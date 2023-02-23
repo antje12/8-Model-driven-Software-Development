@@ -1,0 +1,26 @@
+grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals
+
+generate myDsl "http://www.xtext.org/example/mydsl/MyDsl"
+
+System:
+	'system' name=ID (entities+=Entity)* (relations+=Relation)*;
+	
+Entity:
+	'entity' name=ID (attributess+=Attribute)*;
+	
+Attribute:
+	'attribute' name=ID 'as' Type;
+	
+Type:
+	'string' | 'number';
+	
+Relation:
+	'relation' from=[Entity] 'is' to=[Entity] |
+	'relation' ('a'|'many')? from=[Entity] ('has'|'have') ('a'|'many')? to=[Entity];
+
+//<system> ::= system <ID> <entity>* <relation>*
+//<entity> ::= entity <ID> <attribute>*
+//<attribute> ::= <ID> as <Type>
+//<Type> ::= string | number
+//<relation> ::= relation <ID> is <ID> | 
+//	relation (a|many)? <ID> (has|have) (a|many)? <ID>
