@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link org.xtext.example.mydsl.myDsl.Attribute#getName <em>Name</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.Attribute#getType <em>Type</em>}</li>
  * </ul>
  *
  * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getAttribute()
@@ -44,5 +45,27 @@ public interface Attribute extends EObject
    * @generated
    */
   void setName(String value);
+
+  /**
+   * Returns the value of the '<em><b>Type</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Type</em>' attribute.
+   * @see #setType(String)
+   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getAttribute_Type()
+   * @model
+   * @generated
+   */
+  String getType();
+
+  /**
+   * Sets the value of the '{@link org.xtext.example.mydsl.myDsl.Attribute#getType <em>Type</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Type</em>' attribute.
+   * @see #getType()
+   * @generated
+   */
+  void setType(String value);
 
 } // Attribute

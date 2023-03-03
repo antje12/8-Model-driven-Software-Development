@@ -17,8 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link org.xtext.example.mydsl.myDsl.System#getName <em>Name</em>}</li>
- *   <li>{@link org.xtext.example.mydsl.myDsl.System#getEntities <em>Entities</em>}</li>
- *   <li>{@link org.xtext.example.mydsl.myDsl.System#getRelations <em>Relations</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.System#getElements <em>Elements</em>}</li>
  * </ul>
  *
  * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getSystem()
@@ -50,27 +49,15 @@ public interface System extends EObject
   void setName(String value);
 
   /**
-   * Returns the value of the '<em><b>Entities</b></em>' containment reference list.
-   * The list contents are of type {@link org.xtext.example.mydsl.myDsl.Entity}.
+   * Returns the value of the '<em><b>Elements</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipse.emf.ecore.EObject}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Entities</em>' containment reference list.
-   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getSystem_Entities()
+   * @return the value of the '<em>Elements</em>' containment reference list.
+   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getSystem_Elements()
    * @model containment="true"
    * @generated
    */
-  EList<Entity> getEntities();
-
-  /**
-   * Returns the value of the '<em><b>Relations</b></em>' containment reference list.
-   * The list contents are of type {@link org.xtext.example.mydsl.myDsl.Relation}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Relations</em>' containment reference list.
-   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getSystem_Relations()
-   * @model containment="true"
-   * @generated
-   */
-  EList<Relation> getRelations();
+  EList<EObject> getElements();
 
 } // System

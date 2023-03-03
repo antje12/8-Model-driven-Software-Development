@@ -32,7 +32,7 @@ import org.xtext.example.mydsl.myDsl.MyDslPackage;
  * </p>
  * <ul>
  *   <li>{@link org.xtext.example.mydsl.myDsl.impl.EntityImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.xtext.example.mydsl.myDsl.impl.EntityImpl#getAttributess <em>Attributess</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.impl.EntityImpl#getAttributes <em>Attributes</em>}</li>
  * </ul>
  *
  * @generated
@@ -60,14 +60,14 @@ public class EntityImpl extends MinimalEObjectImpl.Container implements Entity
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getAttributess() <em>Attributess</em>}' containment reference list.
+   * The cached value of the '{@link #getAttributes() <em>Attributes</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getAttributess()
+   * @see #getAttributes()
    * @generated
    * @ordered
    */
-  protected EList<Attribute> attributess;
+  protected EList<Attribute> attributes;
 
   /**
    * <!-- begin-user-doc -->
@@ -121,13 +121,13 @@ public class EntityImpl extends MinimalEObjectImpl.Container implements Entity
    * @generated
    */
   @Override
-  public EList<Attribute> getAttributess()
+  public EList<Attribute> getAttributes()
   {
-    if (attributess == null)
+    if (attributes == null)
     {
-      attributess = new EObjectContainmentEList<Attribute>(Attribute.class, this, MyDslPackage.ENTITY__ATTRIBUTESS);
+      attributes = new EObjectContainmentEList<Attribute>(Attribute.class, this, MyDslPackage.ENTITY__ATTRIBUTES);
     }
-    return attributess;
+    return attributes;
   }
 
   /**
@@ -140,8 +140,8 @@ public class EntityImpl extends MinimalEObjectImpl.Container implements Entity
   {
     switch (featureID)
     {
-      case MyDslPackage.ENTITY__ATTRIBUTESS:
-        return ((InternalEList<?>)getAttributess()).basicRemove(otherEnd, msgs);
+      case MyDslPackage.ENTITY__ATTRIBUTES:
+        return ((InternalEList<?>)getAttributes()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -158,8 +158,8 @@ public class EntityImpl extends MinimalEObjectImpl.Container implements Entity
     {
       case MyDslPackage.ENTITY__NAME:
         return getName();
-      case MyDslPackage.ENTITY__ATTRIBUTESS:
-        return getAttributess();
+      case MyDslPackage.ENTITY__ATTRIBUTES:
+        return getAttributes();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -178,9 +178,9 @@ public class EntityImpl extends MinimalEObjectImpl.Container implements Entity
       case MyDslPackage.ENTITY__NAME:
         setName((String)newValue);
         return;
-      case MyDslPackage.ENTITY__ATTRIBUTESS:
-        getAttributess().clear();
-        getAttributess().addAll((Collection<? extends Attribute>)newValue);
+      case MyDslPackage.ENTITY__ATTRIBUTES:
+        getAttributes().clear();
+        getAttributes().addAll((Collection<? extends Attribute>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -199,8 +199,8 @@ public class EntityImpl extends MinimalEObjectImpl.Container implements Entity
       case MyDslPackage.ENTITY__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case MyDslPackage.ENTITY__ATTRIBUTESS:
-        getAttributess().clear();
+      case MyDslPackage.ENTITY__ATTRIBUTES:
+        getAttributes().clear();
         return;
     }
     super.eUnset(featureID);
@@ -218,8 +218,8 @@ public class EntityImpl extends MinimalEObjectImpl.Container implements Entity
     {
       case MyDslPackage.ENTITY__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case MyDslPackage.ENTITY__ATTRIBUTESS:
-        return attributess != null && !attributess.isEmpty();
+      case MyDslPackage.ENTITY__ATTRIBUTES:
+        return attributes != null && !attributes.isEmpty();
     }
     return super.eIsSet(featureID);
   }

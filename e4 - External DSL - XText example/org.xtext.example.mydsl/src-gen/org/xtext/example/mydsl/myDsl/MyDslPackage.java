@@ -77,22 +77,13 @@ public interface MyDslPackage extends EPackage
   int SYSTEM__NAME = 0;
 
   /**
-   * The feature id for the '<em><b>Entities</b></em>' containment reference list.
+   * The feature id for the '<em><b>Elements</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int SYSTEM__ENTITIES = 1;
-
-  /**
-   * The feature id for the '<em><b>Relations</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SYSTEM__RELATIONS = 2;
+  int SYSTEM__ELEMENTS = 1;
 
   /**
    * The number of structural features of the '<em>System</em>' class.
@@ -101,7 +92,7 @@ public interface MyDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int SYSTEM_FEATURE_COUNT = 3;
+  int SYSTEM_FEATURE_COUNT = 2;
 
   /**
    * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.EntityImpl <em>Entity</em>}' class.
@@ -123,13 +114,13 @@ public interface MyDslPackage extends EPackage
   int ENTITY__NAME = 0;
 
   /**
-   * The feature id for the '<em><b>Attributess</b></em>' containment reference list.
+   * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ENTITY__ATTRIBUTESS = 1;
+  int ENTITY__ATTRIBUTES = 1;
 
   /**
    * The number of structural features of the '<em>Entity</em>' class.
@@ -160,13 +151,22 @@ public interface MyDslPackage extends EPackage
   int ATTRIBUTE__NAME = 0;
 
   /**
+   * The feature id for the '<em><b>Type</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATTRIBUTE__TYPE = 1;
+
+  /**
    * The number of structural features of the '<em>Attribute</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ATTRIBUTE_FEATURE_COUNT = 1;
+  int ATTRIBUTE_FEATURE_COUNT = 2;
 
   /**
    * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.RelationImpl <em>Relation</em>}' class.
@@ -179,31 +179,105 @@ public interface MyDslPackage extends EPackage
   int RELATION = 3;
 
   /**
-   * The feature id for the '<em><b>From</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int RELATION__FROM = 0;
-
-  /**
-   * The feature id for the '<em><b>To</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int RELATION__TO = 1;
-
-  /**
    * The number of structural features of the '<em>Relation</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int RELATION_FEATURE_COUNT = 2;
+  int RELATION_FEATURE_COUNT = 0;
+
+  /**
+   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.InheritanceImpl <em>Inheritance</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.example.mydsl.myDsl.impl.InheritanceImpl
+   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getInheritance()
+   * @generated
+   */
+  int INHERITANCE = 4;
+
+  /**
+   * The feature id for the '<em><b>Sub Entity</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int INHERITANCE__SUB_ENTITY = RELATION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Super Entity</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int INHERITANCE__SUPER_ENTITY = RELATION_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Inheritance</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int INHERITANCE_FEATURE_COUNT = RELATION_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.OtherRelationImpl <em>Other Relation</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.example.mydsl.myDsl.impl.OtherRelationImpl
+   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getOtherRelation()
+   * @generated
+   */
+  int OTHER_RELATION = 5;
+
+  /**
+   * The feature id for the '<em><b>Singleto</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OTHER_RELATION__SINGLETO = RELATION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Manyto</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OTHER_RELATION__MANYTO = RELATION_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>From</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OTHER_RELATION__FROM = RELATION_FEATURE_COUNT + 2;
+
+  /**
+   * The feature id for the '<em><b>To</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OTHER_RELATION__TO = RELATION_FEATURE_COUNT + 3;
+
+  /**
+   * The number of structural features of the '<em>Other Relation</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OTHER_RELATION_FEATURE_COUNT = RELATION_FEATURE_COUNT + 4;
 
 
   /**
@@ -228,26 +302,15 @@ public interface MyDslPackage extends EPackage
   EAttribute getSystem_Name();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.xtext.example.mydsl.myDsl.System#getEntities <em>Entities</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.xtext.example.mydsl.myDsl.System#getElements <em>Elements</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Entities</em>'.
-   * @see org.xtext.example.mydsl.myDsl.System#getEntities()
+   * @return the meta object for the containment reference list '<em>Elements</em>'.
+   * @see org.xtext.example.mydsl.myDsl.System#getElements()
    * @see #getSystem()
    * @generated
    */
-  EReference getSystem_Entities();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.xtext.example.mydsl.myDsl.System#getRelations <em>Relations</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Relations</em>'.
-   * @see org.xtext.example.mydsl.myDsl.System#getRelations()
-   * @see #getSystem()
-   * @generated
-   */
-  EReference getSystem_Relations();
+  EReference getSystem_Elements();
 
   /**
    * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.Entity <em>Entity</em>}'.
@@ -271,15 +334,15 @@ public interface MyDslPackage extends EPackage
   EAttribute getEntity_Name();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.xtext.example.mydsl.myDsl.Entity#getAttributess <em>Attributess</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.xtext.example.mydsl.myDsl.Entity#getAttributes <em>Attributes</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Attributess</em>'.
-   * @see org.xtext.example.mydsl.myDsl.Entity#getAttributess()
+   * @return the meta object for the containment reference list '<em>Attributes</em>'.
+   * @see org.xtext.example.mydsl.myDsl.Entity#getAttributes()
    * @see #getEntity()
    * @generated
    */
-  EReference getEntity_Attributess();
+  EReference getEntity_Attributes();
 
   /**
    * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.Attribute <em>Attribute</em>}'.
@@ -303,6 +366,17 @@ public interface MyDslPackage extends EPackage
   EAttribute getAttribute_Name();
 
   /**
+   * Returns the meta object for the attribute '{@link org.xtext.example.mydsl.myDsl.Attribute#getType <em>Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Type</em>'.
+   * @see org.xtext.example.mydsl.myDsl.Attribute#getType()
+   * @see #getAttribute()
+   * @generated
+   */
+  EAttribute getAttribute_Type();
+
+  /**
    * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.Relation <em>Relation</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -313,26 +387,90 @@ public interface MyDslPackage extends EPackage
   EClass getRelation();
 
   /**
-   * Returns the meta object for the attribute '{@link org.xtext.example.mydsl.myDsl.Relation#getFrom <em>From</em>}'.
+   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.Inheritance <em>Inheritance</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>From</em>'.
-   * @see org.xtext.example.mydsl.myDsl.Relation#getFrom()
-   * @see #getRelation()
+   * @return the meta object for class '<em>Inheritance</em>'.
+   * @see org.xtext.example.mydsl.myDsl.Inheritance
    * @generated
    */
-  EAttribute getRelation_From();
+  EClass getInheritance();
 
   /**
-   * Returns the meta object for the attribute '{@link org.xtext.example.mydsl.myDsl.Relation#getTo <em>To</em>}'.
+   * Returns the meta object for the reference '{@link org.xtext.example.mydsl.myDsl.Inheritance#getSubEntity <em>Sub Entity</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>To</em>'.
-   * @see org.xtext.example.mydsl.myDsl.Relation#getTo()
-   * @see #getRelation()
+   * @return the meta object for the reference '<em>Sub Entity</em>'.
+   * @see org.xtext.example.mydsl.myDsl.Inheritance#getSubEntity()
+   * @see #getInheritance()
    * @generated
    */
-  EAttribute getRelation_To();
+  EReference getInheritance_SubEntity();
+
+  /**
+   * Returns the meta object for the reference '{@link org.xtext.example.mydsl.myDsl.Inheritance#getSuperEntity <em>Super Entity</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Super Entity</em>'.
+   * @see org.xtext.example.mydsl.myDsl.Inheritance#getSuperEntity()
+   * @see #getInheritance()
+   * @generated
+   */
+  EReference getInheritance_SuperEntity();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.OtherRelation <em>Other Relation</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Other Relation</em>'.
+   * @see org.xtext.example.mydsl.myDsl.OtherRelation
+   * @generated
+   */
+  EClass getOtherRelation();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.example.mydsl.myDsl.OtherRelation#isSingleto <em>Singleto</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Singleto</em>'.
+   * @see org.xtext.example.mydsl.myDsl.OtherRelation#isSingleto()
+   * @see #getOtherRelation()
+   * @generated
+   */
+  EAttribute getOtherRelation_Singleto();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.example.mydsl.myDsl.OtherRelation#isManyto <em>Manyto</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Manyto</em>'.
+   * @see org.xtext.example.mydsl.myDsl.OtherRelation#isManyto()
+   * @see #getOtherRelation()
+   * @generated
+   */
+  EAttribute getOtherRelation_Manyto();
+
+  /**
+   * Returns the meta object for the reference '{@link org.xtext.example.mydsl.myDsl.OtherRelation#getFrom <em>From</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>From</em>'.
+   * @see org.xtext.example.mydsl.myDsl.OtherRelation#getFrom()
+   * @see #getOtherRelation()
+   * @generated
+   */
+  EReference getOtherRelation_From();
+
+  /**
+   * Returns the meta object for the reference '{@link org.xtext.example.mydsl.myDsl.OtherRelation#getTo <em>To</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>To</em>'.
+   * @see org.xtext.example.mydsl.myDsl.OtherRelation#getTo()
+   * @see #getOtherRelation()
+   * @generated
+   */
+  EReference getOtherRelation_To();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -376,20 +514,12 @@ public interface MyDslPackage extends EPackage
     EAttribute SYSTEM__NAME = eINSTANCE.getSystem_Name();
 
     /**
-     * The meta object literal for the '<em><b>Entities</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Elements</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference SYSTEM__ENTITIES = eINSTANCE.getSystem_Entities();
-
-    /**
-     * The meta object literal for the '<em><b>Relations</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference SYSTEM__RELATIONS = eINSTANCE.getSystem_Relations();
+    EReference SYSTEM__ELEMENTS = eINSTANCE.getSystem_Elements();
 
     /**
      * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.EntityImpl <em>Entity</em>}' class.
@@ -410,12 +540,12 @@ public interface MyDslPackage extends EPackage
     EAttribute ENTITY__NAME = eINSTANCE.getEntity_Name();
 
     /**
-     * The meta object literal for the '<em><b>Attributess</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Attributes</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference ENTITY__ATTRIBUTESS = eINSTANCE.getEntity_Attributess();
+    EReference ENTITY__ATTRIBUTES = eINSTANCE.getEntity_Attributes();
 
     /**
      * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.AttributeImpl <em>Attribute</em>}' class.
@@ -436,6 +566,14 @@ public interface MyDslPackage extends EPackage
     EAttribute ATTRIBUTE__NAME = eINSTANCE.getAttribute_Name();
 
     /**
+     * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ATTRIBUTE__TYPE = eINSTANCE.getAttribute_Type();
+
+    /**
      * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.RelationImpl <em>Relation</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -446,20 +584,72 @@ public interface MyDslPackage extends EPackage
     EClass RELATION = eINSTANCE.getRelation();
 
     /**
-     * The meta object literal for the '<em><b>From</b></em>' attribute feature.
+     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.InheritanceImpl <em>Inheritance</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     * @see org.xtext.example.mydsl.myDsl.impl.InheritanceImpl
+     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getInheritance()
      * @generated
      */
-    EAttribute RELATION__FROM = eINSTANCE.getRelation_From();
+    EClass INHERITANCE = eINSTANCE.getInheritance();
 
     /**
-     * The meta object literal for the '<em><b>To</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Sub Entity</b></em>' reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute RELATION__TO = eINSTANCE.getRelation_To();
+    EReference INHERITANCE__SUB_ENTITY = eINSTANCE.getInheritance_SubEntity();
+
+    /**
+     * The meta object literal for the '<em><b>Super Entity</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference INHERITANCE__SUPER_ENTITY = eINSTANCE.getInheritance_SuperEntity();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.OtherRelationImpl <em>Other Relation</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.example.mydsl.myDsl.impl.OtherRelationImpl
+     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getOtherRelation()
+     * @generated
+     */
+    EClass OTHER_RELATION = eINSTANCE.getOtherRelation();
+
+    /**
+     * The meta object literal for the '<em><b>Singleto</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute OTHER_RELATION__SINGLETO = eINSTANCE.getOtherRelation_Singleto();
+
+    /**
+     * The meta object literal for the '<em><b>Manyto</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute OTHER_RELATION__MANYTO = eINSTANCE.getOtherRelation_Manyto();
+
+    /**
+     * The meta object literal for the '<em><b>From</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference OTHER_RELATION__FROM = eINSTANCE.getOtherRelation_From();
+
+    /**
+     * The meta object literal for the '<em><b>To</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference OTHER_RELATION__TO = eINSTANCE.getOtherRelation_To();
 
   }
 

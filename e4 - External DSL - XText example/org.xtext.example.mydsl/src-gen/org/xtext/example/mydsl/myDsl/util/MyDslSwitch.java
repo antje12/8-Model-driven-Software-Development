@@ -10,7 +10,9 @@ import org.eclipse.emf.ecore.util.Switch;
 
 import org.xtext.example.mydsl.myDsl.Attribute;
 import org.xtext.example.mydsl.myDsl.Entity;
+import org.xtext.example.mydsl.myDsl.Inheritance;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
+import org.xtext.example.mydsl.myDsl.OtherRelation;
 import org.xtext.example.mydsl.myDsl.Relation;
 
 /**
@@ -104,6 +106,22 @@ public class MyDslSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case MyDslPackage.INHERITANCE:
+      {
+        Inheritance inheritance = (Inheritance)theEObject;
+        T result = caseInheritance(inheritance);
+        if (result == null) result = caseRelation(inheritance);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case MyDslPackage.OTHER_RELATION:
+      {
+        OtherRelation otherRelation = (OtherRelation)theEObject;
+        T result = caseOtherRelation(otherRelation);
+        if (result == null) result = caseRelation(otherRelation);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       default: return defaultCase(theEObject);
     }
   }
@@ -168,6 +186,38 @@ public class MyDslSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseRelation(Relation object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Inheritance</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Inheritance</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseInheritance(Inheritance object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Other Relation</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Other Relation</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseOtherRelation(OtherRelation object)
   {
     return null;
   }

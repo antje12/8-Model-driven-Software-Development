@@ -10,13 +10,6 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Relation</b></em>'.
  * <!-- end-user-doc -->
  *
- * <p>
- * The following features are supported:
- * </p>
- * <ul>
- *   <li>{@link org.xtext.example.mydsl.myDsl.Relation#getFrom <em>From</em>}</li>
- *   <li>{@link org.xtext.example.mydsl.myDsl.Relation#getTo <em>To</em>}</li>
- * </ul>
  *
  * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getRelation()
  * @model
@@ -24,48 +17,4 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface Relation extends EObject
 {
-  /**
-   * Returns the value of the '<em><b>From</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>From</em>' attribute.
-   * @see #setFrom(String)
-   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getRelation_From()
-   * @model
-   * @generated
-   */
-  String getFrom();
-
-  /**
-   * Sets the value of the '{@link org.xtext.example.mydsl.myDsl.Relation#getFrom <em>From</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>From</em>' attribute.
-   * @see #getFrom()
-   * @generated
-   */
-  void setFrom(String value);
-
-  /**
-   * Returns the value of the '<em><b>To</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>To</em>' attribute.
-   * @see #setTo(String)
-   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getRelation_To()
-   * @model
-   * @generated
-   */
-  String getTo();
-
-  /**
-   * Sets the value of the '{@link org.xtext.example.mydsl.myDsl.Relation#getTo <em>To</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>To</em>' attribute.
-   * @see #getTo()
-   * @generated
-   */
-  void setTo(String value);
-
 } // Relation

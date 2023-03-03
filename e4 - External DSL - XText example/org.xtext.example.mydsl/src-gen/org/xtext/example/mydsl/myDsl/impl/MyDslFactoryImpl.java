@@ -13,8 +13,10 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
 import org.xtext.example.mydsl.myDsl.Attribute;
 import org.xtext.example.mydsl.myDsl.Entity;
+import org.xtext.example.mydsl.myDsl.Inheritance;
 import org.xtext.example.mydsl.myDsl.MyDslFactory;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
+import org.xtext.example.mydsl.myDsl.OtherRelation;
 import org.xtext.example.mydsl.myDsl.Relation;
 
 /**
@@ -73,6 +75,8 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
       case MyDslPackage.ENTITY: return createEntity();
       case MyDslPackage.ATTRIBUTE: return createAttribute();
       case MyDslPackage.RELATION: return createRelation();
+      case MyDslPackage.INHERITANCE: return createInheritance();
+      case MyDslPackage.OTHER_RELATION: return createOtherRelation();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -124,6 +128,30 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
   {
     RelationImpl relation = new RelationImpl();
     return relation;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Inheritance createInheritance()
+  {
+    InheritanceImpl inheritance = new InheritanceImpl();
+    return inheritance;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public OtherRelation createOtherRelation()
+  {
+    OtherRelationImpl otherRelation = new OtherRelationImpl();
+    return otherRelation;
   }
 
   /**

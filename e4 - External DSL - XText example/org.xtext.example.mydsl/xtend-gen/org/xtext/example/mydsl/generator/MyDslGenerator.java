@@ -3,10 +3,22 @@
  */
 package org.xtext.example.mydsl.generator;
 
+import com.google.common.base.Objects;
+import com.google.common.collect.Iterables;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.AbstractGenerator;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.IGeneratorContext;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.IteratorExtensions;
+import org.eclipse.xtext.xbase.lib.StringExtensions;
+import org.xtext.example.mydsl.myDsl.Attribute;
+import org.xtext.example.mydsl.myDsl.Entity;
+import org.xtext.example.mydsl.myDsl.Inheritance;
 
 /**
  * Generates code from your model files on save.
@@ -17,5 +29,150 @@ import org.eclipse.xtext.generator.IGeneratorContext;
 public class MyDslGenerator extends AbstractGenerator {
   @Override
   public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
+    final Iterable<Entity> entities = Iterables.<Entity>filter(IteratorExtensions.<EObject>toIterable(resource.getAllContents()), Entity.class);
+    for (final Entity entity : entities) {
+      {
+        final Function1<Inheritance, Boolean> _function = (Inheritance it) -> {
+          Entity _subEntity = it.getSubEntity();
+          return Boolean.valueOf(Objects.equal(_subEntity, entity));
+        };
+        final Inheritance baseEntity = IterableExtensions.<Inheritance>findFirst(Iterables.<Inheritance>filter(IteratorExtensions.<EObject>toIterable(resource.getAllContents()), Inheritance.class), _function);
+        String _name = entity.getName();
+        String _plus = (_name + ".java");
+        fsa.generateFile(_plus, this.compile(entity, baseEntity));
+      }
+    }
+  }
+
+  public CharSequence compile(final Entity entity, final Inheritance relation) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package university.deep_package.another_package;");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("import java.util.ArrayList;");
+    _builder.newLine();
+    _builder.append("import java.util.List;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("public class ");
+    String _name = entity.getName();
+    _builder.append(_name);
+    _builder.append(" ");
+    {
+      boolean _notEquals = (!Objects.equal(relation, null));
+      if (_notEquals) {
+        _builder.append(" extends ");
+        String _name_1 = relation.getSuperEntity().getName();
+        _builder.append(_name_1);
+        _builder.append(" ");
+      }
+    }
+    _builder.append("{");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("private int id;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("private List<Course> courses = new ArrayList<>();");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("public Student(int id, String name, int age){");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("super(name, age);");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("this.setId(id);");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("} ");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    {
+      EList<Attribute> _attributes = entity.getAttributes();
+      for(final Attribute attribute : _attributes) {
+        _builder.append("\t");
+        _builder.append("public ");
+        String _javaType = this.toJavaType(attribute);
+        _builder.append(_javaType, "\t");
+        _builder.append(" get");
+        String _firstUpper = StringExtensions.toFirstUpper(attribute.getName());
+        _builder.append(_firstUpper, "\t");
+        _builder.append("(){");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append("\t");
+        _builder.append("return ");
+        String _name_2 = attribute.getName();
+        _builder.append(_name_2, "\t\t");
+        _builder.append(";");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("public void set");
+        String _firstUpper_1 = StringExtensions.toFirstUpper(attribute.getName());
+        _builder.append(_firstUpper_1, "\t");
+        _builder.append("(){");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append("\t");
+        _builder.append("this.");
+        String _firstUpper_2 = StringExtensions.toFirstUpper(attribute.getName());
+        _builder.append(_firstUpper_2, "\t\t");
+        _builder.append(" = ");
+        String _firstUpper_3 = StringExtensions.toFirstUpper(attribute.getName());
+        _builder.append(_firstUpper_3, "\t\t");
+        _builder.append(";");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append("}");
+        _builder.newLine();
+      }
+    }
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("public List<Course> courses(){");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("return courses;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("public void addCourse(Course course){");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("courses.add(course);");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+
+  public String toJavaType(final Attribute attribute) {
+    String _type = attribute.getType();
+    boolean _equals = Objects.equal(_type, "string");
+    if (_equals) {
+      return "String";
+    }
+    String _type_1 = attribute.getType();
+    boolean _equals_1 = Objects.equal(_type_1, "number");
+    if (_equals_1) {
+      return "int";
+    }
+    return "";
   }
 }

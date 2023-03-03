@@ -7,6 +7,9 @@ import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.generator.AbstractGenerator
 import org.eclipse.xtext.generator.IFileSystemAccess2
 import org.eclipse.xtext.generator.IGeneratorContext
+import org.xtext.example.mydsl.myDsl.Entity
+import org.xtext.example.mydsl.myDsl.Inheritance
+import org.xtext.example.mydsl.myDsl.Attribute
 
 /**
  * Generates code from your model files on save.
@@ -21,5 +24,54 @@ class MyDslGenerator extends AbstractGenerator {
 //				.filter(Greeting)
 //				.map[name]
 //				.join(', '))
+		val entities = resource.allContents.toIterable.filter(Entity)
+		for (entity: entities){
+			val baseEntity = resource.allContents.toIterable.filter(Inheritance).findFirst[subEntity == entity]
+			fsa.generateFile(entity.name+".java", entity.compile(baseEntity))
+		}
 	}
+	
+	def compile(Entity entity, Inheritance relation)
+	'''
+	package university.deep_package.another_package;
+
+	import java.util.ArrayList;
+	import java.util.List;
+		
+	public class «entity.name» «IF relation != null» extends «relation.superEntity.name» «ENDIF»{
+		private int id;
+		private List<Course> courses = new ArrayList<>();
+		
+		public Student(int id, String name, int age){
+			super(name, age);
+			this.setId(id);
+		} 
+		
+		«FOR attribute: entity.attributes»
+		public «attribute.toJavaType» get«attribute.name.toFirstUpper»(){
+			return «attribute.name»;
+		}
+		public void set«attribute.name.toFirstUpper»(){
+			this.«attribute.name.toFirstUpper» = «attribute.name.toFirstUpper»;
+		}
+		«ENDFOR»
+		
+		public List<Course> courses(){
+			return courses;
+		}
+		
+		public void addCourse(Course course){
+			courses.add(course);
+		}
+	}
+	'''
+	
+	def String toJavaType(Attribute attribute) {
+		if (attribute.type == "string")
+			return "String";
+		if (attribute.type == "number")
+			return "int";
+		return "";
+	}
+
 }

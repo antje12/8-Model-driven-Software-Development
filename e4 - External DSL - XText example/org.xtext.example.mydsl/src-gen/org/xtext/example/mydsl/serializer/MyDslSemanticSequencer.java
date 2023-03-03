@@ -16,8 +16,9 @@ import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequence
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import org.xtext.example.mydsl.myDsl.Attribute;
 import org.xtext.example.mydsl.myDsl.Entity;
+import org.xtext.example.mydsl.myDsl.Inheritance;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
-import org.xtext.example.mydsl.myDsl.Relation;
+import org.xtext.example.mydsl.myDsl.OtherRelation;
 import org.xtext.example.mydsl.services.MyDslGrammarAccess;
 
 @SuppressWarnings("all")
@@ -40,8 +41,11 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 			case MyDslPackage.ENTITY:
 				sequence_Entity(context, (Entity) semanticObject); 
 				return; 
-			case MyDslPackage.RELATION:
-				sequence_Relation(context, (Relation) semanticObject); 
+			case MyDslPackage.INHERITANCE:
+				sequence_Relation(context, (Inheritance) semanticObject); 
+				return; 
+			case MyDslPackage.OTHER_RELATION:
+				sequence_Relation(context, (OtherRelation) semanticObject); 
 				return; 
 			case MyDslPackage.SYSTEM:
 				sequence_System(context, (org.xtext.example.mydsl.myDsl.System) semanticObject); 
@@ -57,16 +61,19 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     Attribute returns Attribute
 	 *
 	 * Constraint:
-	 *     name=ID
+	 *     (name=ID type=Type)
 	 * </pre>
 	 */
 	protected void sequence_Attribute(ISerializationContext context, Attribute semanticObject) {
 		if (errorAcceptor != null) {
 			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.ATTRIBUTE__NAME) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.ATTRIBUTE__NAME));
+			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.ATTRIBUTE__TYPE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.ATTRIBUTE__TYPE));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getAttributeAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getAttributeAccess().getTypeTypeParserRuleCall_3_0(), semanticObject.getType());
 		feeder.finish();
 	}
 	
@@ -77,7 +84,7 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     Entity returns Entity
 	 *
 	 * Constraint:
-	 *     (name=ID attributess+=Attribute*)
+	 *     (name=ID attributes+=Attribute*)
 	 * </pre>
 	 */
 	protected void sequence_Entity(ISerializationContext context, Entity semanticObject) {
@@ -88,13 +95,36 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     Relation returns Relation
+	 *     Relation returns Inheritance
 	 *
 	 * Constraint:
-	 *     ((from=ID to=ID) | (from=ID to=ID))
+	 *     (subEntity=[Entity|ID] superEntity=[Entity|ID])
 	 * </pre>
 	 */
-	protected void sequence_Relation(ISerializationContext context, Relation semanticObject) {
+	protected void sequence_Relation(ISerializationContext context, Inheritance semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.INHERITANCE__SUB_ENTITY) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.INHERITANCE__SUB_ENTITY));
+			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.INHERITANCE__SUPER_ENTITY) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.INHERITANCE__SUPER_ENTITY));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getRelationAccess().getSubEntityEntityIDTerminalRuleCall_0_2_0_1(), semanticObject.eGet(MyDslPackage.Literals.INHERITANCE__SUB_ENTITY, false));
+		feeder.accept(grammarAccess.getRelationAccess().getSuperEntityEntityIDTerminalRuleCall_0_4_0_1(), semanticObject.eGet(MyDslPackage.Literals.INHERITANCE__SUPER_ENTITY, false));
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     Relation returns OtherRelation
+	 *
+	 * Constraint:
+	 *     ((singleto?='a' | manyto?='many')? from=[Entity|ID] to=[Entity|ID])
+	 * </pre>
+	 */
+	protected void sequence_Relation(ISerializationContext context, OtherRelation semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -105,7 +135,7 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     System returns System
 	 *
 	 * Constraint:
-	 *     (name=ID entities+=Entity* relations+=Relation*)
+	 *     (name=ID (elements+=Relation | elements+=Entity)+)
 	 * </pre>
 	 */
 	protected void sequence_System(ISerializationContext context, org.xtext.example.mydsl.myDsl.System semanticObject) {

@@ -60,6 +60,24 @@ public interface MyDslFactory extends EFactory
   Relation createRelation();
 
   /**
+   * Returns a new object of class '<em>Inheritance</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Inheritance</em>'.
+   * @generated
+   */
+  Inheritance createInheritance();
+
+  /**
+   * Returns a new object of class '<em>Other Relation</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Other Relation</em>'.
+   * @generated
+   */
+  OtherRelation createOtherRelation();
+
+  /**
    * Returns the package supported by this factory.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

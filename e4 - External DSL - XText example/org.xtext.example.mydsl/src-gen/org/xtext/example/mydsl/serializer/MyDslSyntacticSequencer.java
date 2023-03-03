@@ -21,34 +21,21 @@ import org.xtext.example.mydsl.services.MyDslGrammarAccess;
 public class MyDslSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected MyDslGrammarAccess grammarAccess;
-	protected AbstractElementAlias match_Relation_HasKeyword_1_3_0_or_HaveKeyword_1_3_1;
-	protected AbstractElementAlias match_Relation___AKeyword_1_1_0_or_ManyKeyword_1_1_1__q;
-	protected AbstractElementAlias match_Relation___AKeyword_1_4_0_or_ManyKeyword_1_4_1__q;
+	protected AbstractElementAlias match_Relation_HasKeyword_1_4_0_or_HaveKeyword_1_4_1;
+	protected AbstractElementAlias match_Relation___AKeyword_1_5_0_or_ManyKeyword_1_5_1__q;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (MyDslGrammarAccess) access;
-		match_Relation_HasKeyword_1_3_0_or_HaveKeyword_1_3_1 = new AlternativeAlias(false, false, new TokenAlias(false, false, grammarAccess.getRelationAccess().getHasKeyword_1_3_0()), new TokenAlias(false, false, grammarAccess.getRelationAccess().getHaveKeyword_1_3_1()));
-		match_Relation___AKeyword_1_1_0_or_ManyKeyword_1_1_1__q = new AlternativeAlias(false, true, new TokenAlias(false, false, grammarAccess.getRelationAccess().getAKeyword_1_1_0()), new TokenAlias(false, false, grammarAccess.getRelationAccess().getManyKeyword_1_1_1()));
-		match_Relation___AKeyword_1_4_0_or_ManyKeyword_1_4_1__q = new AlternativeAlias(false, true, new TokenAlias(false, false, grammarAccess.getRelationAccess().getAKeyword_1_4_0()), new TokenAlias(false, false, grammarAccess.getRelationAccess().getManyKeyword_1_4_1()));
+		match_Relation_HasKeyword_1_4_0_or_HaveKeyword_1_4_1 = new AlternativeAlias(false, false, new TokenAlias(false, false, grammarAccess.getRelationAccess().getHasKeyword_1_4_0()), new TokenAlias(false, false, grammarAccess.getRelationAccess().getHaveKeyword_1_4_1()));
+		match_Relation___AKeyword_1_5_0_or_ManyKeyword_1_5_1__q = new AlternativeAlias(false, true, new TokenAlias(false, false, grammarAccess.getRelationAccess().getAKeyword_1_5_0()), new TokenAlias(false, false, grammarAccess.getRelationAccess().getManyKeyword_1_5_1()));
 	}
 	
 	@Override
 	protected String getUnassignedRuleCallToken(EObject semanticObject, RuleCall ruleCall, INode node) {
-		if (ruleCall.getRule() == grammarAccess.getTypeRule())
-			return getTypeToken(semanticObject, ruleCall, node);
 		return "";
 	}
 	
-	/**
-	 * Type:
-	 * 	'string' | 'number';
-	 */
-	protected String getTypeToken(EObject semanticObject, RuleCall ruleCall, INode node) {
-		if (node != null)
-			return getTokenText(node);
-		return "string";
-	}
 	
 	@Override
 	protected void emitUnassignedTokens(EObject semanticObject, ISynTransition transition, INode fromNode, INode toNode) {
@@ -56,12 +43,10 @@ public class MyDslSyntacticSequencer extends AbstractSyntacticSequencer {
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if (match_Relation_HasKeyword_1_3_0_or_HaveKeyword_1_3_1.equals(syntax))
-				emit_Relation_HasKeyword_1_3_0_or_HaveKeyword_1_3_1(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if (match_Relation___AKeyword_1_1_0_or_ManyKeyword_1_1_1__q.equals(syntax))
-				emit_Relation___AKeyword_1_1_0_or_ManyKeyword_1_1_1__q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if (match_Relation___AKeyword_1_4_0_or_ManyKeyword_1_4_1__q.equals(syntax))
-				emit_Relation___AKeyword_1_4_0_or_ManyKeyword_1_4_1__q(semanticObject, getLastNavigableState(), syntaxNodes);
+			if (match_Relation_HasKeyword_1_4_0_or_HaveKeyword_1_4_1.equals(syntax))
+				emit_Relation_HasKeyword_1_4_0_or_HaveKeyword_1_4_1(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_Relation___AKeyword_1_5_0_or_ManyKeyword_1_5_1__q.equals(syntax))
+				emit_Relation___AKeyword_1_5_0_or_ManyKeyword_1_5_1__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}
 	}
@@ -72,11 +57,11 @@ public class MyDslSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     'has' | 'have'
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     from=ID (ambiguity) ('a' | 'many')? to=ID
+	 *     from=[Entity|ID] (ambiguity) ('a' | 'many')? to=[Entity|ID]
 	 
 	 * </pre>
 	 */
-	protected void emit_Relation_HasKeyword_1_3_0_or_HaveKeyword_1_3_1(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_Relation_HasKeyword_1_4_0_or_HaveKeyword_1_4_1(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
@@ -86,25 +71,11 @@ public class MyDslSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     ('a' | 'many')?
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     (rule start) 'relation' (ambiguity) from=ID
+	 *     from=[Entity|ID] ('has' | 'have') (ambiguity) to=[Entity|ID]
 	 
 	 * </pre>
 	 */
-	protected void emit_Relation___AKeyword_1_1_0_or_ManyKeyword_1_1_1__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
-		acceptNodes(transition, nodes);
-	}
-	
-	/**
-	 * <pre>
-	 * Ambiguous syntax:
-	 *     ('a' | 'many')?
-	 *
-	 * This ambiguous syntax occurs at:
-	 *     from=ID ('has' | 'have') (ambiguity) to=ID
-	 
-	 * </pre>
-	 */
-	protected void emit_Relation___AKeyword_1_4_0_or_ManyKeyword_1_4_1__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_Relation___AKeyword_1_5_0_or_ManyKeyword_1_5_1__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

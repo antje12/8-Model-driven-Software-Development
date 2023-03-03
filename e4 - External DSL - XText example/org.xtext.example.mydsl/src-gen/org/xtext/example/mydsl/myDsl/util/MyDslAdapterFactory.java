@@ -12,7 +12,9 @@ import org.eclipse.emf.ecore.EObject;
 
 import org.xtext.example.mydsl.myDsl.Attribute;
 import org.xtext.example.mydsl.myDsl.Entity;
+import org.xtext.example.mydsl.myDsl.Inheritance;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
+import org.xtext.example.mydsl.myDsl.OtherRelation;
 import org.xtext.example.mydsl.myDsl.Relation;
 
 /**
@@ -99,6 +101,16 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
         return createRelationAdapter();
       }
       @Override
+      public Adapter caseInheritance(Inheritance object)
+      {
+        return createInheritanceAdapter();
+      }
+      @Override
+      public Adapter caseOtherRelation(OtherRelation object)
+      {
+        return createOtherRelationAdapter();
+      }
+      @Override
       public Adapter defaultCase(EObject object)
       {
         return createEObjectAdapter();
@@ -176,6 +188,36 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createRelationAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl.myDsl.Inheritance <em>Inheritance</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.example.mydsl.myDsl.Inheritance
+   * @generated
+   */
+  public Adapter createInheritanceAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl.myDsl.OtherRelation <em>Other Relation</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.example.mydsl.myDsl.OtherRelation
+   * @generated
+   */
+  public Adapter createOtherRelationAdapter()
   {
     return null;
   }

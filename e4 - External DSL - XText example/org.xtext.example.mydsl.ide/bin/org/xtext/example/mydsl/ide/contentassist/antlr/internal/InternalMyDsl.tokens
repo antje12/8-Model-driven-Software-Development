@@ -1,11 +1,11 @@
-'a'=13
+'a'=15
 'as'=20
 'attribute'=19
 'entity'=18
-'has'=15
-'have'=16
+'has'=13
+'have'=14
 'is'=22
-'many'=14
+'many'=16
 'number'=12
 'relation'=21
 'string'=11

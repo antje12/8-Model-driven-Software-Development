@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link org.xtext.example.mydsl.myDsl.Entity#getName <em>Name</em>}</li>
- *   <li>{@link org.xtext.example.mydsl.myDsl.Entity#getAttributess <em>Attributess</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.Entity#getAttributes <em>Attributes</em>}</li>
  * </ul>
  *
  * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getEntity()
@@ -49,15 +49,15 @@ public interface Entity extends EObject
   void setName(String value);
 
   /**
-   * Returns the value of the '<em><b>Attributess</b></em>' containment reference list.
+   * Returns the value of the '<em><b>Attributes</b></em>' containment reference list.
    * The list contents are of type {@link org.xtext.example.mydsl.myDsl.Attribute}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Attributess</em>' containment reference list.
-   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getEntity_Attributess()
+   * @return the value of the '<em>Attributes</em>' containment reference list.
+   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getEntity_Attributes()
    * @model containment="true"
    * @generated
    */
-  EList<Attribute> getAttributess();
+  EList<Attribute> getAttributes();
 
 } // Entity

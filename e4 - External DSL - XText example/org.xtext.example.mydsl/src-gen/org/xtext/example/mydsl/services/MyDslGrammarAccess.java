@@ -6,8 +6,10 @@ package org.xtext.example.mydsl.services;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.List;
+import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
@@ -28,16 +30,16 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		private final Keyword cSystemKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
-		private final Assignment cEntitiesAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cEntitiesEntityParserRuleCall_2_0 = (RuleCall)cEntitiesAssignment_2.eContents().get(0);
-		private final Assignment cRelationsAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cRelationsRelationParserRuleCall_3_0 = (RuleCall)cRelationsAssignment_3.eContents().get(0);
+		private final Assignment cElementsAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final Alternatives cElementsAlternatives_2_0 = (Alternatives)cElementsAssignment_2.eContents().get(0);
+		private final RuleCall cElementsRelationParserRuleCall_2_0_0 = (RuleCall)cElementsAlternatives_2_0.eContents().get(0);
+		private final RuleCall cElementsEntityParserRuleCall_2_0_1 = (RuleCall)cElementsAlternatives_2_0.eContents().get(1);
 		
 		//System:
-		//    'system' name=ID (entities+=Entity)* (relations+=Relation)*;
+		//    'system' name=ID (elements+=(Relation|Entity))+ ;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'system' name=ID (entities+=Entity)* (relations+=Relation)*
+		//'system' name=ID (elements+=(Relation|Entity))+
 		public Group getGroup() { return cGroup; }
 		
 		//'system'
@@ -49,17 +51,17 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 		
-		//(entities+=Entity)*
-		public Assignment getEntitiesAssignment_2() { return cEntitiesAssignment_2; }
+		//(elements+=(Relation|Entity))+
+		public Assignment getElementsAssignment_2() { return cElementsAssignment_2; }
 		
-		//Entity
-		public RuleCall getEntitiesEntityParserRuleCall_2_0() { return cEntitiesEntityParserRuleCall_2_0; }
-		
-		//(relations+=Relation)*
-		public Assignment getRelationsAssignment_3() { return cRelationsAssignment_3; }
+		//(Relation|Entity)
+		public Alternatives getElementsAlternatives_2_0() { return cElementsAlternatives_2_0; }
 		
 		//Relation
-		public RuleCall getRelationsRelationParserRuleCall_3_0() { return cRelationsRelationParserRuleCall_3_0; }
+		public RuleCall getElementsRelationParserRuleCall_2_0_0() { return cElementsRelationParserRuleCall_2_0_0; }
+		
+		//Entity
+		public RuleCall getElementsEntityParserRuleCall_2_0_1() { return cElementsEntityParserRuleCall_2_0_1; }
 	}
 	public class EntityElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.example.mydsl.MyDsl.Entity");
@@ -67,14 +69,15 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		private final Keyword cEntityKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
-		private final Assignment cAttributessAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cAttributessAttributeParserRuleCall_2_0 = (RuleCall)cAttributessAssignment_2.eContents().get(0);
+		private final Assignment cAttributesAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cAttributesAttributeParserRuleCall_2_0 = (RuleCall)cAttributesAssignment_2.eContents().get(0);
 		
 		//Entity:
-		//    'entity' name=ID (attributess+=Attribute)*;
+		//    'entity' name=ID (attributes+=Attribute)*
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'entity' name=ID (attributess+=Attribute)*
+		//'entity' name=ID (attributes+=Attribute)*
 		public Group getGroup() { return cGroup; }
 		
 		//'entity'
@@ -86,11 +89,11 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 		
-		//(attributess+=Attribute)*
-		public Assignment getAttributessAssignment_2() { return cAttributessAssignment_2; }
+		//(attributes+=Attribute)*
+		public Assignment getAttributesAssignment_2() { return cAttributesAssignment_2; }
 		
 		//Attribute
-		public RuleCall getAttributessAttributeParserRuleCall_2_0() { return cAttributessAttributeParserRuleCall_2_0; }
+		public RuleCall getAttributesAttributeParserRuleCall_2_0() { return cAttributesAttributeParserRuleCall_2_0; }
 	}
 	public class AttributeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.example.mydsl.MyDsl.Attribute");
@@ -99,13 +102,15 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		private final Keyword cAsKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final RuleCall cTypeParserRuleCall_3 = (RuleCall)cGroup.eContents().get(3);
+		private final Assignment cTypeAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cTypeTypeParserRuleCall_3_0 = (RuleCall)cTypeAssignment_3.eContents().get(0);
 		
 		//Attribute:
-		//    'attribute' name=ID 'as' Type;
+		//    'attribute' name=ID 'as' type=Type
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'attribute' name=ID 'as' Type
+		//'attribute' name=ID 'as' type=Type
 		public Group getGroup() { return cGroup; }
 		
 		//'attribute'
@@ -120,8 +125,11 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		//'as'
 		public Keyword getAsKeyword_2() { return cAsKeyword_2; }
 		
+		//type=Type
+		public Assignment getTypeAssignment_3() { return cTypeAssignment_3; }
+		
 		//Type
-		public RuleCall getTypeParserRuleCall_3() { return cTypeParserRuleCall_3; }
+		public RuleCall getTypeTypeParserRuleCall_3_0() { return cTypeTypeParserRuleCall_3_0; }
 	}
 	public class TypeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.example.mydsl.MyDsl.Type");
@@ -130,7 +138,8 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		private final Keyword cNumberKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
 		
 		//Type:
-		//    'string' | 'number';
+		//    'string' | 'number'
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'string' | 'number'
@@ -146,102 +155,135 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.example.mydsl.MyDsl.Relation");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
-		private final Keyword cRelationKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
-		private final Assignment cFromAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
-		private final RuleCall cFromIDTerminalRuleCall_0_1_0 = (RuleCall)cFromAssignment_0_1.eContents().get(0);
-		private final Keyword cIsKeyword_0_2 = (Keyword)cGroup_0.eContents().get(2);
-		private final Assignment cToAssignment_0_3 = (Assignment)cGroup_0.eContents().get(3);
-		private final RuleCall cToIDTerminalRuleCall_0_3_0 = (RuleCall)cToAssignment_0_3.eContents().get(0);
+		private final Action cInheritanceAction_0_0 = (Action)cGroup_0.eContents().get(0);
+		private final Keyword cRelationKeyword_0_1 = (Keyword)cGroup_0.eContents().get(1);
+		private final Assignment cSubEntityAssignment_0_2 = (Assignment)cGroup_0.eContents().get(2);
+		private final CrossReference cSubEntityEntityCrossReference_0_2_0 = (CrossReference)cSubEntityAssignment_0_2.eContents().get(0);
+		private final RuleCall cSubEntityEntityIDTerminalRuleCall_0_2_0_1 = (RuleCall)cSubEntityEntityCrossReference_0_2_0.eContents().get(1);
+		private final Keyword cIsKeyword_0_3 = (Keyword)cGroup_0.eContents().get(3);
+		private final Assignment cSuperEntityAssignment_0_4 = (Assignment)cGroup_0.eContents().get(4);
+		private final CrossReference cSuperEntityEntityCrossReference_0_4_0 = (CrossReference)cSuperEntityAssignment_0_4.eContents().get(0);
+		private final RuleCall cSuperEntityEntityIDTerminalRuleCall_0_4_0_1 = (RuleCall)cSuperEntityEntityCrossReference_0_4_0.eContents().get(1);
 		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
-		private final Keyword cRelationKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
-		private final Alternatives cAlternatives_1_1 = (Alternatives)cGroup_1.eContents().get(1);
-		private final Keyword cAKeyword_1_1_0 = (Keyword)cAlternatives_1_1.eContents().get(0);
-		private final Keyword cManyKeyword_1_1_1 = (Keyword)cAlternatives_1_1.eContents().get(1);
-		private final Assignment cFromAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
-		private final RuleCall cFromIDTerminalRuleCall_1_2_0 = (RuleCall)cFromAssignment_1_2.eContents().get(0);
-		private final Alternatives cAlternatives_1_3 = (Alternatives)cGroup_1.eContents().get(3);
-		private final Keyword cHasKeyword_1_3_0 = (Keyword)cAlternatives_1_3.eContents().get(0);
-		private final Keyword cHaveKeyword_1_3_1 = (Keyword)cAlternatives_1_3.eContents().get(1);
+		private final Action cOtherRelationAction_1_0 = (Action)cGroup_1.eContents().get(0);
+		private final Keyword cRelationKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
+		private final Alternatives cAlternatives_1_2 = (Alternatives)cGroup_1.eContents().get(2);
+		private final Assignment cSingletoAssignment_1_2_0 = (Assignment)cAlternatives_1_2.eContents().get(0);
+		private final Keyword cSingletoAKeyword_1_2_0_0 = (Keyword)cSingletoAssignment_1_2_0.eContents().get(0);
+		private final Assignment cManytoAssignment_1_2_1 = (Assignment)cAlternatives_1_2.eContents().get(1);
+		private final Keyword cManytoManyKeyword_1_2_1_0 = (Keyword)cManytoAssignment_1_2_1.eContents().get(0);
+		private final Assignment cFromAssignment_1_3 = (Assignment)cGroup_1.eContents().get(3);
+		private final CrossReference cFromEntityCrossReference_1_3_0 = (CrossReference)cFromAssignment_1_3.eContents().get(0);
+		private final RuleCall cFromEntityIDTerminalRuleCall_1_3_0_1 = (RuleCall)cFromEntityCrossReference_1_3_0.eContents().get(1);
 		private final Alternatives cAlternatives_1_4 = (Alternatives)cGroup_1.eContents().get(4);
-		private final Keyword cAKeyword_1_4_0 = (Keyword)cAlternatives_1_4.eContents().get(0);
-		private final Keyword cManyKeyword_1_4_1 = (Keyword)cAlternatives_1_4.eContents().get(1);
-		private final Assignment cToAssignment_1_5 = (Assignment)cGroup_1.eContents().get(5);
-		private final RuleCall cToIDTerminalRuleCall_1_5_0 = (RuleCall)cToAssignment_1_5.eContents().get(0);
+		private final Keyword cHasKeyword_1_4_0 = (Keyword)cAlternatives_1_4.eContents().get(0);
+		private final Keyword cHaveKeyword_1_4_1 = (Keyword)cAlternatives_1_4.eContents().get(1);
+		private final Alternatives cAlternatives_1_5 = (Alternatives)cGroup_1.eContents().get(5);
+		private final Keyword cAKeyword_1_5_0 = (Keyword)cAlternatives_1_5.eContents().get(0);
+		private final Keyword cManyKeyword_1_5_1 = (Keyword)cAlternatives_1_5.eContents().get(1);
+		private final Assignment cToAssignment_1_6 = (Assignment)cGroup_1.eContents().get(6);
+		private final CrossReference cToEntityCrossReference_1_6_0 = (CrossReference)cToAssignment_1_6.eContents().get(0);
+		private final RuleCall cToEntityIDTerminalRuleCall_1_6_0_1 = (RuleCall)cToEntityCrossReference_1_6_0.eContents().get(1);
 		
 		//Relation:
-		//    'relation' from=ID 'is' to=ID |
-		//    'relation' ('a'|'many')? from=ID ('has'|'have') ('a'|'many')? to=ID;
+		//    {Inheritance} 'relation' subEntity=[Entity] 'is' superEntity=[Entity] |
+		//    {OtherRelation} 'relation' (singleto?='a'|manyto?='many')? from=[Entity] ('has'|'have') ('a'|'many')? to=[Entity]
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'relation' from=ID 'is' to=ID |
-		//'relation' ('a'|'many')? from=ID ('has'|'have') ('a'|'many')? to=ID
+		//{Inheritance} 'relation' subEntity=[Entity] 'is' superEntity=[Entity] |
+		//{OtherRelation} 'relation' (singleto?='a'|manyto?='many')? from=[Entity] ('has'|'have') ('a'|'many')? to=[Entity]
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//'relation' from=ID 'is' to=ID
+		//{Inheritance} 'relation' subEntity=[Entity] 'is' superEntity=[Entity]
 		public Group getGroup_0() { return cGroup_0; }
 		
-		//'relation'
-		public Keyword getRelationKeyword_0_0() { return cRelationKeyword_0_0; }
+		//{Inheritance}
+		public Action getInheritanceAction_0_0() { return cInheritanceAction_0_0; }
 		
-		//from=ID
-		public Assignment getFromAssignment_0_1() { return cFromAssignment_0_1; }
+		//'relation'
+		public Keyword getRelationKeyword_0_1() { return cRelationKeyword_0_1; }
+		
+		//subEntity=[Entity]
+		public Assignment getSubEntityAssignment_0_2() { return cSubEntityAssignment_0_2; }
+		
+		//[Entity]
+		public CrossReference getSubEntityEntityCrossReference_0_2_0() { return cSubEntityEntityCrossReference_0_2_0; }
 		
 		//ID
-		public RuleCall getFromIDTerminalRuleCall_0_1_0() { return cFromIDTerminalRuleCall_0_1_0; }
+		public RuleCall getSubEntityEntityIDTerminalRuleCall_0_2_0_1() { return cSubEntityEntityIDTerminalRuleCall_0_2_0_1; }
 		
 		//'is'
-		public Keyword getIsKeyword_0_2() { return cIsKeyword_0_2; }
+		public Keyword getIsKeyword_0_3() { return cIsKeyword_0_3; }
 		
-		//to=ID
-		public Assignment getToAssignment_0_3() { return cToAssignment_0_3; }
+		//superEntity=[Entity]
+		public Assignment getSuperEntityAssignment_0_4() { return cSuperEntityAssignment_0_4; }
+		
+		//[Entity]
+		public CrossReference getSuperEntityEntityCrossReference_0_4_0() { return cSuperEntityEntityCrossReference_0_4_0; }
 		
 		//ID
-		public RuleCall getToIDTerminalRuleCall_0_3_0() { return cToIDTerminalRuleCall_0_3_0; }
+		public RuleCall getSuperEntityEntityIDTerminalRuleCall_0_4_0_1() { return cSuperEntityEntityIDTerminalRuleCall_0_4_0_1; }
 		
-		//'relation' ('a'|'many')? from=ID ('has'|'have') ('a'|'many')? to=ID
+		//{OtherRelation} 'relation' (singleto?='a'|manyto?='many')? from=[Entity] ('has'|'have') ('a'|'many')? to=[Entity]
 		public Group getGroup_1() { return cGroup_1; }
 		
-		//'relation'
-		public Keyword getRelationKeyword_1_0() { return cRelationKeyword_1_0; }
+		//{OtherRelation}
+		public Action getOtherRelationAction_1_0() { return cOtherRelationAction_1_0; }
 		
-		//('a'|'many')?
-		public Alternatives getAlternatives_1_1() { return cAlternatives_1_1; }
+		//'relation'
+		public Keyword getRelationKeyword_1_1() { return cRelationKeyword_1_1; }
+		
+		//(singleto?='a'|manyto?='many')?
+		public Alternatives getAlternatives_1_2() { return cAlternatives_1_2; }
+		
+		//singleto?='a'
+		public Assignment getSingletoAssignment_1_2_0() { return cSingletoAssignment_1_2_0; }
 		
 		//'a'
-		public Keyword getAKeyword_1_1_0() { return cAKeyword_1_1_0; }
+		public Keyword getSingletoAKeyword_1_2_0_0() { return cSingletoAKeyword_1_2_0_0; }
+		
+		//manyto?='many'
+		public Assignment getManytoAssignment_1_2_1() { return cManytoAssignment_1_2_1; }
 		
 		//'many'
-		public Keyword getManyKeyword_1_1_1() { return cManyKeyword_1_1_1; }
+		public Keyword getManytoManyKeyword_1_2_1_0() { return cManytoManyKeyword_1_2_1_0; }
 		
-		//from=ID
-		public Assignment getFromAssignment_1_2() { return cFromAssignment_1_2; }
+		//from=[Entity]
+		public Assignment getFromAssignment_1_3() { return cFromAssignment_1_3; }
+		
+		//[Entity]
+		public CrossReference getFromEntityCrossReference_1_3_0() { return cFromEntityCrossReference_1_3_0; }
 		
 		//ID
-		public RuleCall getFromIDTerminalRuleCall_1_2_0() { return cFromIDTerminalRuleCall_1_2_0; }
+		public RuleCall getFromEntityIDTerminalRuleCall_1_3_0_1() { return cFromEntityIDTerminalRuleCall_1_3_0_1; }
 		
 		//('has'|'have')
-		public Alternatives getAlternatives_1_3() { return cAlternatives_1_3; }
-		
-		//'has'
-		public Keyword getHasKeyword_1_3_0() { return cHasKeyword_1_3_0; }
-		
-		//'have'
-		public Keyword getHaveKeyword_1_3_1() { return cHaveKeyword_1_3_1; }
-		
-		//('a'|'many')?
 		public Alternatives getAlternatives_1_4() { return cAlternatives_1_4; }
 		
+		//'has'
+		public Keyword getHasKeyword_1_4_0() { return cHasKeyword_1_4_0; }
+		
+		//'have'
+		public Keyword getHaveKeyword_1_4_1() { return cHaveKeyword_1_4_1; }
+		
+		//('a'|'many')?
+		public Alternatives getAlternatives_1_5() { return cAlternatives_1_5; }
+		
 		//'a'
-		public Keyword getAKeyword_1_4_0() { return cAKeyword_1_4_0; }
+		public Keyword getAKeyword_1_5_0() { return cAKeyword_1_5_0; }
 		
 		//'many'
-		public Keyword getManyKeyword_1_4_1() { return cManyKeyword_1_4_1; }
+		public Keyword getManyKeyword_1_5_1() { return cManyKeyword_1_5_1; }
 		
-		//to=ID
-		public Assignment getToAssignment_1_5() { return cToAssignment_1_5; }
+		//to=[Entity]
+		public Assignment getToAssignment_1_6() { return cToAssignment_1_6; }
+		
+		//[Entity]
+		public CrossReference getToEntityCrossReference_1_6_0() { return cToEntityCrossReference_1_6_0; }
 		
 		//ID
-		public RuleCall getToIDTerminalRuleCall_1_5_0() { return cToIDTerminalRuleCall_1_5_0; }
+		public RuleCall getToEntityIDTerminalRuleCall_1_6_0_1() { return cToEntityIDTerminalRuleCall_1_6_0_1; }
 	}
 	
 	
@@ -295,7 +337,7 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 
 	
 	//System:
-	//    'system' name=ID (entities+=Entity)* (relations+=Relation)*;
+	//    'system' name=ID (elements+=(Relation|Entity))+ ;
 	public SystemElements getSystemAccess() {
 		return pSystem;
 	}
@@ -305,7 +347,8 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	}
 	
 	//Entity:
-	//    'entity' name=ID (attributess+=Attribute)*;
+	//    'entity' name=ID (attributes+=Attribute)*
+	//;
 	public EntityElements getEntityAccess() {
 		return pEntity;
 	}
@@ -315,7 +358,8 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	}
 	
 	//Attribute:
-	//    'attribute' name=ID 'as' Type;
+	//    'attribute' name=ID 'as' type=Type
+	//;
 	public AttributeElements getAttributeAccess() {
 		return pAttribute;
 	}
@@ -325,7 +369,8 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	}
 	
 	//Type:
-	//    'string' | 'number';
+	//    'string' | 'number'
+	//;
 	public TypeElements getTypeAccess() {
 		return pType;
 	}
@@ -335,8 +380,9 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	}
 	
 	//Relation:
-	//    'relation' from=ID 'is' to=ID |
-	//    'relation' ('a'|'many')? from=ID ('has'|'have') ('a'|'many')? to=ID;
+	//    {Inheritance} 'relation' subEntity=[Entity] 'is' superEntity=[Entity] |
+	//    {OtherRelation} 'relation' (singleto?='a'|manyto?='many')? from=[Entity] ('has'|'have') ('a'|'many')? to=[Entity]
+	//;
 	public RelationElements getRelationAccess() {
 		return pRelation;
 	}

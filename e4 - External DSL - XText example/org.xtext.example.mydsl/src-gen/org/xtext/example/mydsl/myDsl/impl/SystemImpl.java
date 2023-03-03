@@ -11,6 +11,7 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -19,9 +20,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.xtext.example.mydsl.myDsl.Entity;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
-import org.xtext.example.mydsl.myDsl.Relation;
 
 /**
  * <!-- begin-user-doc -->
@@ -32,8 +31,7 @@ import org.xtext.example.mydsl.myDsl.Relation;
  * </p>
  * <ul>
  *   <li>{@link org.xtext.example.mydsl.myDsl.impl.SystemImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.xtext.example.mydsl.myDsl.impl.SystemImpl#getEntities <em>Entities</em>}</li>
- *   <li>{@link org.xtext.example.mydsl.myDsl.impl.SystemImpl#getRelations <em>Relations</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.impl.SystemImpl#getElements <em>Elements</em>}</li>
  * </ul>
  *
  * @generated
@@ -61,24 +59,14 @@ public class SystemImpl extends MinimalEObjectImpl.Container implements org.xtex
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getEntities() <em>Entities</em>}' containment reference list.
+   * The cached value of the '{@link #getElements() <em>Elements</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getEntities()
+   * @see #getElements()
    * @generated
    * @ordered
    */
-  protected EList<Entity> entities;
-
-  /**
-   * The cached value of the '{@link #getRelations() <em>Relations</em>}' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getRelations()
-   * @generated
-   * @ordered
-   */
-  protected EList<Relation> relations;
+  protected EList<EObject> elements;
 
   /**
    * <!-- begin-user-doc -->
@@ -132,28 +120,13 @@ public class SystemImpl extends MinimalEObjectImpl.Container implements org.xtex
    * @generated
    */
   @Override
-  public EList<Entity> getEntities()
+  public EList<EObject> getElements()
   {
-    if (entities == null)
+    if (elements == null)
     {
-      entities = new EObjectContainmentEList<Entity>(Entity.class, this, MyDslPackage.SYSTEM__ENTITIES);
+      elements = new EObjectContainmentEList<EObject>(EObject.class, this, MyDslPackage.SYSTEM__ELEMENTS);
     }
-    return entities;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EList<Relation> getRelations()
-  {
-    if (relations == null)
-    {
-      relations = new EObjectContainmentEList<Relation>(Relation.class, this, MyDslPackage.SYSTEM__RELATIONS);
-    }
-    return relations;
+    return elements;
   }
 
   /**
@@ -166,10 +139,8 @@ public class SystemImpl extends MinimalEObjectImpl.Container implements org.xtex
   {
     switch (featureID)
     {
-      case MyDslPackage.SYSTEM__ENTITIES:
-        return ((InternalEList<?>)getEntities()).basicRemove(otherEnd, msgs);
-      case MyDslPackage.SYSTEM__RELATIONS:
-        return ((InternalEList<?>)getRelations()).basicRemove(otherEnd, msgs);
+      case MyDslPackage.SYSTEM__ELEMENTS:
+        return ((InternalEList<?>)getElements()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -186,10 +157,8 @@ public class SystemImpl extends MinimalEObjectImpl.Container implements org.xtex
     {
       case MyDslPackage.SYSTEM__NAME:
         return getName();
-      case MyDslPackage.SYSTEM__ENTITIES:
-        return getEntities();
-      case MyDslPackage.SYSTEM__RELATIONS:
-        return getRelations();
+      case MyDslPackage.SYSTEM__ELEMENTS:
+        return getElements();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -208,13 +177,9 @@ public class SystemImpl extends MinimalEObjectImpl.Container implements org.xtex
       case MyDslPackage.SYSTEM__NAME:
         setName((String)newValue);
         return;
-      case MyDslPackage.SYSTEM__ENTITIES:
-        getEntities().clear();
-        getEntities().addAll((Collection<? extends Entity>)newValue);
-        return;
-      case MyDslPackage.SYSTEM__RELATIONS:
-        getRelations().clear();
-        getRelations().addAll((Collection<? extends Relation>)newValue);
+      case MyDslPackage.SYSTEM__ELEMENTS:
+        getElements().clear();
+        getElements().addAll((Collection<? extends EObject>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -233,11 +198,8 @@ public class SystemImpl extends MinimalEObjectImpl.Container implements org.xtex
       case MyDslPackage.SYSTEM__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case MyDslPackage.SYSTEM__ENTITIES:
-        getEntities().clear();
-        return;
-      case MyDslPackage.SYSTEM__RELATIONS:
-        getRelations().clear();
+      case MyDslPackage.SYSTEM__ELEMENTS:
+        getElements().clear();
         return;
     }
     super.eUnset(featureID);
@@ -255,10 +217,8 @@ public class SystemImpl extends MinimalEObjectImpl.Container implements org.xtex
     {
       case MyDslPackage.SYSTEM__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case MyDslPackage.SYSTEM__ENTITIES:
-        return entities != null && !entities.isEmpty();
-      case MyDslPackage.SYSTEM__RELATIONS:
-        return relations != null && !relations.isEmpty();
+      case MyDslPackage.SYSTEM__ELEMENTS:
+        return elements != null && !elements.isEmpty();
     }
     return super.eIsSet(featureID);
   }
