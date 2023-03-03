@@ -1,0 +1,6 @@
+<system> ::= system <ID> <entity>* <relation>*
+<entity> ::= entity <ID> <attribute>*
+<attribute> ::= <ID> as <Type>
+<Type> ::= string | number
+<relation> ::= relation <ID> is <ID> |
+                relation (a|many)? <ID> (has|have) (a|many)? <ID>

@@ -1,0 +1,22 @@
+grammar dk.sdu.mmmi.mdsd.EntityRelation with org.eclipse.xtext.common.Terminals
+
+generate entityRelation "http://www.sdu.dk/mmmi/mdsd/EntityRelation"
+
+System:
+    'system' name=ID (elements+=(Relation|Entity))+ ;
+
+Entity:
+    'entity' name=ID (attributes+=Attribute)*
+;
+
+Attribute:
+    'attribute' name=ID 'as' type=Type
+;
+
+Type:
+    'string' | 'number'
+;
+Relation:
+    {Inheritance} 'relation' from=[Entity] 'is' to=[Entity] |
+    {OtherRelation} 'relation' (singleto?='a'|manyto?='many')? from=[Entity] ('has'|'have') ('a'|'many')? to=[Entity]
+;
