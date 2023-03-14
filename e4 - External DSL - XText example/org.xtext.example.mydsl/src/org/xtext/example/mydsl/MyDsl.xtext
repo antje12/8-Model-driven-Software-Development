@@ -3,7 +3,8 @@ grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals
 generate myDsl "http://www.xtext.org/example/mydsl/MyDsl"
 
 System:
-    'system' name=ID (elements+=(Relation|Entity))+ ;
+    'system' name=ID (elements+=(Relation|Entity))+ 
+;
 
 Entity:
     'entity' name=ID (attributes+=Attribute)*
@@ -16,7 +17,8 @@ Attribute:
 Type:
     'string' | 'number'
 ;
+
 Relation:
-    {Inheritance} 'relation' subEntity=[Entity] 'is' superEntity=[Entity] |
-    {OtherRelation} 'relation' (singleto?='a'|manyto?='many')? from=[Entity] ('has'|'have') ('a'|'many')? to=[Entity]
+    {Inheritance} 'relation' baseEntity=[Entity] 'is' superEntity=[Entity] |
+    {Association} 'relation' ('a'|manyFrom?='many')? from=[Entity] ('has'|'have') ('a'|manyTo?='many')? to=[Entity]
 ;

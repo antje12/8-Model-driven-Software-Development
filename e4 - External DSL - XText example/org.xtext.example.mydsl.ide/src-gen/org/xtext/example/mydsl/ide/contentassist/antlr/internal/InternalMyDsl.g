@@ -243,15 +243,15 @@ rule__Relation__Alternatives_1_2
 	}
 :
 	(
-		{ before(grammarAccess.getRelationAccess().getSingletoAssignment_1_2_0()); }
-		(rule__Relation__SingletoAssignment_1_2_0)
-		{ after(grammarAccess.getRelationAccess().getSingletoAssignment_1_2_0()); }
+		{ before(grammarAccess.getRelationAccess().getAKeyword_1_2_0()); }
+		'a'
+		{ after(grammarAccess.getRelationAccess().getAKeyword_1_2_0()); }
 	)
 	|
 	(
-		{ before(grammarAccess.getRelationAccess().getManytoAssignment_1_2_1()); }
-		(rule__Relation__ManytoAssignment_1_2_1)
-		{ after(grammarAccess.getRelationAccess().getManytoAssignment_1_2_1()); }
+		{ before(grammarAccess.getRelationAccess().getManyFromAssignment_1_2_1()); }
+		(rule__Relation__ManyFromAssignment_1_2_1)
+		{ after(grammarAccess.getRelationAccess().getManyFromAssignment_1_2_1()); }
 	)
 ;
 finally {
@@ -291,9 +291,9 @@ rule__Relation__Alternatives_1_5
 	)
 	|
 	(
-		{ before(grammarAccess.getRelationAccess().getManyKeyword_1_5_1()); }
-		'many'
-		{ after(grammarAccess.getRelationAccess().getManyKeyword_1_5_1()); }
+		{ before(grammarAccess.getRelationAccess().getManyToAssignment_1_5_1()); }
+		(rule__Relation__ManyToAssignment_1_5_1)
+		{ after(grammarAccess.getRelationAccess().getManyToAssignment_1_5_1()); }
 	)
 ;
 finally {
@@ -649,9 +649,9 @@ rule__Relation__Group_0__2__Impl
 	}
 :
 (
-	{ before(grammarAccess.getRelationAccess().getSubEntityAssignment_0_2()); }
-	(rule__Relation__SubEntityAssignment_0_2)
-	{ after(grammarAccess.getRelationAccess().getSubEntityAssignment_0_2()); }
+	{ before(grammarAccess.getRelationAccess().getBaseEntityAssignment_0_2()); }
+	(rule__Relation__BaseEntityAssignment_0_2)
+	{ after(grammarAccess.getRelationAccess().getBaseEntityAssignment_0_2()); }
 )
 ;
 finally {
@@ -730,9 +730,9 @@ rule__Relation__Group_1__0__Impl
 	}
 :
 (
-	{ before(grammarAccess.getRelationAccess().getOtherRelationAction_1_0()); }
+	{ before(grammarAccess.getRelationAccess().getAssociationAction_1_0()); }
 	()
-	{ after(grammarAccess.getRelationAccess().getOtherRelationAction_1_0()); }
+	{ after(grammarAccess.getRelationAccess().getAssociationAction_1_0()); }
 )
 ;
 finally {
@@ -991,19 +991,19 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__Relation__SubEntityAssignment_0_2
+rule__Relation__BaseEntityAssignment_0_2
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getRelationAccess().getSubEntityEntityCrossReference_0_2_0()); }
+		{ before(grammarAccess.getRelationAccess().getBaseEntityEntityCrossReference_0_2_0()); }
 		(
-			{ before(grammarAccess.getRelationAccess().getSubEntityEntityIDTerminalRuleCall_0_2_0_1()); }
+			{ before(grammarAccess.getRelationAccess().getBaseEntityEntityIDTerminalRuleCall_0_2_0_1()); }
 			RULE_ID
-			{ after(grammarAccess.getRelationAccess().getSubEntityEntityIDTerminalRuleCall_0_2_0_1()); }
+			{ after(grammarAccess.getRelationAccess().getBaseEntityEntityIDTerminalRuleCall_0_2_0_1()); }
 		)
-		{ after(grammarAccess.getRelationAccess().getSubEntityEntityCrossReference_0_2_0()); }
+		{ after(grammarAccess.getRelationAccess().getBaseEntityEntityCrossReference_0_2_0()); }
 	)
 ;
 finally {
@@ -1029,38 +1029,19 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__Relation__SingletoAssignment_1_2_0
+rule__Relation__ManyFromAssignment_1_2_1
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getRelationAccess().getSingletoAKeyword_1_2_0_0()); }
+		{ before(grammarAccess.getRelationAccess().getManyFromManyKeyword_1_2_1_0()); }
 		(
-			{ before(grammarAccess.getRelationAccess().getSingletoAKeyword_1_2_0_0()); }
-			'a'
-			{ after(grammarAccess.getRelationAccess().getSingletoAKeyword_1_2_0_0()); }
-		)
-		{ after(grammarAccess.getRelationAccess().getSingletoAKeyword_1_2_0_0()); }
-	)
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__Relation__ManytoAssignment_1_2_1
-	@init {
-		int stackSize = keepStackSize();
-	}
-:
-	(
-		{ before(grammarAccess.getRelationAccess().getManytoManyKeyword_1_2_1_0()); }
-		(
-			{ before(grammarAccess.getRelationAccess().getManytoManyKeyword_1_2_1_0()); }
+			{ before(grammarAccess.getRelationAccess().getManyFromManyKeyword_1_2_1_0()); }
 			'many'
-			{ after(grammarAccess.getRelationAccess().getManytoManyKeyword_1_2_1_0()); }
+			{ after(grammarAccess.getRelationAccess().getManyFromManyKeyword_1_2_1_0()); }
 		)
-		{ after(grammarAccess.getRelationAccess().getManytoManyKeyword_1_2_1_0()); }
+		{ after(grammarAccess.getRelationAccess().getManyFromManyKeyword_1_2_1_0()); }
 	)
 ;
 finally {
@@ -1080,6 +1061,25 @@ rule__Relation__FromAssignment_1_3
 			{ after(grammarAccess.getRelationAccess().getFromEntityIDTerminalRuleCall_1_3_0_1()); }
 		)
 		{ after(grammarAccess.getRelationAccess().getFromEntityCrossReference_1_3_0()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__Relation__ManyToAssignment_1_5_1
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	(
+		{ before(grammarAccess.getRelationAccess().getManyToManyKeyword_1_5_1_0()); }
+		(
+			{ before(grammarAccess.getRelationAccess().getManyToManyKeyword_1_5_1_0()); }
+			'many'
+			{ after(grammarAccess.getRelationAccess().getManyToManyKeyword_1_5_1_0()); }
+		)
+		{ after(grammarAccess.getRelationAccess().getManyToManyKeyword_1_5_1_0()); }
 	)
 ;
 finally {

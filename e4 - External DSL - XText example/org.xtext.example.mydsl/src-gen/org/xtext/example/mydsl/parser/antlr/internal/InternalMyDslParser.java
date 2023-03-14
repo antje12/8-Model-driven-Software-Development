@@ -747,7 +747,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleRelation"
-    // InternalMyDsl.g:303:1: ruleRelation returns [EObject current=null] : ( ( () otherlv_1= 'relation' ( (otherlv_2= RULE_ID ) ) otherlv_3= 'is' ( (otherlv_4= RULE_ID ) ) ) | ( () otherlv_6= 'relation' ( ( (lv_singleto_7_0= 'a' ) ) | ( (lv_manyto_8_0= 'many' ) ) )? ( (otherlv_9= RULE_ID ) ) (otherlv_10= 'has' | otherlv_11= 'have' ) (otherlv_12= 'a' | otherlv_13= 'many' )? ( (otherlv_14= RULE_ID ) ) ) ) ;
+    // InternalMyDsl.g:303:1: ruleRelation returns [EObject current=null] : ( ( () otherlv_1= 'relation' ( (otherlv_2= RULE_ID ) ) otherlv_3= 'is' ( (otherlv_4= RULE_ID ) ) ) | ( () otherlv_6= 'relation' (otherlv_7= 'a' | ( (lv_manyFrom_8_0= 'many' ) ) )? ( (otherlv_9= RULE_ID ) ) (otherlv_10= 'has' | otherlv_11= 'have' ) (otherlv_12= 'a' | ( (lv_manyTo_13_0= 'many' ) ) )? ( (otherlv_14= RULE_ID ) ) ) ) ;
     public final EObject ruleRelation() throws RecognitionException {
         EObject current = null;
 
@@ -756,23 +756,23 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
         Token otherlv_3=null;
         Token otherlv_4=null;
         Token otherlv_6=null;
-        Token lv_singleto_7_0=null;
-        Token lv_manyto_8_0=null;
+        Token otherlv_7=null;
+        Token lv_manyFrom_8_0=null;
         Token otherlv_9=null;
         Token otherlv_10=null;
         Token otherlv_11=null;
         Token otherlv_12=null;
-        Token otherlv_13=null;
+        Token lv_manyTo_13_0=null;
         Token otherlv_14=null;
 
 
         	enterRule();
 
         try {
-            // InternalMyDsl.g:309:2: ( ( ( () otherlv_1= 'relation' ( (otherlv_2= RULE_ID ) ) otherlv_3= 'is' ( (otherlv_4= RULE_ID ) ) ) | ( () otherlv_6= 'relation' ( ( (lv_singleto_7_0= 'a' ) ) | ( (lv_manyto_8_0= 'many' ) ) )? ( (otherlv_9= RULE_ID ) ) (otherlv_10= 'has' | otherlv_11= 'have' ) (otherlv_12= 'a' | otherlv_13= 'many' )? ( (otherlv_14= RULE_ID ) ) ) ) )
-            // InternalMyDsl.g:310:2: ( ( () otherlv_1= 'relation' ( (otherlv_2= RULE_ID ) ) otherlv_3= 'is' ( (otherlv_4= RULE_ID ) ) ) | ( () otherlv_6= 'relation' ( ( (lv_singleto_7_0= 'a' ) ) | ( (lv_manyto_8_0= 'many' ) ) )? ( (otherlv_9= RULE_ID ) ) (otherlv_10= 'has' | otherlv_11= 'have' ) (otherlv_12= 'a' | otherlv_13= 'many' )? ( (otherlv_14= RULE_ID ) ) ) )
+            // InternalMyDsl.g:309:2: ( ( ( () otherlv_1= 'relation' ( (otherlv_2= RULE_ID ) ) otherlv_3= 'is' ( (otherlv_4= RULE_ID ) ) ) | ( () otherlv_6= 'relation' (otherlv_7= 'a' | ( (lv_manyFrom_8_0= 'many' ) ) )? ( (otherlv_9= RULE_ID ) ) (otherlv_10= 'has' | otherlv_11= 'have' ) (otherlv_12= 'a' | ( (lv_manyTo_13_0= 'many' ) ) )? ( (otherlv_14= RULE_ID ) ) ) ) )
+            // InternalMyDsl.g:310:2: ( ( () otherlv_1= 'relation' ( (otherlv_2= RULE_ID ) ) otherlv_3= 'is' ( (otherlv_4= RULE_ID ) ) ) | ( () otherlv_6= 'relation' (otherlv_7= 'a' | ( (lv_manyFrom_8_0= 'many' ) ) )? ( (otherlv_9= RULE_ID ) ) (otherlv_10= 'has' | otherlv_11= 'have' ) (otherlv_12= 'a' | ( (lv_manyTo_13_0= 'many' ) ) )? ( (otherlv_14= RULE_ID ) ) ) )
             {
-            // InternalMyDsl.g:310:2: ( ( () otherlv_1= 'relation' ( (otherlv_2= RULE_ID ) ) otherlv_3= 'is' ( (otherlv_4= RULE_ID ) ) ) | ( () otherlv_6= 'relation' ( ( (lv_singleto_7_0= 'a' ) ) | ( (lv_manyto_8_0= 'many' ) ) )? ( (otherlv_9= RULE_ID ) ) (otherlv_10= 'has' | otherlv_11= 'have' ) (otherlv_12= 'a' | otherlv_13= 'many' )? ( (otherlv_14= RULE_ID ) ) ) )
+            // InternalMyDsl.g:310:2: ( ( () otherlv_1= 'relation' ( (otherlv_2= RULE_ID ) ) otherlv_3= 'is' ( (otherlv_4= RULE_ID ) ) ) | ( () otherlv_6= 'relation' (otherlv_7= 'a' | ( (lv_manyFrom_8_0= 'many' ) ) )? ( (otherlv_9= RULE_ID ) ) (otherlv_10= 'has' | otherlv_11= 'have' ) (otherlv_12= 'a' | ( (lv_manyTo_13_0= 'many' ) ) )? ( (otherlv_14= RULE_ID ) ) ) )
             int alt8=2;
             int LA8_0 = input.LA(1);
 
@@ -846,7 +846,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                     					
                     otherlv_2=(Token)match(input,RULE_ID,FOLLOW_9); 
 
-                    						newLeafNode(otherlv_2, grammarAccess.getRelationAccess().getSubEntityEntityCrossReference_0_2_0());
+                    						newLeafNode(otherlv_2, grammarAccess.getRelationAccess().getBaseEntityEntityCrossReference_0_2_0());
                     					
 
                     }
@@ -886,17 +886,17 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalMyDsl.g:355:3: ( () otherlv_6= 'relation' ( ( (lv_singleto_7_0= 'a' ) ) | ( (lv_manyto_8_0= 'many' ) ) )? ( (otherlv_9= RULE_ID ) ) (otherlv_10= 'has' | otherlv_11= 'have' ) (otherlv_12= 'a' | otherlv_13= 'many' )? ( (otherlv_14= RULE_ID ) ) )
+                    // InternalMyDsl.g:355:3: ( () otherlv_6= 'relation' (otherlv_7= 'a' | ( (lv_manyFrom_8_0= 'many' ) ) )? ( (otherlv_9= RULE_ID ) ) (otherlv_10= 'has' | otherlv_11= 'have' ) (otherlv_12= 'a' | ( (lv_manyTo_13_0= 'many' ) ) )? ( (otherlv_14= RULE_ID ) ) )
                     {
-                    // InternalMyDsl.g:355:3: ( () otherlv_6= 'relation' ( ( (lv_singleto_7_0= 'a' ) ) | ( (lv_manyto_8_0= 'many' ) ) )? ( (otherlv_9= RULE_ID ) ) (otherlv_10= 'has' | otherlv_11= 'have' ) (otherlv_12= 'a' | otherlv_13= 'many' )? ( (otherlv_14= RULE_ID ) ) )
-                    // InternalMyDsl.g:356:4: () otherlv_6= 'relation' ( ( (lv_singleto_7_0= 'a' ) ) | ( (lv_manyto_8_0= 'many' ) ) )? ( (otherlv_9= RULE_ID ) ) (otherlv_10= 'has' | otherlv_11= 'have' ) (otherlv_12= 'a' | otherlv_13= 'many' )? ( (otherlv_14= RULE_ID ) )
+                    // InternalMyDsl.g:355:3: ( () otherlv_6= 'relation' (otherlv_7= 'a' | ( (lv_manyFrom_8_0= 'many' ) ) )? ( (otherlv_9= RULE_ID ) ) (otherlv_10= 'has' | otherlv_11= 'have' ) (otherlv_12= 'a' | ( (lv_manyTo_13_0= 'many' ) ) )? ( (otherlv_14= RULE_ID ) ) )
+                    // InternalMyDsl.g:356:4: () otherlv_6= 'relation' (otherlv_7= 'a' | ( (lv_manyFrom_8_0= 'many' ) ) )? ( (otherlv_9= RULE_ID ) ) (otherlv_10= 'has' | otherlv_11= 'have' ) (otherlv_12= 'a' | ( (lv_manyTo_13_0= 'many' ) ) )? ( (otherlv_14= RULE_ID ) )
                     {
                     // InternalMyDsl.g:356:4: ()
                     // InternalMyDsl.g:357:5: 
                     {
 
                     					current = forceCreateModelElement(
-                    						grammarAccess.getRelationAccess().getOtherRelationAction_1_0(),
+                    						grammarAccess.getRelationAccess().getAssociationAction_1_0(),
                     						current);
                     				
 
@@ -906,7 +906,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
                     				newLeafNode(otherlv_6, grammarAccess.getRelationAccess().getRelationKeyword_1_1());
                     			
-                    // InternalMyDsl.g:367:4: ( ( (lv_singleto_7_0= 'a' ) ) | ( (lv_manyto_8_0= 'many' ) ) )?
+                    // InternalMyDsl.g:367:4: (otherlv_7= 'a' | ( (lv_manyFrom_8_0= 'many' ) ) )?
                     int alt5=3;
                     int LA5_0 = input.LA(1);
 
@@ -918,51 +918,33 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt5) {
                         case 1 :
-                            // InternalMyDsl.g:368:5: ( (lv_singleto_7_0= 'a' ) )
+                            // InternalMyDsl.g:368:5: otherlv_7= 'a'
                             {
-                            // InternalMyDsl.g:368:5: ( (lv_singleto_7_0= 'a' ) )
-                            // InternalMyDsl.g:369:6: (lv_singleto_7_0= 'a' )
-                            {
-                            // InternalMyDsl.g:369:6: (lv_singleto_7_0= 'a' )
-                            // InternalMyDsl.g:370:7: lv_singleto_7_0= 'a'
-                            {
-                            lv_singleto_7_0=(Token)match(input,19,FOLLOW_3); 
+                            otherlv_7=(Token)match(input,19,FOLLOW_3); 
 
-                            							newLeafNode(lv_singleto_7_0, grammarAccess.getRelationAccess().getSingletoAKeyword_1_2_0_0());
-                            						
-
-                            							if (current==null) {
-                            								current = createModelElement(grammarAccess.getRelationRule());
-                            							}
-                            							setWithLastConsumed(current, "singleto", lv_singleto_7_0 != null, "a");
-                            						
-
-                            }
-
-
-                            }
-
+                            					newLeafNode(otherlv_7, grammarAccess.getRelationAccess().getAKeyword_1_2_0());
+                            				
 
                             }
                             break;
                         case 2 :
-                            // InternalMyDsl.g:383:5: ( (lv_manyto_8_0= 'many' ) )
+                            // InternalMyDsl.g:373:5: ( (lv_manyFrom_8_0= 'many' ) )
                             {
-                            // InternalMyDsl.g:383:5: ( (lv_manyto_8_0= 'many' ) )
-                            // InternalMyDsl.g:384:6: (lv_manyto_8_0= 'many' )
+                            // InternalMyDsl.g:373:5: ( (lv_manyFrom_8_0= 'many' ) )
+                            // InternalMyDsl.g:374:6: (lv_manyFrom_8_0= 'many' )
                             {
-                            // InternalMyDsl.g:384:6: (lv_manyto_8_0= 'many' )
-                            // InternalMyDsl.g:385:7: lv_manyto_8_0= 'many'
+                            // InternalMyDsl.g:374:6: (lv_manyFrom_8_0= 'many' )
+                            // InternalMyDsl.g:375:7: lv_manyFrom_8_0= 'many'
                             {
-                            lv_manyto_8_0=(Token)match(input,20,FOLLOW_3); 
+                            lv_manyFrom_8_0=(Token)match(input,20,FOLLOW_3); 
 
-                            							newLeafNode(lv_manyto_8_0, grammarAccess.getRelationAccess().getManytoManyKeyword_1_2_1_0());
+                            							newLeafNode(lv_manyFrom_8_0, grammarAccess.getRelationAccess().getManyFromManyKeyword_1_2_1_0());
                             						
 
                             							if (current==null) {
                             								current = createModelElement(grammarAccess.getRelationRule());
                             							}
-                            							setWithLastConsumed(current, "manyto", lv_manyto_8_0 != null, "many");
+                            							setWithLastConsumed(current, "manyFrom", lv_manyFrom_8_0 != null, "many");
                             						
 
                             }
@@ -976,11 +958,11 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalMyDsl.g:398:4: ( (otherlv_9= RULE_ID ) )
-                    // InternalMyDsl.g:399:5: (otherlv_9= RULE_ID )
+                    // InternalMyDsl.g:388:4: ( (otherlv_9= RULE_ID ) )
+                    // InternalMyDsl.g:389:5: (otherlv_9= RULE_ID )
                     {
-                    // InternalMyDsl.g:399:5: (otherlv_9= RULE_ID )
-                    // InternalMyDsl.g:400:6: otherlv_9= RULE_ID
+                    // InternalMyDsl.g:389:5: (otherlv_9= RULE_ID )
+                    // InternalMyDsl.g:390:6: otherlv_9= RULE_ID
                     {
 
                     						if (current==null) {
@@ -997,7 +979,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalMyDsl.g:411:4: (otherlv_10= 'has' | otherlv_11= 'have' )
+                    // InternalMyDsl.g:401:4: (otherlv_10= 'has' | otherlv_11= 'have' )
                     int alt6=2;
                     int LA6_0 = input.LA(1);
 
@@ -1015,7 +997,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt6) {
                         case 1 :
-                            // InternalMyDsl.g:412:5: otherlv_10= 'has'
+                            // InternalMyDsl.g:402:5: otherlv_10= 'has'
                             {
                             otherlv_10=(Token)match(input,21,FOLLOW_10); 
 
@@ -1025,7 +1007,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 2 :
-                            // InternalMyDsl.g:417:5: otherlv_11= 'have'
+                            // InternalMyDsl.g:407:5: otherlv_11= 'have'
                             {
                             otherlv_11=(Token)match(input,22,FOLLOW_10); 
 
@@ -1037,7 +1019,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalMyDsl.g:422:4: (otherlv_12= 'a' | otherlv_13= 'many' )?
+                    // InternalMyDsl.g:412:4: (otherlv_12= 'a' | ( (lv_manyTo_13_0= 'many' ) ) )?
                     int alt7=3;
                     int LA7_0 = input.LA(1);
 
@@ -1049,7 +1031,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt7) {
                         case 1 :
-                            // InternalMyDsl.g:423:5: otherlv_12= 'a'
+                            // InternalMyDsl.g:413:5: otherlv_12= 'a'
                             {
                             otherlv_12=(Token)match(input,19,FOLLOW_3); 
 
@@ -1059,12 +1041,30 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 2 :
-                            // InternalMyDsl.g:428:5: otherlv_13= 'many'
+                            // InternalMyDsl.g:418:5: ( (lv_manyTo_13_0= 'many' ) )
                             {
-                            otherlv_13=(Token)match(input,20,FOLLOW_3); 
+                            // InternalMyDsl.g:418:5: ( (lv_manyTo_13_0= 'many' ) )
+                            // InternalMyDsl.g:419:6: (lv_manyTo_13_0= 'many' )
+                            {
+                            // InternalMyDsl.g:419:6: (lv_manyTo_13_0= 'many' )
+                            // InternalMyDsl.g:420:7: lv_manyTo_13_0= 'many'
+                            {
+                            lv_manyTo_13_0=(Token)match(input,20,FOLLOW_3); 
 
-                            					newLeafNode(otherlv_13, grammarAccess.getRelationAccess().getManyKeyword_1_5_1());
-                            				
+                            							newLeafNode(lv_manyTo_13_0, grammarAccess.getRelationAccess().getManyToManyKeyword_1_5_1_0());
+                            						
+
+                            							if (current==null) {
+                            								current = createModelElement(grammarAccess.getRelationRule());
+                            							}
+                            							setWithLastConsumed(current, "manyTo", lv_manyTo_13_0 != null, "many");
+                            						
+
+                            }
+
+
+                            }
+
 
                             }
                             break;

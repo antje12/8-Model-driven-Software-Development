@@ -36,7 +36,8 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		private final RuleCall cElementsEntityParserRuleCall_2_0_1 = (RuleCall)cElementsAlternatives_2_0.eContents().get(1);
 		
 		//System:
-		//    'system' name=ID (elements+=(Relation|Entity))+ ;
+		//    'system' name=ID (elements+=(Relation|Entity))+
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'system' name=ID (elements+=(Relation|Entity))+
@@ -157,21 +158,20 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
 		private final Action cInheritanceAction_0_0 = (Action)cGroup_0.eContents().get(0);
 		private final Keyword cRelationKeyword_0_1 = (Keyword)cGroup_0.eContents().get(1);
-		private final Assignment cSubEntityAssignment_0_2 = (Assignment)cGroup_0.eContents().get(2);
-		private final CrossReference cSubEntityEntityCrossReference_0_2_0 = (CrossReference)cSubEntityAssignment_0_2.eContents().get(0);
-		private final RuleCall cSubEntityEntityIDTerminalRuleCall_0_2_0_1 = (RuleCall)cSubEntityEntityCrossReference_0_2_0.eContents().get(1);
+		private final Assignment cBaseEntityAssignment_0_2 = (Assignment)cGroup_0.eContents().get(2);
+		private final CrossReference cBaseEntityEntityCrossReference_0_2_0 = (CrossReference)cBaseEntityAssignment_0_2.eContents().get(0);
+		private final RuleCall cBaseEntityEntityIDTerminalRuleCall_0_2_0_1 = (RuleCall)cBaseEntityEntityCrossReference_0_2_0.eContents().get(1);
 		private final Keyword cIsKeyword_0_3 = (Keyword)cGroup_0.eContents().get(3);
 		private final Assignment cSuperEntityAssignment_0_4 = (Assignment)cGroup_0.eContents().get(4);
 		private final CrossReference cSuperEntityEntityCrossReference_0_4_0 = (CrossReference)cSuperEntityAssignment_0_4.eContents().get(0);
 		private final RuleCall cSuperEntityEntityIDTerminalRuleCall_0_4_0_1 = (RuleCall)cSuperEntityEntityCrossReference_0_4_0.eContents().get(1);
 		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
-		private final Action cOtherRelationAction_1_0 = (Action)cGroup_1.eContents().get(0);
+		private final Action cAssociationAction_1_0 = (Action)cGroup_1.eContents().get(0);
 		private final Keyword cRelationKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
 		private final Alternatives cAlternatives_1_2 = (Alternatives)cGroup_1.eContents().get(2);
-		private final Assignment cSingletoAssignment_1_2_0 = (Assignment)cAlternatives_1_2.eContents().get(0);
-		private final Keyword cSingletoAKeyword_1_2_0_0 = (Keyword)cSingletoAssignment_1_2_0.eContents().get(0);
-		private final Assignment cManytoAssignment_1_2_1 = (Assignment)cAlternatives_1_2.eContents().get(1);
-		private final Keyword cManytoManyKeyword_1_2_1_0 = (Keyword)cManytoAssignment_1_2_1.eContents().get(0);
+		private final Keyword cAKeyword_1_2_0 = (Keyword)cAlternatives_1_2.eContents().get(0);
+		private final Assignment cManyFromAssignment_1_2_1 = (Assignment)cAlternatives_1_2.eContents().get(1);
+		private final Keyword cManyFromManyKeyword_1_2_1_0 = (Keyword)cManyFromAssignment_1_2_1.eContents().get(0);
 		private final Assignment cFromAssignment_1_3 = (Assignment)cGroup_1.eContents().get(3);
 		private final CrossReference cFromEntityCrossReference_1_3_0 = (CrossReference)cFromAssignment_1_3.eContents().get(0);
 		private final RuleCall cFromEntityIDTerminalRuleCall_1_3_0_1 = (RuleCall)cFromEntityCrossReference_1_3_0.eContents().get(1);
@@ -180,22 +180,23 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		private final Keyword cHaveKeyword_1_4_1 = (Keyword)cAlternatives_1_4.eContents().get(1);
 		private final Alternatives cAlternatives_1_5 = (Alternatives)cGroup_1.eContents().get(5);
 		private final Keyword cAKeyword_1_5_0 = (Keyword)cAlternatives_1_5.eContents().get(0);
-		private final Keyword cManyKeyword_1_5_1 = (Keyword)cAlternatives_1_5.eContents().get(1);
+		private final Assignment cManyToAssignment_1_5_1 = (Assignment)cAlternatives_1_5.eContents().get(1);
+		private final Keyword cManyToManyKeyword_1_5_1_0 = (Keyword)cManyToAssignment_1_5_1.eContents().get(0);
 		private final Assignment cToAssignment_1_6 = (Assignment)cGroup_1.eContents().get(6);
 		private final CrossReference cToEntityCrossReference_1_6_0 = (CrossReference)cToAssignment_1_6.eContents().get(0);
 		private final RuleCall cToEntityIDTerminalRuleCall_1_6_0_1 = (RuleCall)cToEntityCrossReference_1_6_0.eContents().get(1);
 		
 		//Relation:
-		//    {Inheritance} 'relation' subEntity=[Entity] 'is' superEntity=[Entity] |
-		//    {OtherRelation} 'relation' (singleto?='a'|manyto?='many')? from=[Entity] ('has'|'have') ('a'|'many')? to=[Entity]
+		//    {Inheritance} 'relation' baseEntity=[Entity] 'is' superEntity=[Entity] |
+		//    {Association} 'relation' ('a'|manyFrom?='many')? from=[Entity] ('has'|'have') ('a'|manyTo?='many')? to=[Entity]
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{Inheritance} 'relation' subEntity=[Entity] 'is' superEntity=[Entity] |
-		//{OtherRelation} 'relation' (singleto?='a'|manyto?='many')? from=[Entity] ('has'|'have') ('a'|'many')? to=[Entity]
+		//{Inheritance} 'relation' baseEntity=[Entity] 'is' superEntity=[Entity] |
+		//{Association} 'relation' ('a'|manyFrom?='many')? from=[Entity] ('has'|'have') ('a'|manyTo?='many')? to=[Entity]
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//{Inheritance} 'relation' subEntity=[Entity] 'is' superEntity=[Entity]
+		//{Inheritance} 'relation' baseEntity=[Entity] 'is' superEntity=[Entity]
 		public Group getGroup_0() { return cGroup_0; }
 		
 		//{Inheritance}
@@ -204,14 +205,14 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		//'relation'
 		public Keyword getRelationKeyword_0_1() { return cRelationKeyword_0_1; }
 		
-		//subEntity=[Entity]
-		public Assignment getSubEntityAssignment_0_2() { return cSubEntityAssignment_0_2; }
+		//baseEntity=[Entity]
+		public Assignment getBaseEntityAssignment_0_2() { return cBaseEntityAssignment_0_2; }
 		
 		//[Entity]
-		public CrossReference getSubEntityEntityCrossReference_0_2_0() { return cSubEntityEntityCrossReference_0_2_0; }
+		public CrossReference getBaseEntityEntityCrossReference_0_2_0() { return cBaseEntityEntityCrossReference_0_2_0; }
 		
 		//ID
-		public RuleCall getSubEntityEntityIDTerminalRuleCall_0_2_0_1() { return cSubEntityEntityIDTerminalRuleCall_0_2_0_1; }
+		public RuleCall getBaseEntityEntityIDTerminalRuleCall_0_2_0_1() { return cBaseEntityEntityIDTerminalRuleCall_0_2_0_1; }
 		
 		//'is'
 		public Keyword getIsKeyword_0_3() { return cIsKeyword_0_3; }
@@ -225,29 +226,26 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		//ID
 		public RuleCall getSuperEntityEntityIDTerminalRuleCall_0_4_0_1() { return cSuperEntityEntityIDTerminalRuleCall_0_4_0_1; }
 		
-		//{OtherRelation} 'relation' (singleto?='a'|manyto?='many')? from=[Entity] ('has'|'have') ('a'|'many')? to=[Entity]
+		//{Association} 'relation' ('a'|manyFrom?='many')? from=[Entity] ('has'|'have') ('a'|manyTo?='many')? to=[Entity]
 		public Group getGroup_1() { return cGroup_1; }
 		
-		//{OtherRelation}
-		public Action getOtherRelationAction_1_0() { return cOtherRelationAction_1_0; }
+		//{Association}
+		public Action getAssociationAction_1_0() { return cAssociationAction_1_0; }
 		
 		//'relation'
 		public Keyword getRelationKeyword_1_1() { return cRelationKeyword_1_1; }
 		
-		//(singleto?='a'|manyto?='many')?
+		//('a'|manyFrom?='many')?
 		public Alternatives getAlternatives_1_2() { return cAlternatives_1_2; }
 		
-		//singleto?='a'
-		public Assignment getSingletoAssignment_1_2_0() { return cSingletoAssignment_1_2_0; }
-		
 		//'a'
-		public Keyword getSingletoAKeyword_1_2_0_0() { return cSingletoAKeyword_1_2_0_0; }
+		public Keyword getAKeyword_1_2_0() { return cAKeyword_1_2_0; }
 		
-		//manyto?='many'
-		public Assignment getManytoAssignment_1_2_1() { return cManytoAssignment_1_2_1; }
+		//manyFrom?='many'
+		public Assignment getManyFromAssignment_1_2_1() { return cManyFromAssignment_1_2_1; }
 		
 		//'many'
-		public Keyword getManytoManyKeyword_1_2_1_0() { return cManytoManyKeyword_1_2_1_0; }
+		public Keyword getManyFromManyKeyword_1_2_1_0() { return cManyFromManyKeyword_1_2_1_0; }
 		
 		//from=[Entity]
 		public Assignment getFromAssignment_1_3() { return cFromAssignment_1_3; }
@@ -267,14 +265,17 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		//'have'
 		public Keyword getHaveKeyword_1_4_1() { return cHaveKeyword_1_4_1; }
 		
-		//('a'|'many')?
+		//('a'|manyTo?='many')?
 		public Alternatives getAlternatives_1_5() { return cAlternatives_1_5; }
 		
 		//'a'
 		public Keyword getAKeyword_1_5_0() { return cAKeyword_1_5_0; }
 		
+		//manyTo?='many'
+		public Assignment getManyToAssignment_1_5_1() { return cManyToAssignment_1_5_1; }
+		
 		//'many'
-		public Keyword getManyKeyword_1_5_1() { return cManyKeyword_1_5_1; }
+		public Keyword getManyToManyKeyword_1_5_1_0() { return cManyToManyKeyword_1_5_1_0; }
 		
 		//to=[Entity]
 		public Assignment getToAssignment_1_6() { return cToAssignment_1_6; }
@@ -337,7 +338,8 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 
 	
 	//System:
-	//    'system' name=ID (elements+=(Relation|Entity))+ ;
+	//    'system' name=ID (elements+=(Relation|Entity))+
+	//;
 	public SystemElements getSystemAccess() {
 		return pSystem;
 	}
@@ -380,8 +382,8 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	}
 	
 	//Relation:
-	//    {Inheritance} 'relation' subEntity=[Entity] 'is' superEntity=[Entity] |
-	//    {OtherRelation} 'relation' (singleto?='a'|manyto?='many')? from=[Entity] ('has'|'have') ('a'|'many')? to=[Entity]
+	//    {Inheritance} 'relation' baseEntity=[Entity] 'is' superEntity=[Entity] |
+	//    {Association} 'relation' ('a'|manyFrom?='many')? from=[Entity] ('has'|'have') ('a'|manyTo?='many')? to=[Entity]
 	//;
 	public RelationElements getRelationAccess() {
 		return pRelation;

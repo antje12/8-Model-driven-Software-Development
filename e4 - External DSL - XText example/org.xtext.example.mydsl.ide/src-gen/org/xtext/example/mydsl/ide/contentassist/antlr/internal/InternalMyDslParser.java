@@ -22,7 +22,7 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalMyDslParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'string'", "'number'", "'has'", "'have'", "'a'", "'many'", "'system'", "'entity'", "'attribute'", "'as'", "'relation'", "'is'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'string'", "'number'", "'a'", "'has'", "'have'", "'system'", "'entity'", "'attribute'", "'as'", "'relation'", "'is'", "'many'"
     };
     public static final int RULE_STRING=6;
     public static final int RULE_SL_COMMENT=8;
@@ -476,10 +476,10 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
             int alt1=2;
             int LA1_0 = input.LA(1);
 
-            if ( (LA1_0==21) ) {
+            if ( (LA1_0==20) ) {
                 alt1=1;
             }
-            else if ( (LA1_0==18) ) {
+            else if ( (LA1_0==17) ) {
                 alt1=2;
             }
             else {
@@ -626,19 +626,19 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
             int alt3=2;
             int LA3_0 = input.LA(1);
 
-            if ( (LA3_0==21) ) {
+            if ( (LA3_0==20) ) {
                 int LA3_1 = input.LA(2);
 
-                if ( ((LA3_1>=15 && LA3_1<=16)) ) {
+                if ( (LA3_1==13||LA3_1==22) ) {
                     alt3=2;
                 }
                 else if ( (LA3_1==RULE_ID) ) {
                     int LA3_3 = input.LA(3);
 
-                    if ( (LA3_3==22) ) {
+                    if ( (LA3_3==21) ) {
                         alt3=1;
                     }
-                    else if ( ((LA3_3>=13 && LA3_3<=14)) ) {
+                    else if ( ((LA3_3>=14 && LA3_3<=15)) ) {
                         alt3=2;
                     }
                     else {
@@ -730,20 +730,20 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Relation__Alternatives_1_2"
-    // InternalMyDsl.g:240:1: rule__Relation__Alternatives_1_2 : ( ( ( rule__Relation__SingletoAssignment_1_2_0 ) ) | ( ( rule__Relation__ManytoAssignment_1_2_1 ) ) );
+    // InternalMyDsl.g:240:1: rule__Relation__Alternatives_1_2 : ( ( 'a' ) | ( ( rule__Relation__ManyFromAssignment_1_2_1 ) ) );
     public final void rule__Relation__Alternatives_1_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMyDsl.g:244:1: ( ( ( rule__Relation__SingletoAssignment_1_2_0 ) ) | ( ( rule__Relation__ManytoAssignment_1_2_1 ) ) )
+            // InternalMyDsl.g:244:1: ( ( 'a' ) | ( ( rule__Relation__ManyFromAssignment_1_2_1 ) ) )
             int alt4=2;
             int LA4_0 = input.LA(1);
 
-            if ( (LA4_0==15) ) {
+            if ( (LA4_0==13) ) {
                 alt4=1;
             }
-            else if ( (LA4_0==16) ) {
+            else if ( (LA4_0==22) ) {
                 alt4=2;
             }
             else {
@@ -754,24 +754,14 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
             }
             switch (alt4) {
                 case 1 :
-                    // InternalMyDsl.g:245:2: ( ( rule__Relation__SingletoAssignment_1_2_0 ) )
+                    // InternalMyDsl.g:245:2: ( 'a' )
                     {
-                    // InternalMyDsl.g:245:2: ( ( rule__Relation__SingletoAssignment_1_2_0 ) )
-                    // InternalMyDsl.g:246:3: ( rule__Relation__SingletoAssignment_1_2_0 )
+                    // InternalMyDsl.g:245:2: ( 'a' )
+                    // InternalMyDsl.g:246:3: 'a'
                     {
-                     before(grammarAccess.getRelationAccess().getSingletoAssignment_1_2_0()); 
-                    // InternalMyDsl.g:247:3: ( rule__Relation__SingletoAssignment_1_2_0 )
-                    // InternalMyDsl.g:247:4: rule__Relation__SingletoAssignment_1_2_0
-                    {
-                    pushFollow(FOLLOW_2);
-                    rule__Relation__SingletoAssignment_1_2_0();
-
-                    state._fsp--;
-
-
-                    }
-
-                     after(grammarAccess.getRelationAccess().getSingletoAssignment_1_2_0()); 
+                     before(grammarAccess.getRelationAccess().getAKeyword_1_2_0()); 
+                    match(input,13,FOLLOW_2); 
+                     after(grammarAccess.getRelationAccess().getAKeyword_1_2_0()); 
 
                     }
 
@@ -779,24 +769,24 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // InternalMyDsl.g:251:2: ( ( rule__Relation__ManytoAssignment_1_2_1 ) )
+                    // InternalMyDsl.g:251:2: ( ( rule__Relation__ManyFromAssignment_1_2_1 ) )
                     {
-                    // InternalMyDsl.g:251:2: ( ( rule__Relation__ManytoAssignment_1_2_1 ) )
-                    // InternalMyDsl.g:252:3: ( rule__Relation__ManytoAssignment_1_2_1 )
+                    // InternalMyDsl.g:251:2: ( ( rule__Relation__ManyFromAssignment_1_2_1 ) )
+                    // InternalMyDsl.g:252:3: ( rule__Relation__ManyFromAssignment_1_2_1 )
                     {
-                     before(grammarAccess.getRelationAccess().getManytoAssignment_1_2_1()); 
-                    // InternalMyDsl.g:253:3: ( rule__Relation__ManytoAssignment_1_2_1 )
-                    // InternalMyDsl.g:253:4: rule__Relation__ManytoAssignment_1_2_1
+                     before(grammarAccess.getRelationAccess().getManyFromAssignment_1_2_1()); 
+                    // InternalMyDsl.g:253:3: ( rule__Relation__ManyFromAssignment_1_2_1 )
+                    // InternalMyDsl.g:253:4: rule__Relation__ManyFromAssignment_1_2_1
                     {
                     pushFollow(FOLLOW_2);
-                    rule__Relation__ManytoAssignment_1_2_1();
+                    rule__Relation__ManyFromAssignment_1_2_1();
 
                     state._fsp--;
 
 
                     }
 
-                     after(grammarAccess.getRelationAccess().getManytoAssignment_1_2_1()); 
+                     after(grammarAccess.getRelationAccess().getManyFromAssignment_1_2_1()); 
 
                     }
 
@@ -831,10 +821,10 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
             int alt5=2;
             int LA5_0 = input.LA(1);
 
-            if ( (LA5_0==13) ) {
+            if ( (LA5_0==14) ) {
                 alt5=1;
             }
-            else if ( (LA5_0==14) ) {
+            else if ( (LA5_0==15) ) {
                 alt5=2;
             }
             else {
@@ -851,7 +841,7 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
                     // InternalMyDsl.g:267:3: 'has'
                     {
                      before(grammarAccess.getRelationAccess().getHasKeyword_1_4_0()); 
-                    match(input,13,FOLLOW_2); 
+                    match(input,14,FOLLOW_2); 
                      after(grammarAccess.getRelationAccess().getHasKeyword_1_4_0()); 
 
                     }
@@ -866,7 +856,7 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
                     // InternalMyDsl.g:273:3: 'have'
                     {
                      before(grammarAccess.getRelationAccess().getHaveKeyword_1_4_1()); 
-                    match(input,14,FOLLOW_2); 
+                    match(input,15,FOLLOW_2); 
                      after(grammarAccess.getRelationAccess().getHaveKeyword_1_4_1()); 
 
                     }
@@ -892,20 +882,20 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Relation__Alternatives_1_5"
-    // InternalMyDsl.g:282:1: rule__Relation__Alternatives_1_5 : ( ( 'a' ) | ( 'many' ) );
+    // InternalMyDsl.g:282:1: rule__Relation__Alternatives_1_5 : ( ( 'a' ) | ( ( rule__Relation__ManyToAssignment_1_5_1 ) ) );
     public final void rule__Relation__Alternatives_1_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMyDsl.g:286:1: ( ( 'a' ) | ( 'many' ) )
+            // InternalMyDsl.g:286:1: ( ( 'a' ) | ( ( rule__Relation__ManyToAssignment_1_5_1 ) ) )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
-            if ( (LA6_0==15) ) {
+            if ( (LA6_0==13) ) {
                 alt6=1;
             }
-            else if ( (LA6_0==16) ) {
+            else if ( (LA6_0==22) ) {
                 alt6=2;
             }
             else {
@@ -922,7 +912,7 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
                     // InternalMyDsl.g:288:3: 'a'
                     {
                      before(grammarAccess.getRelationAccess().getAKeyword_1_5_0()); 
-                    match(input,15,FOLLOW_2); 
+                    match(input,13,FOLLOW_2); 
                      after(grammarAccess.getRelationAccess().getAKeyword_1_5_0()); 
 
                     }
@@ -931,14 +921,24 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // InternalMyDsl.g:293:2: ( 'many' )
+                    // InternalMyDsl.g:293:2: ( ( rule__Relation__ManyToAssignment_1_5_1 ) )
                     {
-                    // InternalMyDsl.g:293:2: ( 'many' )
-                    // InternalMyDsl.g:294:3: 'many'
+                    // InternalMyDsl.g:293:2: ( ( rule__Relation__ManyToAssignment_1_5_1 ) )
+                    // InternalMyDsl.g:294:3: ( rule__Relation__ManyToAssignment_1_5_1 )
                     {
-                     before(grammarAccess.getRelationAccess().getManyKeyword_1_5_1()); 
-                    match(input,16,FOLLOW_2); 
-                     after(grammarAccess.getRelationAccess().getManyKeyword_1_5_1()); 
+                     before(grammarAccess.getRelationAccess().getManyToAssignment_1_5_1()); 
+                    // InternalMyDsl.g:295:3: ( rule__Relation__ManyToAssignment_1_5_1 )
+                    // InternalMyDsl.g:295:4: rule__Relation__ManyToAssignment_1_5_1
+                    {
+                    pushFollow(FOLLOW_2);
+                    rule__Relation__ManyToAssignment_1_5_1();
+
+                    state._fsp--;
+
+
+                    }
+
+                     after(grammarAccess.getRelationAccess().getManyToAssignment_1_5_1()); 
 
                     }
 
@@ -1014,7 +1014,7 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
             // InternalMyDsl.g:321:2: 'system'
             {
              before(grammarAccess.getSystemAccess().getSystemKeyword_0()); 
-            match(input,17,FOLLOW_2); 
+            match(input,16,FOLLOW_2); 
              after(grammarAccess.getSystemAccess().getSystemKeyword_0()); 
 
             }
@@ -1197,7 +1197,7 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
                 int alt7=2;
                 int LA7_0 = input.LA(1);
 
-                if ( (LA7_0==18||LA7_0==21) ) {
+                if ( (LA7_0==17||LA7_0==20) ) {
                     alt7=1;
                 }
 
@@ -1297,7 +1297,7 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
             // InternalMyDsl.g:409:2: 'entity'
             {
              before(grammarAccess.getEntityAccess().getEntityKeyword_0()); 
-            match(input,18,FOLLOW_2); 
+            match(input,17,FOLLOW_2); 
              after(grammarAccess.getEntityAccess().getEntityKeyword_0()); 
 
             }
@@ -1458,7 +1458,7 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
                 int alt8=2;
                 int LA8_0 = input.LA(1);
 
-                if ( (LA8_0==19) ) {
+                if ( (LA8_0==18) ) {
                     alt8=1;
                 }
 
@@ -1555,7 +1555,7 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
             // InternalMyDsl.g:490:2: 'attribute'
             {
              before(grammarAccess.getAttributeAccess().getAttributeKeyword_0()); 
-            match(input,19,FOLLOW_2); 
+            match(input,18,FOLLOW_2); 
              after(grammarAccess.getAttributeAccess().getAttributeKeyword_0()); 
 
             }
@@ -1715,7 +1715,7 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
             // InternalMyDsl.g:544:2: 'as'
             {
              before(grammarAccess.getAttributeAccess().getAsKeyword_2()); 
-            match(input,20,FOLLOW_2); 
+            match(input,19,FOLLOW_2); 
              after(grammarAccess.getAttributeAccess().getAsKeyword_2()); 
 
             }
@@ -1945,7 +1945,7 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
             // InternalMyDsl.g:625:2: 'relation'
             {
              before(grammarAccess.getRelationAccess().getRelationKeyword_0_1()); 
-            match(input,21,FOLLOW_2); 
+            match(input,20,FOLLOW_2); 
              after(grammarAccess.getRelationAccess().getRelationKeyword_0_1()); 
 
             }
@@ -2007,31 +2007,31 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Relation__Group_0__2__Impl"
-    // InternalMyDsl.g:646:1: rule__Relation__Group_0__2__Impl : ( ( rule__Relation__SubEntityAssignment_0_2 ) ) ;
+    // InternalMyDsl.g:646:1: rule__Relation__Group_0__2__Impl : ( ( rule__Relation__BaseEntityAssignment_0_2 ) ) ;
     public final void rule__Relation__Group_0__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMyDsl.g:650:1: ( ( ( rule__Relation__SubEntityAssignment_0_2 ) ) )
-            // InternalMyDsl.g:651:1: ( ( rule__Relation__SubEntityAssignment_0_2 ) )
+            // InternalMyDsl.g:650:1: ( ( ( rule__Relation__BaseEntityAssignment_0_2 ) ) )
+            // InternalMyDsl.g:651:1: ( ( rule__Relation__BaseEntityAssignment_0_2 ) )
             {
-            // InternalMyDsl.g:651:1: ( ( rule__Relation__SubEntityAssignment_0_2 ) )
-            // InternalMyDsl.g:652:2: ( rule__Relation__SubEntityAssignment_0_2 )
+            // InternalMyDsl.g:651:1: ( ( rule__Relation__BaseEntityAssignment_0_2 ) )
+            // InternalMyDsl.g:652:2: ( rule__Relation__BaseEntityAssignment_0_2 )
             {
-             before(grammarAccess.getRelationAccess().getSubEntityAssignment_0_2()); 
-            // InternalMyDsl.g:653:2: ( rule__Relation__SubEntityAssignment_0_2 )
-            // InternalMyDsl.g:653:3: rule__Relation__SubEntityAssignment_0_2
+             before(grammarAccess.getRelationAccess().getBaseEntityAssignment_0_2()); 
+            // InternalMyDsl.g:653:2: ( rule__Relation__BaseEntityAssignment_0_2 )
+            // InternalMyDsl.g:653:3: rule__Relation__BaseEntityAssignment_0_2
             {
             pushFollow(FOLLOW_2);
-            rule__Relation__SubEntityAssignment_0_2();
+            rule__Relation__BaseEntityAssignment_0_2();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getRelationAccess().getSubEntityAssignment_0_2()); 
+             after(grammarAccess.getRelationAccess().getBaseEntityAssignment_0_2()); 
 
             }
 
@@ -2105,7 +2105,7 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
             // InternalMyDsl.g:679:2: 'is'
             {
              before(grammarAccess.getRelationAccess().getIsKeyword_0_3()); 
-            match(input,22,FOLLOW_2); 
+            match(input,21,FOLLOW_2); 
              after(grammarAccess.getRelationAccess().getIsKeyword_0_3()); 
 
             }
@@ -2259,13 +2259,13 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
             // InternalMyDsl.g:732:1: ( () )
             // InternalMyDsl.g:733:2: ()
             {
-             before(grammarAccess.getRelationAccess().getOtherRelationAction_1_0()); 
+             before(grammarAccess.getRelationAccess().getAssociationAction_1_0()); 
             // InternalMyDsl.g:734:2: ()
             // InternalMyDsl.g:734:3: 
             {
             }
 
-             after(grammarAccess.getRelationAccess().getOtherRelationAction_1_0()); 
+             after(grammarAccess.getRelationAccess().getAssociationAction_1_0()); 
 
             }
 
@@ -2335,7 +2335,7 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
             // InternalMyDsl.g:760:2: 'relation'
             {
              before(grammarAccess.getRelationAccess().getRelationKeyword_1_1()); 
-            match(input,21,FOLLOW_2); 
+            match(input,20,FOLLOW_2); 
              after(grammarAccess.getRelationAccess().getRelationKeyword_1_1()); 
 
             }
@@ -2414,7 +2414,7 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
             int alt9=2;
             int LA9_0 = input.LA(1);
 
-            if ( ((LA9_0>=15 && LA9_0<=16)) ) {
+            if ( (LA9_0==13||LA9_0==22) ) {
                 alt9=1;
             }
             switch (alt9) {
@@ -2680,7 +2680,7 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
             int alt10=2;
             int LA10_0 = input.LA(1);
 
-            if ( ((LA10_0>=15 && LA10_0<=16)) ) {
+            if ( (LA10_0==13||LA10_0==22) ) {
                 alt10=1;
             }
             switch (alt10) {
@@ -3040,9 +3040,9 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__Attribute__TypeAssignment_3"
 
 
-    // $ANTLR start "rule__Relation__SubEntityAssignment_0_2"
-    // InternalMyDsl.g:994:1: rule__Relation__SubEntityAssignment_0_2 : ( ( RULE_ID ) ) ;
-    public final void rule__Relation__SubEntityAssignment_0_2() throws RecognitionException {
+    // $ANTLR start "rule__Relation__BaseEntityAssignment_0_2"
+    // InternalMyDsl.g:994:1: rule__Relation__BaseEntityAssignment_0_2 : ( ( RULE_ID ) ) ;
+    public final void rule__Relation__BaseEntityAssignment_0_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
@@ -3053,17 +3053,17 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
             // InternalMyDsl.g:999:2: ( ( RULE_ID ) )
             // InternalMyDsl.g:1000:3: ( RULE_ID )
             {
-             before(grammarAccess.getRelationAccess().getSubEntityEntityCrossReference_0_2_0()); 
+             before(grammarAccess.getRelationAccess().getBaseEntityEntityCrossReference_0_2_0()); 
             // InternalMyDsl.g:1001:3: ( RULE_ID )
             // InternalMyDsl.g:1002:4: RULE_ID
             {
-             before(grammarAccess.getRelationAccess().getSubEntityEntityIDTerminalRuleCall_0_2_0_1()); 
+             before(grammarAccess.getRelationAccess().getBaseEntityEntityIDTerminalRuleCall_0_2_0_1()); 
             match(input,RULE_ID,FOLLOW_2); 
-             after(grammarAccess.getRelationAccess().getSubEntityEntityIDTerminalRuleCall_0_2_0_1()); 
+             after(grammarAccess.getRelationAccess().getBaseEntityEntityIDTerminalRuleCall_0_2_0_1()); 
 
             }
 
-             after(grammarAccess.getRelationAccess().getSubEntityEntityCrossReference_0_2_0()); 
+             after(grammarAccess.getRelationAccess().getBaseEntityEntityCrossReference_0_2_0()); 
 
             }
 
@@ -3082,7 +3082,7 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__Relation__SubEntityAssignment_0_2"
+    // $ANTLR end "rule__Relation__BaseEntityAssignment_0_2"
 
 
     // $ANTLR start "rule__Relation__SuperEntityAssignment_0_4"
@@ -3130,30 +3130,30 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__Relation__SuperEntityAssignment_0_4"
 
 
-    // $ANTLR start "rule__Relation__SingletoAssignment_1_2_0"
-    // InternalMyDsl.g:1032:1: rule__Relation__SingletoAssignment_1_2_0 : ( ( 'a' ) ) ;
-    public final void rule__Relation__SingletoAssignment_1_2_0() throws RecognitionException {
+    // $ANTLR start "rule__Relation__ManyFromAssignment_1_2_1"
+    // InternalMyDsl.g:1032:1: rule__Relation__ManyFromAssignment_1_2_1 : ( ( 'many' ) ) ;
+    public final void rule__Relation__ManyFromAssignment_1_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMyDsl.g:1036:1: ( ( ( 'a' ) ) )
-            // InternalMyDsl.g:1037:2: ( ( 'a' ) )
+            // InternalMyDsl.g:1036:1: ( ( ( 'many' ) ) )
+            // InternalMyDsl.g:1037:2: ( ( 'many' ) )
             {
-            // InternalMyDsl.g:1037:2: ( ( 'a' ) )
-            // InternalMyDsl.g:1038:3: ( 'a' )
+            // InternalMyDsl.g:1037:2: ( ( 'many' ) )
+            // InternalMyDsl.g:1038:3: ( 'many' )
             {
-             before(grammarAccess.getRelationAccess().getSingletoAKeyword_1_2_0_0()); 
-            // InternalMyDsl.g:1039:3: ( 'a' )
-            // InternalMyDsl.g:1040:4: 'a'
+             before(grammarAccess.getRelationAccess().getManyFromManyKeyword_1_2_1_0()); 
+            // InternalMyDsl.g:1039:3: ( 'many' )
+            // InternalMyDsl.g:1040:4: 'many'
             {
-             before(grammarAccess.getRelationAccess().getSingletoAKeyword_1_2_0_0()); 
-            match(input,15,FOLLOW_2); 
-             after(grammarAccess.getRelationAccess().getSingletoAKeyword_1_2_0_0()); 
+             before(grammarAccess.getRelationAccess().getManyFromManyKeyword_1_2_1_0()); 
+            match(input,22,FOLLOW_2); 
+             after(grammarAccess.getRelationAccess().getManyFromManyKeyword_1_2_1_0()); 
 
             }
 
-             after(grammarAccess.getRelationAccess().getSingletoAKeyword_1_2_0_0()); 
+             after(grammarAccess.getRelationAccess().getManyFromManyKeyword_1_2_1_0()); 
 
             }
 
@@ -3172,70 +3172,25 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__Relation__SingletoAssignment_1_2_0"
-
-
-    // $ANTLR start "rule__Relation__ManytoAssignment_1_2_1"
-    // InternalMyDsl.g:1051:1: rule__Relation__ManytoAssignment_1_2_1 : ( ( 'many' ) ) ;
-    public final void rule__Relation__ManytoAssignment_1_2_1() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalMyDsl.g:1055:1: ( ( ( 'many' ) ) )
-            // InternalMyDsl.g:1056:2: ( ( 'many' ) )
-            {
-            // InternalMyDsl.g:1056:2: ( ( 'many' ) )
-            // InternalMyDsl.g:1057:3: ( 'many' )
-            {
-             before(grammarAccess.getRelationAccess().getManytoManyKeyword_1_2_1_0()); 
-            // InternalMyDsl.g:1058:3: ( 'many' )
-            // InternalMyDsl.g:1059:4: 'many'
-            {
-             before(grammarAccess.getRelationAccess().getManytoManyKeyword_1_2_1_0()); 
-            match(input,16,FOLLOW_2); 
-             after(grammarAccess.getRelationAccess().getManytoManyKeyword_1_2_1_0()); 
-
-            }
-
-             after(grammarAccess.getRelationAccess().getManytoManyKeyword_1_2_1_0()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__Relation__ManytoAssignment_1_2_1"
+    // $ANTLR end "rule__Relation__ManyFromAssignment_1_2_1"
 
 
     // $ANTLR start "rule__Relation__FromAssignment_1_3"
-    // InternalMyDsl.g:1070:1: rule__Relation__FromAssignment_1_3 : ( ( RULE_ID ) ) ;
+    // InternalMyDsl.g:1051:1: rule__Relation__FromAssignment_1_3 : ( ( RULE_ID ) ) ;
     public final void rule__Relation__FromAssignment_1_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalMyDsl.g:1074:1: ( ( ( RULE_ID ) ) )
-            // InternalMyDsl.g:1075:2: ( ( RULE_ID ) )
+            // InternalMyDsl.g:1055:1: ( ( ( RULE_ID ) ) )
+            // InternalMyDsl.g:1056:2: ( ( RULE_ID ) )
             {
-            // InternalMyDsl.g:1075:2: ( ( RULE_ID ) )
-            // InternalMyDsl.g:1076:3: ( RULE_ID )
+            // InternalMyDsl.g:1056:2: ( ( RULE_ID ) )
+            // InternalMyDsl.g:1057:3: ( RULE_ID )
             {
              before(grammarAccess.getRelationAccess().getFromEntityCrossReference_1_3_0()); 
-            // InternalMyDsl.g:1077:3: ( RULE_ID )
-            // InternalMyDsl.g:1078:4: RULE_ID
+            // InternalMyDsl.g:1058:3: ( RULE_ID )
+            // InternalMyDsl.g:1059:4: RULE_ID
             {
              before(grammarAccess.getRelationAccess().getFromEntityIDTerminalRuleCall_1_3_0_1()); 
             match(input,RULE_ID,FOLLOW_2); 
@@ -3263,6 +3218,51 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
         return ;
     }
     // $ANTLR end "rule__Relation__FromAssignment_1_3"
+
+
+    // $ANTLR start "rule__Relation__ManyToAssignment_1_5_1"
+    // InternalMyDsl.g:1070:1: rule__Relation__ManyToAssignment_1_5_1 : ( ( 'many' ) ) ;
+    public final void rule__Relation__ManyToAssignment_1_5_1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalMyDsl.g:1074:1: ( ( ( 'many' ) ) )
+            // InternalMyDsl.g:1075:2: ( ( 'many' ) )
+            {
+            // InternalMyDsl.g:1075:2: ( ( 'many' ) )
+            // InternalMyDsl.g:1076:3: ( 'many' )
+            {
+             before(grammarAccess.getRelationAccess().getManyToManyKeyword_1_5_1_0()); 
+            // InternalMyDsl.g:1077:3: ( 'many' )
+            // InternalMyDsl.g:1078:4: 'many'
+            {
+             before(grammarAccess.getRelationAccess().getManyToManyKeyword_1_5_1_0()); 
+            match(input,22,FOLLOW_2); 
+             after(grammarAccess.getRelationAccess().getManyToManyKeyword_1_5_1_0()); 
+
+            }
+
+             after(grammarAccess.getRelationAccess().getManyToManyKeyword_1_5_1_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Relation__ManyToAssignment_1_5_1"
 
 
     // $ANTLR start "rule__Relation__ToAssignment_1_6"
@@ -3317,15 +3317,15 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000240000L});
-    public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000240002L});
-    public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000080000L});
-    public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000000080002L});
-    public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000000100000L});
+    public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000120000L});
+    public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000120002L});
+    public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000040000L});
+    public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000000040002L});
+    public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000000080000L});
     public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000000001800L});
-    public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0000000000200000L});
-    public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000000000400000L});
-    public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000000000018010L});
-    public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x0000000000006000L});
+    public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0000000000100000L});
+    public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000000000200000L});
+    public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000000000402010L});
+    public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x000000000000C000L});
 
 }

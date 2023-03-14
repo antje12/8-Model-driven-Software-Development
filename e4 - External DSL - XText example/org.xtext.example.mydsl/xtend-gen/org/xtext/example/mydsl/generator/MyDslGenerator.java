@@ -5,6 +5,8 @@ package org.xtext.example.mydsl.generator;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Iterators;
+import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -12,10 +14,13 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.AbstractGenerator;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.IGeneratorContext;
+import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
+import org.xtext.example.mydsl.myDsl.Association;
 import org.xtext.example.mydsl.myDsl.Attribute;
 import org.xtext.example.mydsl.myDsl.Entity;
 import org.xtext.example.mydsl.myDsl.Inheritance;
@@ -29,150 +34,386 @@ import org.xtext.example.mydsl.myDsl.Inheritance;
 public class MyDslGenerator extends AbstractGenerator {
   @Override
   public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
-    final Iterable<Entity> entities = Iterables.<Entity>filter(IteratorExtensions.<EObject>toIterable(resource.getAllContents()), Entity.class);
-    for (final Entity entity : entities) {
+    final org.xtext.example.mydsl.myDsl.System sys = Iterators.<org.xtext.example.mydsl.myDsl.System>filter(resource.getAllContents(), org.xtext.example.mydsl.myDsl.System.class).next();
+    Iterable<Entity> _filter = Iterables.<Entity>filter(IteratorExtensions.<EObject>toIterable(resource.getAllContents()), Entity.class);
+    for (final Entity entity : _filter) {
       {
         final Function1<Inheritance, Boolean> _function = (Inheritance it) -> {
-          Entity _subEntity = it.getSubEntity();
-          return Boolean.valueOf(Objects.equal(_subEntity, entity));
+          Entity _baseEntity = it.getBaseEntity();
+          return Boolean.valueOf(Objects.equal(_baseEntity, entity));
         };
-        final Inheritance baseEntity = IterableExtensions.<Inheritance>findFirst(Iterables.<Inheritance>filter(IteratorExtensions.<EObject>toIterable(resource.getAllContents()), Inheritance.class), _function);
+        Inheritance relation = IterableExtensions.<Inheritance>findFirst(Iterables.<Inheritance>filter(IteratorExtensions.<EObject>toIterable(resource.getAllContents()), Inheritance.class), _function);
+        final Function1<Association, Boolean> _function_1 = (Association it) -> {
+          return Boolean.valueOf((Objects.equal(it.getFrom(), entity) || Objects.equal(it.getTo(), entity)));
+        };
+        Iterable<Association> associations = IterableExtensions.<Association>filter(Iterables.<Association>filter(IteratorExtensions.<EObject>toIterable(resource.getAllContents()), Association.class), _function_1);
         String _name = entity.getName();
         String _plus = (_name + ".java");
-        fsa.generateFile(_plus, this.compile(entity, baseEntity));
+        fsa.generateFile(_plus, this.compile(entity, sys, relation, IterableExtensions.<Association>toList(associations)));
       }
     }
   }
 
-  public CharSequence compile(final Entity entity, final Inheritance relation) {
+  public CharSequence compile(final Entity entity, final org.xtext.example.mydsl.myDsl.System system, final Inheritance inheritance, final List<Association> associations) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("package university.deep_package.another_package;");
+    _builder.append("package ");
+    String _firstLower = StringExtensions.toFirstLower(system.getName());
+    _builder.append(_firstLower);
+    _builder.append(";");
+    _builder.newLineIfNotEmpty();
     _builder.newLine();
+    _builder.append("import java.util.*;");
     _builder.newLine();
-    _builder.append("import java.util.ArrayList;");
-    _builder.newLine();
-    _builder.append("import java.util.List;");
-    _builder.newLine();
-    _builder.append("\t");
     _builder.newLine();
     _builder.append("public class ");
     String _name = entity.getName();
     _builder.append(_name);
     _builder.append(" ");
     {
-      boolean _notEquals = (!Objects.equal(relation, null));
-      if (_notEquals) {
-        _builder.append(" extends ");
-        String _name_1 = relation.getSuperEntity().getName();
+      if ((inheritance != null)) {
+        _builder.append("extends ");
+        String _name_1 = inheritance.getSuperEntity().getName();
         _builder.append(_name_1);
         _builder.append(" ");
       }
     }
     _builder.append("{");
     _builder.newLineIfNotEmpty();
-    _builder.append("\t");
-    _builder.append("private int id;");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("private List<Course> courses = new ArrayList<>();");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("public Student(int id, String name, int age){");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("super(name, age);");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("this.setId(id);");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("} ");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.newLine();
     {
       EList<Attribute> _attributes = entity.getAttributes();
       for(final Attribute attribute : _attributes) {
-        _builder.append("\t");
-        _builder.append("public ");
-        String _javaType = this.toJavaType(attribute);
-        _builder.append(_javaType, "\t");
-        _builder.append(" get");
-        String _firstUpper = StringExtensions.toFirstUpper(attribute.getName());
-        _builder.append(_firstUpper, "\t");
-        _builder.append("(){");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t");
-        _builder.append("\t");
-        _builder.append("return ");
+        _builder.append("    ");
+        _builder.append("private ");
+        String _javaType = this.javaType(attribute);
+        _builder.append(_javaType, "    ");
+        _builder.append(" ");
         String _name_2 = attribute.getName();
-        _builder.append(_name_2, "\t\t");
+        _builder.append(_name_2, "    ");
         _builder.append(";");
         _builder.newLineIfNotEmpty();
-        _builder.append("\t");
+      }
+    }
+    {
+      for(final Association association : associations) {
+        _builder.append("    ");
+        CharSequence _compileInstanceVariables = this.compileInstanceVariables(entity, association);
+        _builder.append(_compileInstanceVariables, "    ");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("public ");
+    String _name_3 = entity.getName();
+    _builder.append(_name_3, "    ");
+    _builder.append("(");
+    String _compileConstructorAttributes = this.compileConstructorAttributes(entity, inheritance);
+    _builder.append(_compileConstructorAttributes, "    ");
+    _builder.append(") {");
+    _builder.newLineIfNotEmpty();
+    {
+      if ((inheritance != null)) {
+        _builder.append("        ");
+        _builder.append("super(");
+        {
+          EList<Attribute> _attributes_1 = inheritance.getSuperEntity().getAttributes();
+          boolean _hasElements = false;
+          for(final Attribute attribute_1 : _attributes_1) {
+            if (!_hasElements) {
+              _hasElements = true;
+            } else {
+              _builder.appendImmediate(", ", "        ");
+            }
+            String _name_4 = attribute_1.getName();
+            _builder.append(_name_4, "        ");
+          }
+        }
+        _builder.append(");");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    {
+      EList<Attribute> _attributes_2 = entity.getAttributes();
+      for(final Attribute attribute_2 : _attributes_2) {
+        _builder.append("        ");
+        _builder.append("this.set");
+        String _firstUpper = StringExtensions.toFirstUpper(attribute_2.getName());
+        _builder.append(_firstUpper, "        ");
+        _builder.append("(");
+        String _name_5 = attribute_2.getName();
+        _builder.append(_name_5, "        ");
+        _builder.append(");");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    _builder.append("    ");
+    _builder.append("}");
+    _builder.newLine();
+    {
+      EList<Attribute> _attributes_3 = entity.getAttributes();
+      for(final Attribute attribute_3 : _attributes_3) {
+        _builder.append("    ");
+        _builder.append("public ");
+        String _javaType_1 = this.javaType(attribute_3);
+        _builder.append(_javaType_1, "    ");
+        _builder.append(" get");
+        String _firstUpper_1 = StringExtensions.toFirstUpper(attribute_3.getName());
+        _builder.append(_firstUpper_1, "    ");
+        _builder.append("() {");
+        _builder.newLineIfNotEmpty();
+        _builder.append("    ");
+        _builder.append("    ");
+        _builder.append("return ");
+        String _name_6 = attribute_3.getName();
+        _builder.append(_name_6, "        ");
+        _builder.append(";");
+        _builder.newLineIfNotEmpty();
+        _builder.append("    ");
         _builder.append("}");
         _builder.newLine();
-        _builder.append("\t");
+        _builder.append("    ");
         _builder.append("public void set");
-        String _firstUpper_1 = StringExtensions.toFirstUpper(attribute.getName());
-        _builder.append(_firstUpper_1, "\t");
-        _builder.append("(){");
+        String _firstUpper_2 = StringExtensions.toFirstUpper(attribute_3.getName());
+        _builder.append(_firstUpper_2, "    ");
+        _builder.append("(");
+        String _javaType_2 = this.javaType(attribute_3);
+        _builder.append(_javaType_2, "    ");
+        _builder.append(" ");
+        String _name_7 = attribute_3.getName();
+        _builder.append(_name_7, "    ");
+        _builder.append(") {");
         _builder.newLineIfNotEmpty();
-        _builder.append("\t");
-        _builder.append("\t");
+        _builder.append("    ");
+        _builder.append("    ");
         _builder.append("this.");
-        String _firstUpper_2 = StringExtensions.toFirstUpper(attribute.getName());
-        _builder.append(_firstUpper_2, "\t\t");
+        String _name_8 = attribute_3.getName();
+        _builder.append(_name_8, "        ");
         _builder.append(" = ");
-        String _firstUpper_3 = StringExtensions.toFirstUpper(attribute.getName());
-        _builder.append(_firstUpper_3, "\t\t");
+        String _name_9 = attribute_3.getName();
+        _builder.append(_name_9, "        ");
         _builder.append(";");
         _builder.newLineIfNotEmpty();
-        _builder.append("\t");
+        _builder.append("    ");
         _builder.append("}");
         _builder.newLine();
       }
     }
-    _builder.append("\t");
+    _builder.append("    ");
     _builder.newLine();
-    _builder.append("\t");
-    _builder.append("public List<Course> courses(){");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("return courses;");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("public void addCourse(Course course){");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("courses.add(course);");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("}");
-    _builder.newLine();
+    {
+      for(final Association association_1 : associations) {
+        _builder.append("    ");
+        CharSequence _compileAssociationMethods = this.compileAssociationMethods(entity, association_1);
+        _builder.append(_compileAssociationMethods, "    ");
+        _builder.newLineIfNotEmpty();
+      }
+    }
     _builder.append("}");
     _builder.newLine();
     return _builder;
   }
 
-  public String toJavaType(final Attribute attribute) {
+  public String javaType(final Attribute attribute) {
+    String _switchResult = null;
     String _type = attribute.getType();
-    boolean _equals = Objects.equal(_type, "string");
+    if (_type != null) {
+      switch (_type) {
+        case "string":
+          _switchResult = "String";
+          break;
+        case "number":
+          _switchResult = "int";
+          break;
+      }
+    }
+    return _switchResult;
+  }
+
+  public String compileConstructorAttributes(final Entity base, final Inheritance inheritance) {
+    String _xblockexpression = null;
+    {
+      final Function1<Attribute, String> _function = (Attribute it) -> {
+        String _javaType = this.javaType(it);
+        String _plus = (_javaType + " ");
+        String _name = it.getName();
+        return (_plus + _name);
+      };
+      String[] attributes = ((String[])Conversions.unwrapArray(ListExtensions.<Attribute, String>map(base.getAttributes(), _function), String.class));
+      if ((inheritance != null)) {
+        final String[] _converted_attributes = (String[])attributes;
+        final Function1<Attribute, String> _function_1 = (Attribute it) -> {
+          String _javaType = this.javaType(it);
+          String _plus = (_javaType + " ");
+          String _name = it.getName();
+          return (_plus + _name);
+        };
+        List<String> _map = ListExtensions.<Attribute, String>map(inheritance.getSuperEntity().getAttributes(), _function_1);
+        Iterable<String> _plus = Iterables.<String>concat(((Iterable<? extends String>)Conversions.doWrapArray(_converted_attributes)), _map);
+        attributes = ((String[])Conversions.unwrapArray(_plus, String.class));
+      }
+      final String[] _converted_attributes_1 = (String[])attributes;
+      _xblockexpression = IterableExtensions.join(((Iterable<?>)Conversions.doWrapArray(_converted_attributes_1)), ", ");
+    }
+    return _xblockexpression;
+  }
+
+  public CharSequence compileInstanceVariables(final Entity entity, final Association association) {
+    CharSequence _xblockexpression = null;
+    {
+      final Entity otherEntity = this.associationEntity(entity, association);
+      final boolean cardinality = this.associationCardinality(entity, association);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("private ");
+      {
+        if (cardinality) {
+          _builder.append("List<");
+        }
+      }
+      String _name = otherEntity.getName();
+      _builder.append(_name);
+      {
+        if (cardinality) {
+          _builder.append(">");
+        }
+      }
+      _builder.append(" ");
+      String _associationVariableName = this.associationVariableName(entity, association);
+      _builder.append(_associationVariableName);
+      {
+        if (cardinality) {
+          _builder.append(" = new ArrayList<>()");
+        }
+      }
+      _builder.append(";");
+      _xblockexpression = _builder;
+    }
+    return _xblockexpression;
+  }
+
+  public CharSequence compileAssociationMethods(final Entity entity, final Association association) {
+    CharSequence _xifexpression = null;
+    boolean _associationCardinality = this.associationCardinality(entity, association);
+    if (_associationCardinality) {
+      _xifexpression = this.compileCardinalityAssociationMethods(entity, association);
+    } else {
+      _xifexpression = this.compileNonCardinalityAssociationMethods(entity, association);
+    }
+    return _xifexpression;
+  }
+
+  public CharSequence compileCardinalityAssociationMethods(final Entity entity, final Association association) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("public List<");
+    String _name = this.associationEntity(entity, association).getName();
+    _builder.append(_name);
+    _builder.append("> get");
+    String _firstUpper = StringExtensions.toFirstUpper(this.associationVariableName(entity, association));
+    _builder.append(_firstUpper);
+    _builder.append("() {");
+    _builder.newLineIfNotEmpty();
+    _builder.append("    ");
+    _builder.append("return this.");
+    String _associationVariableName = this.associationVariableName(entity, association);
+    _builder.append(_associationVariableName, "    ");
+    _builder.append(";");
+    _builder.newLineIfNotEmpty();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("public void add");
+    String _firstUpper_1 = StringExtensions.toFirstUpper(this.associationSingularVariableName(entity, association));
+    _builder.append(_firstUpper_1);
+    _builder.append("(");
+    String _name_1 = this.associationEntity(entity, association).getName();
+    _builder.append(_name_1);
+    _builder.append(" element) {");
+    _builder.newLineIfNotEmpty();
+    _builder.append("    ");
+    _builder.append("this.");
+    String _associationVariableName_1 = this.associationVariableName(entity, association);
+    _builder.append(_associationVariableName_1, "    ");
+    _builder.append(".add(element);");
+    _builder.newLineIfNotEmpty();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+
+  public CharSequence compileNonCardinalityAssociationMethods(final Entity entity, final Association association) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("public ");
+    String _name = this.associationEntity(entity, association).getName();
+    _builder.append(_name);
+    _builder.append(" get");
+    String _firstUpper = StringExtensions.toFirstUpper(this.associationVariableName(entity, association));
+    _builder.append(_firstUpper);
+    _builder.append("() {");
+    _builder.newLineIfNotEmpty();
+    _builder.append("    ");
+    _builder.append("return this.");
+    String _associationVariableName = this.associationVariableName(entity, association);
+    _builder.append(_associationVariableName, "    ");
+    _builder.append(";");
+    _builder.newLineIfNotEmpty();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("public void set");
+    String _firstUpper_1 = StringExtensions.toFirstUpper(this.associationSingularVariableName(entity, association));
+    _builder.append(_firstUpper_1);
+    _builder.append("(");
+    String _name_1 = this.associationEntity(entity, association).getName();
+    _builder.append(_name_1);
+    _builder.append(" element) {");
+    _builder.newLineIfNotEmpty();
+    _builder.append("    ");
+    _builder.append("this.");
+    String _associationVariableName_1 = this.associationVariableName(entity, association);
+    _builder.append(_associationVariableName_1, "    ");
+    _builder.append(" = element;");
+    _builder.newLineIfNotEmpty();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+
+  public String associationVariableName(final Entity entity, final Association association) {
+    String _xifexpression = null;
+    boolean _associationCardinality = this.associationCardinality(entity, association);
+    if (_associationCardinality) {
+      String _associationSingularVariableName = this.associationSingularVariableName(entity, association);
+      _xifexpression = (_associationSingularVariableName + "s");
+    } else {
+      _xifexpression = this.associationSingularVariableName(entity, association);
+    }
+    return _xifexpression;
+  }
+
+  public String associationSingularVariableName(final Entity entity, final Association association) {
+    return StringExtensions.toFirstLower(this.associationEntity(entity, association).getName());
+  }
+
+  public boolean associationCardinality(final Entity entity, final Association association) {
+    boolean _xifexpression = false;
+    Entity _to = association.getTo();
+    boolean _equals = Objects.equal(entity, _to);
     if (_equals) {
-      return "String";
+      _xifexpression = association.isManyFrom();
+    } else {
+      _xifexpression = association.isManyTo();
     }
-    String _type_1 = attribute.getType();
-    boolean _equals_1 = Objects.equal(_type_1, "number");
-    if (_equals_1) {
-      return "int";
+    return _xifexpression;
+  }
+
+  public Entity associationEntity(final Entity entity, final Association association) {
+    Entity _xifexpression = null;
+    Entity _to = association.getTo();
+    boolean _equals = Objects.equal(entity, _to);
+    if (_equals) {
+      _xifexpression = association.getFrom();
+    } else {
+      _xifexpression = association.getTo();
     }
-    return "";
+    return _xifexpression;
   }
 }

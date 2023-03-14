@@ -21,14 +21,16 @@ import org.xtext.example.mydsl.services.MyDslGrammarAccess;
 public class MyDslSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected MyDslGrammarAccess grammarAccess;
+	protected AbstractElementAlias match_Relation_AKeyword_1_2_0_q;
+	protected AbstractElementAlias match_Relation_AKeyword_1_5_0_q;
 	protected AbstractElementAlias match_Relation_HasKeyword_1_4_0_or_HaveKeyword_1_4_1;
-	protected AbstractElementAlias match_Relation___AKeyword_1_5_0_or_ManyKeyword_1_5_1__q;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (MyDslGrammarAccess) access;
+		match_Relation_AKeyword_1_2_0_q = new TokenAlias(false, true, grammarAccess.getRelationAccess().getAKeyword_1_2_0());
+		match_Relation_AKeyword_1_5_0_q = new TokenAlias(false, true, grammarAccess.getRelationAccess().getAKeyword_1_5_0());
 		match_Relation_HasKeyword_1_4_0_or_HaveKeyword_1_4_1 = new AlternativeAlias(false, false, new TokenAlias(false, false, grammarAccess.getRelationAccess().getHasKeyword_1_4_0()), new TokenAlias(false, false, grammarAccess.getRelationAccess().getHaveKeyword_1_4_1()));
-		match_Relation___AKeyword_1_5_0_or_ManyKeyword_1_5_1__q = new AlternativeAlias(false, true, new TokenAlias(false, false, grammarAccess.getRelationAccess().getAKeyword_1_5_0()), new TokenAlias(false, false, grammarAccess.getRelationAccess().getManyKeyword_1_5_1()));
 	}
 	
 	@Override
@@ -43,10 +45,12 @@ public class MyDslSyntacticSequencer extends AbstractSyntacticSequencer {
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if (match_Relation_HasKeyword_1_4_0_or_HaveKeyword_1_4_1.equals(syntax))
+			if (match_Relation_AKeyword_1_2_0_q.equals(syntax))
+				emit_Relation_AKeyword_1_2_0_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_Relation_AKeyword_1_5_0_q.equals(syntax))
+				emit_Relation_AKeyword_1_5_0_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_Relation_HasKeyword_1_4_0_or_HaveKeyword_1_4_1.equals(syntax))
 				emit_Relation_HasKeyword_1_4_0_or_HaveKeyword_1_4_1(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if (match_Relation___AKeyword_1_5_0_or_ManyKeyword_1_5_1__q.equals(syntax))
-				emit_Relation___AKeyword_1_5_0_or_ManyKeyword_1_5_1__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}
 	}
@@ -54,28 +58,43 @@ public class MyDslSyntacticSequencer extends AbstractSyntacticSequencer {
 	/**
 	 * <pre>
 	 * Ambiguous syntax:
-	 *     'has' | 'have'
+	 *     'a'?
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     from=[Entity|ID] (ambiguity) ('a' | 'many')? to=[Entity|ID]
+	 *     (rule start) 'relation' (ambiguity) from=[Entity|ID]
 	 
 	 * </pre>
 	 */
-	protected void emit_Relation_HasKeyword_1_4_0_or_HaveKeyword_1_4_1(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_Relation_AKeyword_1_2_0_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
 	 * <pre>
 	 * Ambiguous syntax:
-	 *     ('a' | 'many')?
+	 *     'a'?
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     from=[Entity|ID] ('has' | 'have') (ambiguity) to=[Entity|ID]
 	 
 	 * </pre>
 	 */
-	protected void emit_Relation___AKeyword_1_5_0_or_ManyKeyword_1_5_1__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_Relation_AKeyword_1_5_0_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * <pre>
+	 * Ambiguous syntax:
+	 *     'has' | 'have'
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     from=[Entity|ID] (ambiguity) 'a'? to=[Entity|ID]
+	 *     from=[Entity|ID] (ambiguity) manyTo?='many'
+	 
+	 * </pre>
+	 */
+	protected void emit_Relation_HasKeyword_1_4_0_or_HaveKeyword_1_4_1(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

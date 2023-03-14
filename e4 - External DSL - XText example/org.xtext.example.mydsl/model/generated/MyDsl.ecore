@@ -17,13 +17,13 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Relation"/>
   <eClassifiers xsi:type="ecore:EClass" name="Inheritance" eSuperTypes="#//Relation">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="subEntity" eType="#//Entity"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="baseEntity" eType="#//Entity"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="superEntity" eType="#//Entity"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="OtherRelation" eSuperTypes="#//Relation">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="singleto" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="manyto" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Association" eSuperTypes="#//Relation">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="manyFrom" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="from" eType="#//Entity"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="manyTo" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="to" eType="#//Entity"/>
   </eClassifiers>
 </ecore:EPackage>

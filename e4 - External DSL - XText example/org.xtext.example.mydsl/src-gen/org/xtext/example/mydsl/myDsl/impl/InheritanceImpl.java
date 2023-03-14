@@ -22,7 +22,7 @@ import org.xtext.example.mydsl.myDsl.MyDslPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.xtext.example.mydsl.myDsl.impl.InheritanceImpl#getSubEntity <em>Sub Entity</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.impl.InheritanceImpl#getBaseEntity <em>Base Entity</em>}</li>
  *   <li>{@link org.xtext.example.mydsl.myDsl.impl.InheritanceImpl#getSuperEntity <em>Super Entity</em>}</li>
  * </ul>
  *
@@ -31,14 +31,14 @@ import org.xtext.example.mydsl.myDsl.MyDslPackage;
 public class InheritanceImpl extends RelationImpl implements Inheritance
 {
   /**
-   * The cached value of the '{@link #getSubEntity() <em>Sub Entity</em>}' reference.
+   * The cached value of the '{@link #getBaseEntity() <em>Base Entity</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getSubEntity()
+   * @see #getBaseEntity()
    * @generated
    * @ordered
    */
-  protected Entity subEntity;
+  protected Entity baseEntity;
 
   /**
    * The cached value of the '{@link #getSuperEntity() <em>Super Entity</em>}' reference.
@@ -77,19 +77,19 @@ public class InheritanceImpl extends RelationImpl implements Inheritance
    * @generated
    */
   @Override
-  public Entity getSubEntity()
+  public Entity getBaseEntity()
   {
-    if (subEntity != null && subEntity.eIsProxy())
+    if (baseEntity != null && baseEntity.eIsProxy())
     {
-      InternalEObject oldSubEntity = (InternalEObject)subEntity;
-      subEntity = (Entity)eResolveProxy(oldSubEntity);
-      if (subEntity != oldSubEntity)
+      InternalEObject oldBaseEntity = (InternalEObject)baseEntity;
+      baseEntity = (Entity)eResolveProxy(oldBaseEntity);
+      if (baseEntity != oldBaseEntity)
       {
         if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, MyDslPackage.INHERITANCE__SUB_ENTITY, oldSubEntity, subEntity));
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, MyDslPackage.INHERITANCE__BASE_ENTITY, oldBaseEntity, baseEntity));
       }
     }
-    return subEntity;
+    return baseEntity;
   }
 
   /**
@@ -97,9 +97,9 @@ public class InheritanceImpl extends RelationImpl implements Inheritance
    * <!-- end-user-doc -->
    * @generated
    */
-  public Entity basicGetSubEntity()
+  public Entity basicGetBaseEntity()
   {
-    return subEntity;
+    return baseEntity;
   }
 
   /**
@@ -108,12 +108,12 @@ public class InheritanceImpl extends RelationImpl implements Inheritance
    * @generated
    */
   @Override
-  public void setSubEntity(Entity newSubEntity)
+  public void setBaseEntity(Entity newBaseEntity)
   {
-    Entity oldSubEntity = subEntity;
-    subEntity = newSubEntity;
+    Entity oldBaseEntity = baseEntity;
+    baseEntity = newBaseEntity;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.INHERITANCE__SUB_ENTITY, oldSubEntity, subEntity));
+      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.INHERITANCE__BASE_ENTITY, oldBaseEntity, baseEntity));
   }
 
   /**
@@ -171,9 +171,9 @@ public class InheritanceImpl extends RelationImpl implements Inheritance
   {
     switch (featureID)
     {
-      case MyDslPackage.INHERITANCE__SUB_ENTITY:
-        if (resolve) return getSubEntity();
-        return basicGetSubEntity();
+      case MyDslPackage.INHERITANCE__BASE_ENTITY:
+        if (resolve) return getBaseEntity();
+        return basicGetBaseEntity();
       case MyDslPackage.INHERITANCE__SUPER_ENTITY:
         if (resolve) return getSuperEntity();
         return basicGetSuperEntity();
@@ -191,8 +191,8 @@ public class InheritanceImpl extends RelationImpl implements Inheritance
   {
     switch (featureID)
     {
-      case MyDslPackage.INHERITANCE__SUB_ENTITY:
-        setSubEntity((Entity)newValue);
+      case MyDslPackage.INHERITANCE__BASE_ENTITY:
+        setBaseEntity((Entity)newValue);
         return;
       case MyDslPackage.INHERITANCE__SUPER_ENTITY:
         setSuperEntity((Entity)newValue);
@@ -211,8 +211,8 @@ public class InheritanceImpl extends RelationImpl implements Inheritance
   {
     switch (featureID)
     {
-      case MyDslPackage.INHERITANCE__SUB_ENTITY:
-        setSubEntity((Entity)null);
+      case MyDslPackage.INHERITANCE__BASE_ENTITY:
+        setBaseEntity((Entity)null);
         return;
       case MyDslPackage.INHERITANCE__SUPER_ENTITY:
         setSuperEntity((Entity)null);
@@ -231,8 +231,8 @@ public class InheritanceImpl extends RelationImpl implements Inheritance
   {
     switch (featureID)
     {
-      case MyDslPackage.INHERITANCE__SUB_ENTITY:
-        return subEntity != null;
+      case MyDslPackage.INHERITANCE__BASE_ENTITY:
+        return baseEntity != null;
       case MyDslPackage.INHERITANCE__SUPER_ENTITY:
         return superEntity != null;
     }

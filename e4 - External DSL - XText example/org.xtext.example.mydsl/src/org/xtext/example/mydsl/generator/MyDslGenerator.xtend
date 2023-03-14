@@ -7,9 +7,12 @@ import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.generator.AbstractGenerator
 import org.eclipse.xtext.generator.IFileSystemAccess2
 import org.eclipse.xtext.generator.IGeneratorContext
+import org.xtext.example.mydsl.myDsl.System
 import org.xtext.example.mydsl.myDsl.Entity
-import org.xtext.example.mydsl.myDsl.Inheritance
 import org.xtext.example.mydsl.myDsl.Attribute
+import org.xtext.example.mydsl.myDsl.Association
+import org.xtext.example.mydsl.myDsl.Inheritance
+import java.util.List
 
 /**
  * Generates code from your model files on save.
@@ -18,60 +21,123 @@ import org.xtext.example.mydsl.myDsl.Attribute
  */
 class MyDslGenerator extends AbstractGenerator {
 
-	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
-//		fsa.generateFile('greetings.txt', 'People to greet: ' + 
-//			resource.allContents
-//				.filter(Greeting)
-//				.map[name]
-//				.join(', '))
-		val entities = resource.allContents.toIterable.filter(Entity)
-		for (entity: entities){
-			val baseEntity = resource.allContents.toIterable.filter(Inheritance).findFirst[subEntity == entity]
-			fsa.generateFile(entity.name+".java", entity.compile(baseEntity))
-		}
-	}
-	
-	def compile(Entity entity, Inheritance relation)
-	'''
-	package university.deep_package.another_package;
-
-	import java.util.ArrayList;
-	import java.util.List;
-		
-	public class «entity.name» «IF relation != null» extends «relation.superEntity.name» «ENDIF»{
-		private int id;
-		private List<Course> courses = new ArrayList<>();
-		
-		public Student(int id, String name, int age){
-			super(name, age);
-			this.setId(id);
-		} 
-		
-		«FOR attribute: entity.attributes»
-		public «attribute.toJavaType» get«attribute.name.toFirstUpper»(){
-			return «attribute.name»;
-		}
-		public void set«attribute.name.toFirstUpper»(){
-			this.«attribute.name.toFirstUpper» = «attribute.name.toFirstUpper»;
-		}
-		«ENDFOR»
-		
-		public List<Course> courses(){
-			return courses;
-		}
-		
-		public void addCourse(Course course){
-			courses.add(course);
-		}
-	}
-	'''
-	
-	def String toJavaType(Attribute attribute) {
-		if (attribute.type == "string")
-			return "String";
-		if (attribute.type == "number")
-			return "int";
-		return "";
-	}
-
+    override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
+        val sys = resource.allContents.filter(System).next
+        for (entity: resource.allContents.toIterable.filter(Entity)){
+            var relation = resource.allContents.toIterable.filter(Inheritance).findFirst[baseEntity == entity]
+            var associations = resource.allContents.toIterable.filter(Association).filter[from == entity || to == entity ]
+            fsa.generateFile(entity.name + ".java", entity.compile(sys, relation, associations.toList))
+        }
+    }
+    
+    def compile(Entity entity, System system, Inheritance inheritance, List<Association> associations)'''
+    package «system.name.toFirstLower»;
+    
+    import java.util.*;
+    
+    public class «entity.name» «IF inheritance !== null»extends «inheritance.superEntity.name» «ENDIF»{
+        «FOR attribute: entity.attributes»
+        private «attribute.javaType» «attribute.name»;
+        «ENDFOR»
+        «FOR association: associations»
+        «entity.compileInstanceVariables(association)»
+        «ENDFOR»
+    
+        public «entity.name»(«entity.compileConstructorAttributes(inheritance)») {
+            «IF inheritance !== null»
+            super(«FOR attribute: inheritance.superEntity.attributes SEPARATOR ", "»«attribute.name»«ENDFOR»);
+            «ENDIF»
+            «FOR attribute: entity.attributes»
+            this.set«attribute.name.toFirstUpper»(«attribute.name»);
+            «ENDFOR»
+        }
+        «FOR attribute: entity.attributes»
+        public «attribute.javaType» get«attribute.name.toFirstUpper»() {
+            return «attribute.name»;
+        }
+        public void set«attribute.name.toFirstUpper»(«attribute.javaType» «attribute.name») {
+            this.«attribute.name» = «attribute.name»;
+        }
+        «ENDFOR»
+        
+        «FOR association : associations»
+        «entity.compileAssociationMethods(association)»
+        «ENDFOR»
+    }
+    '''
+    
+    def javaType(Attribute attribute){
+        switch attribute.type {
+            case "string": "String"
+            case "number": "int"
+        }
+    }
+    
+    def compileConstructorAttributes(Entity base, Inheritance inheritance) {
+        var String[] attributes = base.attributes.map[javaType +" "+ name]
+        if(inheritance !== null){
+            attributes = attributes + inheritance.superEntity.attributes.map[javaType +" "+ name]
+        }
+        attributes.join(", ")
+    }
+    
+    def compileInstanceVariables(Entity entity, Association association){
+        val otherEntity = entity.associationEntity(association)
+        val cardinality = entity.associationCardinality(association)
+        
+        '''private «IF cardinality»List<«ENDIF»«otherEntity.name»«IF cardinality»>«ENDIF» «entity.associationVariableName(association)»«IF cardinality» = new ArrayList<>()«ENDIF»;'''
+    }
+    
+    def compileAssociationMethods(Entity entity, Association association){
+        if (entity.associationCardinality(association))
+            entity.compileCardinalityAssociationMethods(association)
+        else
+            entity.compileNonCardinalityAssociationMethods(association)
+    }
+    
+    def compileCardinalityAssociationMethods(Entity entity, Association association)'''
+    public List<«entity.associationEntity(association).name»> get«entity.associationVariableName(association).toFirstUpper»() {
+        return this.«entity.associationVariableName(association)»;
+    }
+    
+    public void add«entity.associationSingularVariableName(association).toFirstUpper»(«entity.associationEntity(association).name» element) {
+        this.«entity.associationVariableName(association)».add(element);
+    }
+    '''
+    
+    def compileNonCardinalityAssociationMethods(Entity entity, Association association)'''
+    public «entity.associationEntity(association).name» get«entity.associationVariableName(association).toFirstUpper»() {
+        return this.«entity.associationVariableName(association)»;
+    }
+    
+    public void set«entity.associationSingularVariableName(association).toFirstUpper»(«entity.associationEntity(association).name» element) {
+        this.«entity.associationVariableName(association)» = element;
+    }
+    '''
+    
+    def associationVariableName(Entity entity, Association association){
+        entity.associationCardinality(association) ? entity.associationSingularVariableName(association) + "s" : entity.associationSingularVariableName(association)
+    }
+    
+    def associationSingularVariableName(Entity entity, Association association){
+        entity.associationEntity(association).name.toFirstLower
+    }
+    
+    def associationCardinality(Entity entity, Association association){
+        if(entity == association.to){
+            association.manyFrom
+        }
+        else{
+            association.manyTo
+        }
+    }
+    
+    def associationEntity (Entity entity, Association association){
+        if(entity == association.to){
+            association.from
+        }
+        else{
+            association.to
+        }
+    }
 }

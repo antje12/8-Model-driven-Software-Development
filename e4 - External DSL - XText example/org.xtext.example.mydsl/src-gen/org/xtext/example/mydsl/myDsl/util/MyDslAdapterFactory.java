@@ -10,11 +10,11 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
 import org.eclipse.emf.ecore.EObject;
 
+import org.xtext.example.mydsl.myDsl.Association;
 import org.xtext.example.mydsl.myDsl.Attribute;
 import org.xtext.example.mydsl.myDsl.Entity;
 import org.xtext.example.mydsl.myDsl.Inheritance;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
-import org.xtext.example.mydsl.myDsl.OtherRelation;
 import org.xtext.example.mydsl.myDsl.Relation;
 
 /**
@@ -106,9 +106,9 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
         return createInheritanceAdapter();
       }
       @Override
-      public Adapter caseOtherRelation(OtherRelation object)
+      public Adapter caseAssociation(Association object)
       {
-        return createOtherRelationAdapter();
+        return createAssociationAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -208,16 +208,16 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl.myDsl.OtherRelation <em>Other Relation</em>}'.
+   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl.myDsl.Association <em>Association</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.xtext.example.mydsl.myDsl.OtherRelation
+   * @see org.xtext.example.mydsl.myDsl.Association
    * @generated
    */
-  public Adapter createOtherRelationAdapter()
+  public Adapter createAssociationAdapter()
   {
     return null;
   }

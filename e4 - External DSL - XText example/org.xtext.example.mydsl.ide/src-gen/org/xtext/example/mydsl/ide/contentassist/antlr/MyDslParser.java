@@ -48,11 +48,11 @@ public class MyDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getEntityAccess().getAttributesAssignment_2(), "rule__Entity__AttributesAssignment_2");
 			builder.put(grammarAccess.getAttributeAccess().getNameAssignment_1(), "rule__Attribute__NameAssignment_1");
 			builder.put(grammarAccess.getAttributeAccess().getTypeAssignment_3(), "rule__Attribute__TypeAssignment_3");
-			builder.put(grammarAccess.getRelationAccess().getSubEntityAssignment_0_2(), "rule__Relation__SubEntityAssignment_0_2");
+			builder.put(grammarAccess.getRelationAccess().getBaseEntityAssignment_0_2(), "rule__Relation__BaseEntityAssignment_0_2");
 			builder.put(grammarAccess.getRelationAccess().getSuperEntityAssignment_0_4(), "rule__Relation__SuperEntityAssignment_0_4");
-			builder.put(grammarAccess.getRelationAccess().getSingletoAssignment_1_2_0(), "rule__Relation__SingletoAssignment_1_2_0");
-			builder.put(grammarAccess.getRelationAccess().getManytoAssignment_1_2_1(), "rule__Relation__ManytoAssignment_1_2_1");
+			builder.put(grammarAccess.getRelationAccess().getManyFromAssignment_1_2_1(), "rule__Relation__ManyFromAssignment_1_2_1");
 			builder.put(grammarAccess.getRelationAccess().getFromAssignment_1_3(), "rule__Relation__FromAssignment_1_3");
+			builder.put(grammarAccess.getRelationAccess().getManyToAssignment_1_5_1(), "rule__Relation__ManyToAssignment_1_5_1");
 			builder.put(grammarAccess.getRelationAccess().getToAssignment_1_6(), "rule__Relation__ToAssignment_1_6");
 		}
 	}

@@ -20,14 +20,14 @@
     </genClasses>
     <genClasses ecoreClass="MyDsl.ecore#//Relation"/>
     <genClasses ecoreClass="MyDsl.ecore#//Inheritance">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MyDsl.ecore#//Inheritance/subEntity"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MyDsl.ecore#//Inheritance/baseEntity"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MyDsl.ecore#//Inheritance/superEntity"/>
     </genClasses>
-    <genClasses ecoreClass="MyDsl.ecore#//OtherRelation">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//OtherRelation/singleto"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//OtherRelation/manyto"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MyDsl.ecore#//OtherRelation/from"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MyDsl.ecore#//OtherRelation/to"/>
+    <genClasses ecoreClass="MyDsl.ecore#//Association">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//Association/manyFrom"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MyDsl.ecore#//Association/from"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//Association/manyTo"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MyDsl.ecore#//Association/to"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

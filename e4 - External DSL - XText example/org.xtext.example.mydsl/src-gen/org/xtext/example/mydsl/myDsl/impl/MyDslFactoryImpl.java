@@ -11,12 +11,12 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
+import org.xtext.example.mydsl.myDsl.Association;
 import org.xtext.example.mydsl.myDsl.Attribute;
 import org.xtext.example.mydsl.myDsl.Entity;
 import org.xtext.example.mydsl.myDsl.Inheritance;
 import org.xtext.example.mydsl.myDsl.MyDslFactory;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
-import org.xtext.example.mydsl.myDsl.OtherRelation;
 import org.xtext.example.mydsl.myDsl.Relation;
 
 /**
@@ -76,7 +76,7 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
       case MyDslPackage.ATTRIBUTE: return createAttribute();
       case MyDslPackage.RELATION: return createRelation();
       case MyDslPackage.INHERITANCE: return createInheritance();
-      case MyDslPackage.OTHER_RELATION: return createOtherRelation();
+      case MyDslPackage.ASSOCIATION: return createAssociation();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -148,10 +148,10 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
    * @generated
    */
   @Override
-  public OtherRelation createOtherRelation()
+  public Association createAssociation()
   {
-    OtherRelationImpl otherRelation = new OtherRelationImpl();
-    return otherRelation;
+    AssociationImpl association = new AssociationImpl();
+    return association;
   }
 
   /**

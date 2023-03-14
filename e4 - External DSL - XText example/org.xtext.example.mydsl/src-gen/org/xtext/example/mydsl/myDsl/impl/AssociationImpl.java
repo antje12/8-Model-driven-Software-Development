@@ -10,67 +10,47 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.xtext.example.mydsl.myDsl.Association;
 import org.xtext.example.mydsl.myDsl.Entity;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
-import org.xtext.example.mydsl.myDsl.OtherRelation;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Other Relation</b></em>'.
+ * An implementation of the model object '<em><b>Association</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.xtext.example.mydsl.myDsl.impl.OtherRelationImpl#isSingleto <em>Singleto</em>}</li>
- *   <li>{@link org.xtext.example.mydsl.myDsl.impl.OtherRelationImpl#isManyto <em>Manyto</em>}</li>
- *   <li>{@link org.xtext.example.mydsl.myDsl.impl.OtherRelationImpl#getFrom <em>From</em>}</li>
- *   <li>{@link org.xtext.example.mydsl.myDsl.impl.OtherRelationImpl#getTo <em>To</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.impl.AssociationImpl#isManyFrom <em>Many From</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.impl.AssociationImpl#getFrom <em>From</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.impl.AssociationImpl#isManyTo <em>Many To</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.impl.AssociationImpl#getTo <em>To</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class OtherRelationImpl extends RelationImpl implements OtherRelation
+public class AssociationImpl extends RelationImpl implements Association
 {
   /**
-   * The default value of the '{@link #isSingleto() <em>Singleto</em>}' attribute.
+   * The default value of the '{@link #isManyFrom() <em>Many From</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #isSingleto()
+   * @see #isManyFrom()
    * @generated
    * @ordered
    */
-  protected static final boolean SINGLETO_EDEFAULT = false;
+  protected static final boolean MANY_FROM_EDEFAULT = false;
 
   /**
-   * The cached value of the '{@link #isSingleto() <em>Singleto</em>}' attribute.
+   * The cached value of the '{@link #isManyFrom() <em>Many From</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #isSingleto()
+   * @see #isManyFrom()
    * @generated
    * @ordered
    */
-  protected boolean singleto = SINGLETO_EDEFAULT;
-
-  /**
-   * The default value of the '{@link #isManyto() <em>Manyto</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #isManyto()
-   * @generated
-   * @ordered
-   */
-  protected static final boolean MANYTO_EDEFAULT = false;
-
-  /**
-   * The cached value of the '{@link #isManyto() <em>Manyto</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #isManyto()
-   * @generated
-   * @ordered
-   */
-  protected boolean manyto = MANYTO_EDEFAULT;
+  protected boolean manyFrom = MANY_FROM_EDEFAULT;
 
   /**
    * The cached value of the '{@link #getFrom() <em>From</em>}' reference.
@@ -81,6 +61,26 @@ public class OtherRelationImpl extends RelationImpl implements OtherRelation
    * @ordered
    */
   protected Entity from;
+
+  /**
+   * The default value of the '{@link #isManyTo() <em>Many To</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isManyTo()
+   * @generated
+   * @ordered
+   */
+  protected static final boolean MANY_TO_EDEFAULT = false;
+
+  /**
+   * The cached value of the '{@link #isManyTo() <em>Many To</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isManyTo()
+   * @generated
+   * @ordered
+   */
+  protected boolean manyTo = MANY_TO_EDEFAULT;
 
   /**
    * The cached value of the '{@link #getTo() <em>To</em>}' reference.
@@ -97,7 +97,7 @@ public class OtherRelationImpl extends RelationImpl implements OtherRelation
    * <!-- end-user-doc -->
    * @generated
    */
-  protected OtherRelationImpl()
+  protected AssociationImpl()
   {
     super();
   }
@@ -110,7 +110,7 @@ public class OtherRelationImpl extends RelationImpl implements OtherRelation
   @Override
   protected EClass eStaticClass()
   {
-    return MyDslPackage.Literals.OTHER_RELATION;
+    return MyDslPackage.Literals.ASSOCIATION;
   }
 
   /**
@@ -119,9 +119,9 @@ public class OtherRelationImpl extends RelationImpl implements OtherRelation
    * @generated
    */
   @Override
-  public boolean isSingleto()
+  public boolean isManyFrom()
   {
-    return singleto;
+    return manyFrom;
   }
 
   /**
@@ -130,37 +130,12 @@ public class OtherRelationImpl extends RelationImpl implements OtherRelation
    * @generated
    */
   @Override
-  public void setSingleto(boolean newSingleto)
+  public void setManyFrom(boolean newManyFrom)
   {
-    boolean oldSingleto = singleto;
-    singleto = newSingleto;
+    boolean oldManyFrom = manyFrom;
+    manyFrom = newManyFrom;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.OTHER_RELATION__SINGLETO, oldSingleto, singleto));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public boolean isManyto()
-  {
-    return manyto;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setManyto(boolean newManyto)
-  {
-    boolean oldManyto = manyto;
-    manyto = newManyto;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.OTHER_RELATION__MANYTO, oldManyto, manyto));
+      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.ASSOCIATION__MANY_FROM, oldManyFrom, manyFrom));
   }
 
   /**
@@ -178,7 +153,7 @@ public class OtherRelationImpl extends RelationImpl implements OtherRelation
       if (from != oldFrom)
       {
         if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, MyDslPackage.OTHER_RELATION__FROM, oldFrom, from));
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, MyDslPackage.ASSOCIATION__FROM, oldFrom, from));
       }
     }
     return from;
@@ -205,7 +180,32 @@ public class OtherRelationImpl extends RelationImpl implements OtherRelation
     Entity oldFrom = from;
     from = newFrom;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.OTHER_RELATION__FROM, oldFrom, from));
+      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.ASSOCIATION__FROM, oldFrom, from));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public boolean isManyTo()
+  {
+    return manyTo;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setManyTo(boolean newManyTo)
+  {
+    boolean oldManyTo = manyTo;
+    manyTo = newManyTo;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.ASSOCIATION__MANY_TO, oldManyTo, manyTo));
   }
 
   /**
@@ -223,7 +223,7 @@ public class OtherRelationImpl extends RelationImpl implements OtherRelation
       if (to != oldTo)
       {
         if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, MyDslPackage.OTHER_RELATION__TO, oldTo, to));
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, MyDslPackage.ASSOCIATION__TO, oldTo, to));
       }
     }
     return to;
@@ -250,7 +250,7 @@ public class OtherRelationImpl extends RelationImpl implements OtherRelation
     Entity oldTo = to;
     to = newTo;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.OTHER_RELATION__TO, oldTo, to));
+      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.ASSOCIATION__TO, oldTo, to));
   }
 
   /**
@@ -263,14 +263,14 @@ public class OtherRelationImpl extends RelationImpl implements OtherRelation
   {
     switch (featureID)
     {
-      case MyDslPackage.OTHER_RELATION__SINGLETO:
-        return isSingleto();
-      case MyDslPackage.OTHER_RELATION__MANYTO:
-        return isManyto();
-      case MyDslPackage.OTHER_RELATION__FROM:
+      case MyDslPackage.ASSOCIATION__MANY_FROM:
+        return isManyFrom();
+      case MyDslPackage.ASSOCIATION__FROM:
         if (resolve) return getFrom();
         return basicGetFrom();
-      case MyDslPackage.OTHER_RELATION__TO:
+      case MyDslPackage.ASSOCIATION__MANY_TO:
+        return isManyTo();
+      case MyDslPackage.ASSOCIATION__TO:
         if (resolve) return getTo();
         return basicGetTo();
     }
@@ -287,16 +287,16 @@ public class OtherRelationImpl extends RelationImpl implements OtherRelation
   {
     switch (featureID)
     {
-      case MyDslPackage.OTHER_RELATION__SINGLETO:
-        setSingleto((Boolean)newValue);
+      case MyDslPackage.ASSOCIATION__MANY_FROM:
+        setManyFrom((Boolean)newValue);
         return;
-      case MyDslPackage.OTHER_RELATION__MANYTO:
-        setManyto((Boolean)newValue);
-        return;
-      case MyDslPackage.OTHER_RELATION__FROM:
+      case MyDslPackage.ASSOCIATION__FROM:
         setFrom((Entity)newValue);
         return;
-      case MyDslPackage.OTHER_RELATION__TO:
+      case MyDslPackage.ASSOCIATION__MANY_TO:
+        setManyTo((Boolean)newValue);
+        return;
+      case MyDslPackage.ASSOCIATION__TO:
         setTo((Entity)newValue);
         return;
     }
@@ -313,16 +313,16 @@ public class OtherRelationImpl extends RelationImpl implements OtherRelation
   {
     switch (featureID)
     {
-      case MyDslPackage.OTHER_RELATION__SINGLETO:
-        setSingleto(SINGLETO_EDEFAULT);
+      case MyDslPackage.ASSOCIATION__MANY_FROM:
+        setManyFrom(MANY_FROM_EDEFAULT);
         return;
-      case MyDslPackage.OTHER_RELATION__MANYTO:
-        setManyto(MANYTO_EDEFAULT);
-        return;
-      case MyDslPackage.OTHER_RELATION__FROM:
+      case MyDslPackage.ASSOCIATION__FROM:
         setFrom((Entity)null);
         return;
-      case MyDslPackage.OTHER_RELATION__TO:
+      case MyDslPackage.ASSOCIATION__MANY_TO:
+        setManyTo(MANY_TO_EDEFAULT);
+        return;
+      case MyDslPackage.ASSOCIATION__TO:
         setTo((Entity)null);
         return;
     }
@@ -339,13 +339,13 @@ public class OtherRelationImpl extends RelationImpl implements OtherRelation
   {
     switch (featureID)
     {
-      case MyDslPackage.OTHER_RELATION__SINGLETO:
-        return singleto != SINGLETO_EDEFAULT;
-      case MyDslPackage.OTHER_RELATION__MANYTO:
-        return manyto != MANYTO_EDEFAULT;
-      case MyDslPackage.OTHER_RELATION__FROM:
+      case MyDslPackage.ASSOCIATION__MANY_FROM:
+        return manyFrom != MANY_FROM_EDEFAULT;
+      case MyDslPackage.ASSOCIATION__FROM:
         return from != null;
-      case MyDslPackage.OTHER_RELATION__TO:
+      case MyDslPackage.ASSOCIATION__MANY_TO:
+        return manyTo != MANY_TO_EDEFAULT;
+      case MyDslPackage.ASSOCIATION__TO:
         return to != null;
     }
     return super.eIsSet(featureID);
@@ -362,12 +362,12 @@ public class OtherRelationImpl extends RelationImpl implements OtherRelation
     if (eIsProxy()) return super.toString();
 
     StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (singleto: ");
-    result.append(singleto);
-    result.append(", manyto: ");
-    result.append(manyto);
+    result.append(" (manyFrom: ");
+    result.append(manyFrom);
+    result.append(", manyTo: ");
+    result.append(manyTo);
     result.append(')');
     return result.toString();
   }
 
-} //OtherRelationImpl
+} //AssociationImpl

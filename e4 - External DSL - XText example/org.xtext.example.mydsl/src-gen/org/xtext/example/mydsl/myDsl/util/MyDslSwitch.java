@@ -8,11 +8,11 @@ import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.util.Switch;
 
+import org.xtext.example.mydsl.myDsl.Association;
 import org.xtext.example.mydsl.myDsl.Attribute;
 import org.xtext.example.mydsl.myDsl.Entity;
 import org.xtext.example.mydsl.myDsl.Inheritance;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
-import org.xtext.example.mydsl.myDsl.OtherRelation;
 import org.xtext.example.mydsl.myDsl.Relation;
 
 /**
@@ -114,11 +114,11 @@ public class MyDslSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case MyDslPackage.OTHER_RELATION:
+      case MyDslPackage.ASSOCIATION:
       {
-        OtherRelation otherRelation = (OtherRelation)theEObject;
-        T result = caseOtherRelation(otherRelation);
-        if (result == null) result = caseRelation(otherRelation);
+        Association association = (Association)theEObject;
+        T result = caseAssociation(association);
+        if (result == null) result = caseRelation(association);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -207,17 +207,17 @@ public class MyDslSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Other Relation</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Association</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Other Relation</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Association</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseOtherRelation(OtherRelation object)
+  public T caseAssociation(Association object)
   {
     return null;
   }

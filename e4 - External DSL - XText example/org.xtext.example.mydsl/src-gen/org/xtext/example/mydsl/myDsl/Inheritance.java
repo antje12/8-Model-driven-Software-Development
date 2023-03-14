@@ -13,7 +13,7 @@ package org.xtext.example.mydsl.myDsl;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.xtext.example.mydsl.myDsl.Inheritance#getSubEntity <em>Sub Entity</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.Inheritance#getBaseEntity <em>Base Entity</em>}</li>
  *   <li>{@link org.xtext.example.mydsl.myDsl.Inheritance#getSuperEntity <em>Super Entity</em>}</li>
  * </ul>
  *
@@ -24,26 +24,26 @@ package org.xtext.example.mydsl.myDsl;
 public interface Inheritance extends Relation
 {
   /**
-   * Returns the value of the '<em><b>Sub Entity</b></em>' reference.
+   * Returns the value of the '<em><b>Base Entity</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Sub Entity</em>' reference.
-   * @see #setSubEntity(Entity)
-   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getInheritance_SubEntity()
+   * @return the value of the '<em>Base Entity</em>' reference.
+   * @see #setBaseEntity(Entity)
+   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getInheritance_BaseEntity()
    * @model
    * @generated
    */
-  Entity getSubEntity();
+  Entity getBaseEntity();
 
   /**
-   * Sets the value of the '{@link org.xtext.example.mydsl.myDsl.Inheritance#getSubEntity <em>Sub Entity</em>}' reference.
+   * Sets the value of the '{@link org.xtext.example.mydsl.myDsl.Inheritance#getBaseEntity <em>Base Entity</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Sub Entity</em>' reference.
-   * @see #getSubEntity()
+   * @param value the new value of the '<em>Base Entity</em>' reference.
+   * @see #getBaseEntity()
    * @generated
    */
-  void setSubEntity(Entity value);
+  void setBaseEntity(Entity value);
 
   /**
    * Returns the value of the '<em><b>Super Entity</b></em>' reference.

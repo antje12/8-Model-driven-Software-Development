@@ -329,7 +329,7 @@ ruleRelation returns [EObject current=null]
 					}
 					otherlv_2=RULE_ID
 					{
-						newLeafNode(otherlv_2, grammarAccess.getRelationAccess().getSubEntityEntityCrossReference_0_2_0());
+						newLeafNode(otherlv_2, grammarAccess.getRelationAccess().getBaseEntityEntityCrossReference_0_2_0());
 					}
 				)
 			)
@@ -356,7 +356,7 @@ ruleRelation returns [EObject current=null]
 			(
 				{
 					$current = forceCreateModelElement(
-						grammarAccess.getRelationAccess().getOtherRelationAction_1_0(),
+						grammarAccess.getRelationAccess().getAssociationAction_1_0(),
 						$current);
 				}
 			)
@@ -365,32 +365,22 @@ ruleRelation returns [EObject current=null]
 				newLeafNode(otherlv_6, grammarAccess.getRelationAccess().getRelationKeyword_1_1());
 			}
 			(
-				(
-					(
-						lv_singleto_7_0='a'
-						{
-							newLeafNode(lv_singleto_7_0, grammarAccess.getRelationAccess().getSingletoAKeyword_1_2_0_0());
-						}
-						{
-							if ($current==null) {
-								$current = createModelElement(grammarAccess.getRelationRule());
-							}
-							setWithLastConsumed($current, "singleto", lv_singleto_7_0 != null, "a");
-						}
-					)
-				)
+				otherlv_7='a'
+				{
+					newLeafNode(otherlv_7, grammarAccess.getRelationAccess().getAKeyword_1_2_0());
+				}
 				    |
 				(
 					(
-						lv_manyto_8_0='many'
+						lv_manyFrom_8_0='many'
 						{
-							newLeafNode(lv_manyto_8_0, grammarAccess.getRelationAccess().getManytoManyKeyword_1_2_1_0());
+							newLeafNode(lv_manyFrom_8_0, grammarAccess.getRelationAccess().getManyFromManyKeyword_1_2_1_0());
 						}
 						{
 							if ($current==null) {
 								$current = createModelElement(grammarAccess.getRelationRule());
 							}
-							setWithLastConsumed($current, "manyto", lv_manyto_8_0 != null, "many");
+							setWithLastConsumed($current, "manyFrom", lv_manyFrom_8_0 != null, "many");
 						}
 					)
 				)
@@ -425,10 +415,20 @@ ruleRelation returns [EObject current=null]
 					newLeafNode(otherlv_12, grammarAccess.getRelationAccess().getAKeyword_1_5_0());
 				}
 				    |
-				otherlv_13='many'
-				{
-					newLeafNode(otherlv_13, grammarAccess.getRelationAccess().getManyKeyword_1_5_1());
-				}
+				(
+					(
+						lv_manyTo_13_0='many'
+						{
+							newLeafNode(lv_manyTo_13_0, grammarAccess.getRelationAccess().getManyToManyKeyword_1_5_1_0());
+						}
+						{
+							if ($current==null) {
+								$current = createModelElement(grammarAccess.getRelationRule());
+							}
+							setWithLastConsumed($current, "manyTo", lv_manyTo_13_0 != null, "many");
+						}
+					)
+				)
 			)?
 			(
 				(
