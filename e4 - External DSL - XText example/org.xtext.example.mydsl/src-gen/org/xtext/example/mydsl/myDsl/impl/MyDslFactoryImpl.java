@@ -18,6 +18,7 @@ import org.xtext.example.mydsl.myDsl.Inheritance;
 import org.xtext.example.mydsl.myDsl.MyDslFactory;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
 import org.xtext.example.mydsl.myDsl.Relation;
+import org.xtext.example.mydsl.myDsl.Require;
 
 /**
  * <!-- begin-user-doc -->
@@ -74,6 +75,7 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
       case MyDslPackage.SYSTEM: return createSystem();
       case MyDslPackage.ENTITY: return createEntity();
       case MyDslPackage.ATTRIBUTE: return createAttribute();
+      case MyDslPackage.REQUIRE: return createRequire();
       case MyDslPackage.RELATION: return createRelation();
       case MyDslPackage.INHERITANCE: return createInheritance();
       case MyDslPackage.ASSOCIATION: return createAssociation();
@@ -116,6 +118,18 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
   {
     AttributeImpl attribute = new AttributeImpl();
     return attribute;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Require createRequire()
+  {
+    RequireImpl require = new RequireImpl();
+    return require;
   }
 
   /**

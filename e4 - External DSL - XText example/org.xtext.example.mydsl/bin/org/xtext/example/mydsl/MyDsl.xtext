@@ -7,11 +7,15 @@ System:
 ;
 
 Entity:
-    'entity' name=ID (attributes+=Attribute)*
+    'entity' name=ID (elements+=(Attribute|Require))*
 ;
 
 Attribute:
     'attribute' name=ID 'as' type=Type
+;
+
+Require:
+    'require' varRef=[Attribute] '==' exp=INT
 ;
 
 Type:

@@ -178,21 +178,39 @@ ruleEntity returns [EObject current=null]
 		)
 		(
 			(
-				{
-					newCompositeNode(grammarAccess.getEntityAccess().getAttributesAttributeParserRuleCall_2_0());
-				}
-				lv_attributes_2_0=ruleAttribute
-				{
-					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getEntityRule());
+				(
+					{
+						newCompositeNode(grammarAccess.getEntityAccess().getElementsAttributeParserRuleCall_2_0_0());
 					}
-					add(
-						$current,
-						"attributes",
-						lv_attributes_2_0,
-						"org.xtext.example.mydsl.MyDsl.Attribute");
-					afterParserOrEnumRuleCall();
-				}
+					lv_elements_2_1=ruleAttribute
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getEntityRule());
+						}
+						add(
+							$current,
+							"elements",
+							lv_elements_2_1,
+							"org.xtext.example.mydsl.MyDsl.Attribute");
+						afterParserOrEnumRuleCall();
+					}
+					    |
+					{
+						newCompositeNode(grammarAccess.getEntityAccess().getElementsRequireParserRuleCall_2_0_1());
+					}
+					lv_elements_2_2=ruleRequire
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getEntityRule());
+						}
+						add(
+							$current,
+							"elements",
+							lv_elements_2_2,
+							"org.xtext.example.mydsl.MyDsl.Require");
+						afterParserOrEnumRuleCall();
+					}
+				)
 			)
 		)*
 	)
@@ -256,6 +274,64 @@ ruleAttribute returns [EObject current=null]
 						lv_type_3_0,
 						"org.xtext.example.mydsl.MyDsl.Type");
 					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+	)
+;
+
+// Entry rule entryRuleRequire
+entryRuleRequire returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getRequireRule()); }
+	iv_ruleRequire=ruleRequire
+	{ $current=$iv_ruleRequire.current; }
+	EOF;
+
+// Rule Require
+ruleRequire returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='require'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getRequireAccess().getRequireKeyword_0());
+		}
+		(
+			(
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getRequireRule());
+					}
+				}
+				otherlv_1=RULE_ID
+				{
+					newLeafNode(otherlv_1, grammarAccess.getRequireAccess().getVarRefAttributeCrossReference_1_0());
+				}
+			)
+		)
+		otherlv_2='=='
+		{
+			newLeafNode(otherlv_2, grammarAccess.getRequireAccess().getEqualsSignEqualsSignKeyword_2());
+		}
+		(
+			(
+				lv_exp_3_0=RULE_INT
+				{
+					newLeafNode(lv_exp_3_0, grammarAccess.getRequireAccess().getExpINTTerminalRuleCall_3_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getRequireRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"exp",
+						lv_exp_3_0,
+						"org.eclipse.xtext.common.Terminals.INT");
 				}
 			)
 		)

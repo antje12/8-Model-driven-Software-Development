@@ -11,6 +11,7 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -19,7 +20,6 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.xtext.example.mydsl.myDsl.Attribute;
 import org.xtext.example.mydsl.myDsl.Entity;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
 
@@ -32,7 +32,7 @@ import org.xtext.example.mydsl.myDsl.MyDslPackage;
  * </p>
  * <ul>
  *   <li>{@link org.xtext.example.mydsl.myDsl.impl.EntityImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.xtext.example.mydsl.myDsl.impl.EntityImpl#getAttributes <em>Attributes</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.impl.EntityImpl#getElements <em>Elements</em>}</li>
  * </ul>
  *
  * @generated
@@ -60,14 +60,14 @@ public class EntityImpl extends MinimalEObjectImpl.Container implements Entity
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getAttributes() <em>Attributes</em>}' containment reference list.
+   * The cached value of the '{@link #getElements() <em>Elements</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getAttributes()
+   * @see #getElements()
    * @generated
    * @ordered
    */
-  protected EList<Attribute> attributes;
+  protected EList<EObject> elements;
 
   /**
    * <!-- begin-user-doc -->
@@ -121,13 +121,13 @@ public class EntityImpl extends MinimalEObjectImpl.Container implements Entity
    * @generated
    */
   @Override
-  public EList<Attribute> getAttributes()
+  public EList<EObject> getElements()
   {
-    if (attributes == null)
+    if (elements == null)
     {
-      attributes = new EObjectContainmentEList<Attribute>(Attribute.class, this, MyDslPackage.ENTITY__ATTRIBUTES);
+      elements = new EObjectContainmentEList<EObject>(EObject.class, this, MyDslPackage.ENTITY__ELEMENTS);
     }
-    return attributes;
+    return elements;
   }
 
   /**
@@ -140,8 +140,8 @@ public class EntityImpl extends MinimalEObjectImpl.Container implements Entity
   {
     switch (featureID)
     {
-      case MyDslPackage.ENTITY__ATTRIBUTES:
-        return ((InternalEList<?>)getAttributes()).basicRemove(otherEnd, msgs);
+      case MyDslPackage.ENTITY__ELEMENTS:
+        return ((InternalEList<?>)getElements()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -158,8 +158,8 @@ public class EntityImpl extends MinimalEObjectImpl.Container implements Entity
     {
       case MyDslPackage.ENTITY__NAME:
         return getName();
-      case MyDslPackage.ENTITY__ATTRIBUTES:
-        return getAttributes();
+      case MyDslPackage.ENTITY__ELEMENTS:
+        return getElements();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -178,9 +178,9 @@ public class EntityImpl extends MinimalEObjectImpl.Container implements Entity
       case MyDslPackage.ENTITY__NAME:
         setName((String)newValue);
         return;
-      case MyDslPackage.ENTITY__ATTRIBUTES:
-        getAttributes().clear();
-        getAttributes().addAll((Collection<? extends Attribute>)newValue);
+      case MyDslPackage.ENTITY__ELEMENTS:
+        getElements().clear();
+        getElements().addAll((Collection<? extends EObject>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -199,8 +199,8 @@ public class EntityImpl extends MinimalEObjectImpl.Container implements Entity
       case MyDslPackage.ENTITY__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case MyDslPackage.ENTITY__ATTRIBUTES:
-        getAttributes().clear();
+      case MyDslPackage.ENTITY__ELEMENTS:
+        getElements().clear();
         return;
     }
     super.eUnset(featureID);
@@ -218,8 +218,8 @@ public class EntityImpl extends MinimalEObjectImpl.Container implements Entity
     {
       case MyDslPackage.ENTITY__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case MyDslPackage.ENTITY__ATTRIBUTES:
-        return attributes != null && !attributes.isEmpty();
+      case MyDslPackage.ENTITY__ELEMENTS:
+        return elements != null && !elements.isEmpty();
     }
     return super.eIsSet(featureID);
   }

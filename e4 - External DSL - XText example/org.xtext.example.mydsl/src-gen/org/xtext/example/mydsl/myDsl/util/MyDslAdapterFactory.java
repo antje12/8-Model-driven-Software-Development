@@ -16,6 +16,7 @@ import org.xtext.example.mydsl.myDsl.Entity;
 import org.xtext.example.mydsl.myDsl.Inheritance;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
 import org.xtext.example.mydsl.myDsl.Relation;
+import org.xtext.example.mydsl.myDsl.Require;
 
 /**
  * <!-- begin-user-doc -->
@@ -96,6 +97,11 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
         return createAttributeAdapter();
       }
       @Override
+      public Adapter caseRequire(Require object)
+      {
+        return createRequireAdapter();
+      }
+      @Override
       public Adapter caseRelation(Relation object)
       {
         return createRelationAdapter();
@@ -173,6 +179,21 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createAttributeAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl.myDsl.Require <em>Require</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.example.mydsl.myDsl.Require
+   * @generated
+   */
+  public Adapter createRequireAdapter()
   {
     return null;
   }

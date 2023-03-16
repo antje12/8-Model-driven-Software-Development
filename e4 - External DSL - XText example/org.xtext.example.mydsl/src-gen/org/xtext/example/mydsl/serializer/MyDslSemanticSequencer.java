@@ -19,6 +19,7 @@ import org.xtext.example.mydsl.myDsl.Attribute;
 import org.xtext.example.mydsl.myDsl.Entity;
 import org.xtext.example.mydsl.myDsl.Inheritance;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
+import org.xtext.example.mydsl.myDsl.Require;
 import org.xtext.example.mydsl.services.MyDslGrammarAccess;
 
 @SuppressWarnings("all")
@@ -46,6 +47,9 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 				return; 
 			case MyDslPackage.INHERITANCE:
 				sequence_Relation(context, (Inheritance) semanticObject); 
+				return; 
+			case MyDslPackage.REQUIRE:
+				sequence_Require(context, (Require) semanticObject); 
 				return; 
 			case MyDslPackage.SYSTEM:
 				sequence_System(context, (org.xtext.example.mydsl.myDsl.System) semanticObject); 
@@ -84,7 +88,7 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     Entity returns Entity
 	 *
 	 * Constraint:
-	 *     (name=ID attributes+=Attribute*)
+	 *     (name=ID (elements+=Attribute | elements+=Require)*)
 	 * </pre>
 	 */
 	protected void sequence_Entity(ISerializationContext context, Entity semanticObject) {
@@ -125,6 +129,29 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getRelationAccess().getBaseEntityEntityIDTerminalRuleCall_0_2_0_1(), semanticObject.eGet(MyDslPackage.Literals.INHERITANCE__BASE_ENTITY, false));
 		feeder.accept(grammarAccess.getRelationAccess().getSuperEntityEntityIDTerminalRuleCall_0_4_0_1(), semanticObject.eGet(MyDslPackage.Literals.INHERITANCE__SUPER_ENTITY, false));
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     Require returns Require
+	 *
+	 * Constraint:
+	 *     (varRef=[Attribute|ID] exp=INT)
+	 * </pre>
+	 */
+	protected void sequence_Require(ISerializationContext context, Require semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.REQUIRE__VAR_REF) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.REQUIRE__VAR_REF));
+			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.REQUIRE__EXP) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.REQUIRE__EXP));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getRequireAccess().getVarRefAttributeIDTerminalRuleCall_1_0_1(), semanticObject.eGet(MyDslPackage.Literals.REQUIRE__VAR_REF, false));
+		feeder.accept(grammarAccess.getRequireAccess().getExpINTTerminalRuleCall_3_0(), semanticObject.getExp());
 		feeder.finish();
 	}
 	

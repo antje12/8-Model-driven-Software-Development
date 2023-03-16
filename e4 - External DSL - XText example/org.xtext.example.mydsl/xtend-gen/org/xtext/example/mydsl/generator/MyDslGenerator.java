@@ -7,7 +7,6 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
 import java.util.List;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -18,7 +17,6 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
-import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.xtext.example.mydsl.myDsl.Association;
 import org.xtext.example.mydsl.myDsl.Attribute;
@@ -80,8 +78,8 @@ public class MyDslGenerator extends AbstractGenerator {
     _builder.append("{");
     _builder.newLineIfNotEmpty();
     {
-      EList<Attribute> _attributes = entity.getAttributes();
-      for(final Attribute attribute : _attributes) {
+      Iterable<Attribute> _filter = Iterables.<Attribute>filter(entity.getElements(), Attribute.class);
+      for(final Attribute attribute : _filter) {
         _builder.append("    ");
         _builder.append("private ");
         String _javaType = this.javaType(attribute);
@@ -116,9 +114,9 @@ public class MyDslGenerator extends AbstractGenerator {
         _builder.append("        ");
         _builder.append("super(");
         {
-          EList<Attribute> _attributes_1 = inheritance.getSuperEntity().getAttributes();
+          Iterable<Attribute> _filter_1 = Iterables.<Attribute>filter(inheritance.getSuperEntity().getElements(), Attribute.class);
           boolean _hasElements = false;
-          for(final Attribute attribute_1 : _attributes_1) {
+          for(final Attribute attribute_1 : _filter_1) {
             if (!_hasElements) {
               _hasElements = true;
             } else {
@@ -133,8 +131,8 @@ public class MyDslGenerator extends AbstractGenerator {
       }
     }
     {
-      EList<Attribute> _attributes_2 = entity.getAttributes();
-      for(final Attribute attribute_2 : _attributes_2) {
+      Iterable<Attribute> _filter_2 = Iterables.<Attribute>filter(entity.getElements(), Attribute.class);
+      for(final Attribute attribute_2 : _filter_2) {
         _builder.append("        ");
         _builder.append("this.set");
         String _firstUpper = StringExtensions.toFirstUpper(attribute_2.getName());
@@ -150,8 +148,8 @@ public class MyDslGenerator extends AbstractGenerator {
     _builder.append("}");
     _builder.newLine();
     {
-      EList<Attribute> _attributes_3 = entity.getAttributes();
-      for(final Attribute attribute_3 : _attributes_3) {
+      Iterable<Attribute> _filter_3 = Iterables.<Attribute>filter(entity.getElements(), Attribute.class);
+      for(final Attribute attribute_3 : _filter_3) {
         _builder.append("    ");
         _builder.append("public ");
         String _javaType_1 = this.javaType(attribute_3);
@@ -238,7 +236,7 @@ public class MyDslGenerator extends AbstractGenerator {
         String _name = it.getName();
         return (_plus + _name);
       };
-      String[] attributes = ((String[])Conversions.unwrapArray(ListExtensions.<Attribute, String>map(base.getAttributes(), _function), String.class));
+      String[] attributes = ((String[])Conversions.unwrapArray(IterableExtensions.<Attribute, String>map(Iterables.<Attribute>filter(base.getElements(), Attribute.class), _function), String.class));
       if ((inheritance != null)) {
         final String[] _converted_attributes = (String[])attributes;
         final Function1<Attribute, String> _function_1 = (Attribute it) -> {
@@ -247,7 +245,7 @@ public class MyDslGenerator extends AbstractGenerator {
           String _name = it.getName();
           return (_plus + _name);
         };
-        List<String> _map = ListExtensions.<Attribute, String>map(inheritance.getSuperEntity().getAttributes(), _function_1);
+        Iterable<String> _map = IterableExtensions.<Attribute, String>map(Iterables.<Attribute>filter(inheritance.getSuperEntity().getElements(), Attribute.class), _function_1);
         Iterable<String> _plus = Iterables.<String>concat(((Iterable<? extends String>)Conversions.doWrapArray(_converted_attributes)), _map);
         attributes = ((String[])Conversions.unwrapArray(_plus, String.class));
       }

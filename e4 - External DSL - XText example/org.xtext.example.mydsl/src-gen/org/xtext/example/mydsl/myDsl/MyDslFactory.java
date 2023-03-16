@@ -51,6 +51,15 @@ public interface MyDslFactory extends EFactory
   Attribute createAttribute();
 
   /**
+   * Returns a new object of class '<em>Require</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Require</em>'.
+   * @generated
+   */
+  Require createRequire();
+
+  /**
    * Returns a new object of class '<em>Relation</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

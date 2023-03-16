@@ -70,15 +70,17 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		private final Keyword cEntityKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
-		private final Assignment cAttributesAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cAttributesAttributeParserRuleCall_2_0 = (RuleCall)cAttributesAssignment_2.eContents().get(0);
+		private final Assignment cElementsAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final Alternatives cElementsAlternatives_2_0 = (Alternatives)cElementsAssignment_2.eContents().get(0);
+		private final RuleCall cElementsAttributeParserRuleCall_2_0_0 = (RuleCall)cElementsAlternatives_2_0.eContents().get(0);
+		private final RuleCall cElementsRequireParserRuleCall_2_0_1 = (RuleCall)cElementsAlternatives_2_0.eContents().get(1);
 		
 		//Entity:
-		//    'entity' name=ID (attributes+=Attribute)*
+		//    'entity' name=ID (elements+=(Attribute|Require))*
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'entity' name=ID (attributes+=Attribute)*
+		//'entity' name=ID (elements+=(Attribute|Require))*
 		public Group getGroup() { return cGroup; }
 		
 		//'entity'
@@ -90,11 +92,17 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 		
-		//(attributes+=Attribute)*
-		public Assignment getAttributesAssignment_2() { return cAttributesAssignment_2; }
+		//(elements+=(Attribute|Require))*
+		public Assignment getElementsAssignment_2() { return cElementsAssignment_2; }
+		
+		//(Attribute|Require)
+		public Alternatives getElementsAlternatives_2_0() { return cElementsAlternatives_2_0; }
 		
 		//Attribute
-		public RuleCall getAttributesAttributeParserRuleCall_2_0() { return cAttributesAttributeParserRuleCall_2_0; }
+		public RuleCall getElementsAttributeParserRuleCall_2_0_0() { return cElementsAttributeParserRuleCall_2_0_0; }
+		
+		//Require
+		public RuleCall getElementsRequireParserRuleCall_2_0_1() { return cElementsRequireParserRuleCall_2_0_1; }
 	}
 	public class AttributeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.example.mydsl.MyDsl.Attribute");
@@ -131,6 +139,46 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		
 		//Type
 		public RuleCall getTypeTypeParserRuleCall_3_0() { return cTypeTypeParserRuleCall_3_0; }
+	}
+	public class RequireElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.example.mydsl.MyDsl.Require");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cRequireKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cVarRefAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final CrossReference cVarRefAttributeCrossReference_1_0 = (CrossReference)cVarRefAssignment_1.eContents().get(0);
+		private final RuleCall cVarRefAttributeIDTerminalRuleCall_1_0_1 = (RuleCall)cVarRefAttributeCrossReference_1_0.eContents().get(1);
+		private final Keyword cEqualsSignEqualsSignKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cExpAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cExpINTTerminalRuleCall_3_0 = (RuleCall)cExpAssignment_3.eContents().get(0);
+		
+		//Require:
+		//    'require' varRef=[Attribute] '==' exp=INT
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'require' varRef=[Attribute] '==' exp=INT
+		public Group getGroup() { return cGroup; }
+		
+		//'require'
+		public Keyword getRequireKeyword_0() { return cRequireKeyword_0; }
+		
+		//varRef=[Attribute]
+		public Assignment getVarRefAssignment_1() { return cVarRefAssignment_1; }
+		
+		//[Attribute]
+		public CrossReference getVarRefAttributeCrossReference_1_0() { return cVarRefAttributeCrossReference_1_0; }
+		
+		//ID
+		public RuleCall getVarRefAttributeIDTerminalRuleCall_1_0_1() { return cVarRefAttributeIDTerminalRuleCall_1_0_1; }
+		
+		//'=='
+		public Keyword getEqualsSignEqualsSignKeyword_2() { return cEqualsSignEqualsSignKeyword_2; }
+		
+		//exp=INT
+		public Assignment getExpAssignment_3() { return cExpAssignment_3; }
+		
+		//INT
+		public RuleCall getExpINTTerminalRuleCall_3_0() { return cExpINTTerminalRuleCall_3_0; }
 	}
 	public class TypeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.example.mydsl.MyDsl.Type");
@@ -291,6 +339,7 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	private final SystemElements pSystem;
 	private final EntityElements pEntity;
 	private final AttributeElements pAttribute;
+	private final RequireElements pRequire;
 	private final TypeElements pType;
 	private final RelationElements pRelation;
 	
@@ -306,6 +355,7 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		this.pSystem = new SystemElements();
 		this.pEntity = new EntityElements();
 		this.pAttribute = new AttributeElements();
+		this.pRequire = new RequireElements();
 		this.pType = new TypeElements();
 		this.pRelation = new RelationElements();
 	}
@@ -349,7 +399,7 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	}
 	
 	//Entity:
-	//    'entity' name=ID (attributes+=Attribute)*
+	//    'entity' name=ID (elements+=(Attribute|Require))*
 	//;
 	public EntityElements getEntityAccess() {
 		return pEntity;
@@ -368,6 +418,17 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	
 	public ParserRule getAttributeRule() {
 		return getAttributeAccess().getRule();
+	}
+	
+	//Require:
+	//    'require' varRef=[Attribute] '==' exp=INT
+	//;
+	public RequireElements getRequireAccess() {
+		return pRequire;
+	}
+	
+	public ParserRule getRequireRule() {
+		return getRequireAccess().getRule();
 	}
 	
 	//Type:

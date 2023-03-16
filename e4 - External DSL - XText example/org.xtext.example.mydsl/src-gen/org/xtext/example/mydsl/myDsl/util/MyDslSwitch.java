@@ -14,6 +14,7 @@ import org.xtext.example.mydsl.myDsl.Entity;
 import org.xtext.example.mydsl.myDsl.Inheritance;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
 import org.xtext.example.mydsl.myDsl.Relation;
+import org.xtext.example.mydsl.myDsl.Require;
 
 /**
  * <!-- begin-user-doc -->
@@ -99,6 +100,13 @@ public class MyDslSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case MyDslPackage.REQUIRE:
+      {
+        Require require = (Require)theEObject;
+        T result = caseRequire(require);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case MyDslPackage.RELATION:
       {
         Relation relation = (Relation)theEObject;
@@ -170,6 +178,22 @@ public class MyDslSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseAttribute(Attribute object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Require</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Require</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseRequire(Require object)
   {
     return null;
   }

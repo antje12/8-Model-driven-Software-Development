@@ -12,11 +12,15 @@
     </genClasses>
     <genClasses ecoreClass="MyDsl.ecore#//Entity">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//Entity/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//Entity/attributes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//Entity/elements"/>
     </genClasses>
     <genClasses ecoreClass="MyDsl.ecore#//Attribute">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//Attribute/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//Attribute/type"/>
+    </genClasses>
+    <genClasses ecoreClass="MyDsl.ecore#//Require">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MyDsl.ecore#//Require/varRef"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//Require/exp"/>
     </genClasses>
     <genClasses ecoreClass="MyDsl.ecore#//Relation"/>
     <genClasses ecoreClass="MyDsl.ecore#//Inheritance">

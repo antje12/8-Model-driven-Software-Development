@@ -114,13 +114,13 @@ public interface MyDslPackage extends EPackage
   int ENTITY__NAME = 0;
 
   /**
-   * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
+   * The feature id for the '<em><b>Elements</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ENTITY__ATTRIBUTES = 1;
+  int ENTITY__ELEMENTS = 1;
 
   /**
    * The number of structural features of the '<em>Entity</em>' class.
@@ -169,6 +169,43 @@ public interface MyDslPackage extends EPackage
   int ATTRIBUTE_FEATURE_COUNT = 2;
 
   /**
+   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.RequireImpl <em>Require</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.example.mydsl.myDsl.impl.RequireImpl
+   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getRequire()
+   * @generated
+   */
+  int REQUIRE = 3;
+
+  /**
+   * The feature id for the '<em><b>Var Ref</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REQUIRE__VAR_REF = 0;
+
+  /**
+   * The feature id for the '<em><b>Exp</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REQUIRE__EXP = 1;
+
+  /**
+   * The number of structural features of the '<em>Require</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REQUIRE_FEATURE_COUNT = 2;
+
+  /**
    * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.RelationImpl <em>Relation</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -176,7 +213,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getRelation()
    * @generated
    */
-  int RELATION = 3;
+  int RELATION = 4;
 
   /**
    * The number of structural features of the '<em>Relation</em>' class.
@@ -195,7 +232,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getInheritance()
    * @generated
    */
-  int INHERITANCE = 4;
+  int INHERITANCE = 5;
 
   /**
    * The feature id for the '<em><b>Base Entity</b></em>' reference.
@@ -232,7 +269,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getAssociation()
    * @generated
    */
-  int ASSOCIATION = 5;
+  int ASSOCIATION = 6;
 
   /**
    * The feature id for the '<em><b>Many From</b></em>' attribute.
@@ -334,15 +371,15 @@ public interface MyDslPackage extends EPackage
   EAttribute getEntity_Name();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.xtext.example.mydsl.myDsl.Entity#getAttributes <em>Attributes</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.xtext.example.mydsl.myDsl.Entity#getElements <em>Elements</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Attributes</em>'.
-   * @see org.xtext.example.mydsl.myDsl.Entity#getAttributes()
+   * @return the meta object for the containment reference list '<em>Elements</em>'.
+   * @see org.xtext.example.mydsl.myDsl.Entity#getElements()
    * @see #getEntity()
    * @generated
    */
-  EReference getEntity_Attributes();
+  EReference getEntity_Elements();
 
   /**
    * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.Attribute <em>Attribute</em>}'.
@@ -375,6 +412,38 @@ public interface MyDslPackage extends EPackage
    * @generated
    */
   EAttribute getAttribute_Type();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.Require <em>Require</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Require</em>'.
+   * @see org.xtext.example.mydsl.myDsl.Require
+   * @generated
+   */
+  EClass getRequire();
+
+  /**
+   * Returns the meta object for the reference '{@link org.xtext.example.mydsl.myDsl.Require#getVarRef <em>Var Ref</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Var Ref</em>'.
+   * @see org.xtext.example.mydsl.myDsl.Require#getVarRef()
+   * @see #getRequire()
+   * @generated
+   */
+  EReference getRequire_VarRef();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.example.mydsl.myDsl.Require#getExp <em>Exp</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Exp</em>'.
+   * @see org.xtext.example.mydsl.myDsl.Require#getExp()
+   * @see #getRequire()
+   * @generated
+   */
+  EAttribute getRequire_Exp();
 
   /**
    * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.Relation <em>Relation</em>}'.
@@ -540,12 +609,12 @@ public interface MyDslPackage extends EPackage
     EAttribute ENTITY__NAME = eINSTANCE.getEntity_Name();
 
     /**
-     * The meta object literal for the '<em><b>Attributes</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Elements</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference ENTITY__ATTRIBUTES = eINSTANCE.getEntity_Attributes();
+    EReference ENTITY__ELEMENTS = eINSTANCE.getEntity_Elements();
 
     /**
      * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.AttributeImpl <em>Attribute</em>}' class.
@@ -572,6 +641,32 @@ public interface MyDslPackage extends EPackage
      * @generated
      */
     EAttribute ATTRIBUTE__TYPE = eINSTANCE.getAttribute_Type();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.RequireImpl <em>Require</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.example.mydsl.myDsl.impl.RequireImpl
+     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getRequire()
+     * @generated
+     */
+    EClass REQUIRE = eINSTANCE.getRequire();
+
+    /**
+     * The meta object literal for the '<em><b>Var Ref</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference REQUIRE__VAR_REF = eINSTANCE.getRequire_VarRef();
+
+    /**
+     * The meta object literal for the '<em><b>Exp</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute REQUIRE__EXP = eINSTANCE.getRequire_Exp();
 
     /**
      * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.RelationImpl <em>Relation</em>}' class.

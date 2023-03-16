@@ -1,13 +1,15 @@
+'=='=21
 'a'=13
 'as'=19
 'attribute'=18
 'entity'=17
 'has'=14
 'have'=15
-'is'=21
-'many'=22
+'is'=23
+'many'=24
 'number'=12
-'relation'=20
+'relation'=22
+'require'=20
 'string'=11
 'system'=16
 RULE_ANY_OTHER=10
@@ -29,3 +31,5 @@ T__19=19
 T__20=20
 T__21=21
 T__22=22
+T__23=23
+T__24=24

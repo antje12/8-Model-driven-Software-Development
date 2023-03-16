@@ -36,7 +36,7 @@ class MyDslGenerator extends AbstractGenerator {
     import java.util.*;
     
     public class «entity.name» «IF inheritance !== null»extends «inheritance.superEntity.name» «ENDIF»{
-        «FOR attribute: entity.attributes»
+        «FOR attribute: entity.elements.filter(Attribute)»
         private «attribute.javaType» «attribute.name»;
         «ENDFOR»
         «FOR association: associations»
@@ -45,13 +45,13 @@ class MyDslGenerator extends AbstractGenerator {
     
         public «entity.name»(«entity.compileConstructorAttributes(inheritance)») {
             «IF inheritance !== null»
-            super(«FOR attribute: inheritance.superEntity.attributes SEPARATOR ", "»«attribute.name»«ENDFOR»);
+            super(«FOR attribute: inheritance.superEntity.elements.filter(Attribute) SEPARATOR ", "»«attribute.name»«ENDFOR»);
             «ENDIF»
-            «FOR attribute: entity.attributes»
+            «FOR attribute: entity.elements.filter(Attribute)»
             this.set«attribute.name.toFirstUpper»(«attribute.name»);
             «ENDFOR»
         }
-        «FOR attribute: entity.attributes»
+        «FOR attribute: entity.elements.filter(Attribute)»
         public «attribute.javaType» get«attribute.name.toFirstUpper»() {
             return «attribute.name»;
         }
@@ -74,9 +74,9 @@ class MyDslGenerator extends AbstractGenerator {
     }
     
     def compileConstructorAttributes(Entity base, Inheritance inheritance) {
-        var String[] attributes = base.attributes.map[javaType +" "+ name]
+        var String[] attributes = base.elements.filter(Attribute).map[javaType +" "+ name]
         if(inheritance !== null){
-            attributes = attributes + inheritance.superEntity.attributes.map[javaType +" "+ name]
+            attributes = attributes + inheritance.superEntity.elements.filter(Attribute).map[javaType +" "+ name]
         }
         attributes.join(", ")
     }
