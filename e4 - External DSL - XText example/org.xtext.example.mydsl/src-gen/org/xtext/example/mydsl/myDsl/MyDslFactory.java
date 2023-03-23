@@ -33,6 +33,15 @@ public interface MyDslFactory extends EFactory
   System createSystem();
 
   /**
+   * Returns a new object of class '<em>External Definitions</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>External Definitions</em>'.
+   * @generated
+   */
+  ExternalDefinitions createExternalDefinitions();
+
+  /**
    * Returns a new object of class '<em>Entity</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -58,6 +67,24 @@ public interface MyDslFactory extends EFactory
    * @generated
    */
   Require createRequire();
+
+  /**
+   * Returns a new object of class '<em>Var Exp</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Var Exp</em>'.
+   * @generated
+   */
+  VarExp createVarExp();
+
+  /**
+   * Returns a new object of class '<em>Fun Call</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Fun Call</em>'.
+   * @generated
+   */
+  FunCall createFunCall();
 
   /**
    * Returns a new object of class '<em>Relation</em>'.

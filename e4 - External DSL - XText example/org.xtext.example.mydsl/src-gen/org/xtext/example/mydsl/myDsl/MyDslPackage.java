@@ -77,13 +77,22 @@ public interface MyDslPackage extends EPackage
   int SYSTEM__NAME = 0;
 
   /**
+   * The feature id for the '<em><b>Externals</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SYSTEM__EXTERNALS = 1;
+
+  /**
    * The feature id for the '<em><b>Elements</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int SYSTEM__ELEMENTS = 1;
+  int SYSTEM__ELEMENTS = 2;
 
   /**
    * The number of structural features of the '<em>System</em>' class.
@@ -92,7 +101,44 @@ public interface MyDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int SYSTEM_FEATURE_COUNT = 2;
+  int SYSTEM_FEATURE_COUNT = 3;
+
+  /**
+   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.ExternalDefinitionsImpl <em>External Definitions</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.example.mydsl.myDsl.impl.ExternalDefinitionsImpl
+   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getExternalDefinitions()
+   * @generated
+   */
+  int EXTERNAL_DEFINITIONS = 1;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EXTERNAL_DEFINITIONS__NAME = 0;
+
+  /**
+   * The feature id for the '<em><b>Types</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EXTERNAL_DEFINITIONS__TYPES = 1;
+
+  /**
+   * The number of structural features of the '<em>External Definitions</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EXTERNAL_DEFINITIONS_FEATURE_COUNT = 2;
 
   /**
    * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.EntityImpl <em>Entity</em>}' class.
@@ -102,7 +148,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getEntity()
    * @generated
    */
-  int ENTITY = 1;
+  int ENTITY = 2;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -139,7 +185,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getAttribute()
    * @generated
    */
-  int ATTRIBUTE = 2;
+  int ATTRIBUTE = 3;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -176,25 +222,16 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getRequire()
    * @generated
    */
-  int REQUIRE = 3;
+  int REQUIRE = 4;
 
   /**
-   * The feature id for the '<em><b>Var Ref</b></em>' reference.
+   * The feature id for the '<em><b>Require</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int REQUIRE__VAR_REF = 0;
-
-  /**
-   * The feature id for the '<em><b>Exp</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int REQUIRE__EXP = 1;
+  int REQUIRE__REQUIRE = 0;
 
   /**
    * The number of structural features of the '<em>Require</em>' class.
@@ -203,7 +240,81 @@ public interface MyDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int REQUIRE_FEATURE_COUNT = 2;
+  int REQUIRE_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.VarExpImpl <em>Var Exp</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.example.mydsl.myDsl.impl.VarExpImpl
+   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getVarExp()
+   * @generated
+   */
+  int VAR_EXP = 5;
+
+  /**
+   * The feature id for the '<em><b>Var Ref</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VAR_EXP__VAR_REF = 0;
+
+  /**
+   * The feature id for the '<em><b>Exp</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VAR_EXP__EXP = 1;
+
+  /**
+   * The number of structural features of the '<em>Var Exp</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VAR_EXP_FEATURE_COUNT = 2;
+
+  /**
+   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.FunCallImpl <em>Fun Call</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.example.mydsl.myDsl.impl.FunCallImpl
+   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getFunCall()
+   * @generated
+   */
+  int FUN_CALL = 6;
+
+  /**
+   * The feature id for the '<em><b>Function</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FUN_CALL__FUNCTION = 0;
+
+  /**
+   * The feature id for the '<em><b>Variables</b></em>' reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FUN_CALL__VARIABLES = 1;
+
+  /**
+   * The number of structural features of the '<em>Fun Call</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FUN_CALL_FEATURE_COUNT = 2;
 
   /**
    * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.RelationImpl <em>Relation</em>}' class.
@@ -213,7 +324,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getRelation()
    * @generated
    */
-  int RELATION = 4;
+  int RELATION = 7;
 
   /**
    * The number of structural features of the '<em>Relation</em>' class.
@@ -232,7 +343,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getInheritance()
    * @generated
    */
-  int INHERITANCE = 5;
+  int INHERITANCE = 8;
 
   /**
    * The feature id for the '<em><b>Base Entity</b></em>' reference.
@@ -269,7 +380,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getAssociation()
    * @generated
    */
-  int ASSOCIATION = 6;
+  int ASSOCIATION = 9;
 
   /**
    * The feature id for the '<em><b>Many From</b></em>' attribute.
@@ -339,6 +450,17 @@ public interface MyDslPackage extends EPackage
   EAttribute getSystem_Name();
 
   /**
+   * Returns the meta object for the containment reference list '{@link org.xtext.example.mydsl.myDsl.System#getExternals <em>Externals</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Externals</em>'.
+   * @see org.xtext.example.mydsl.myDsl.System#getExternals()
+   * @see #getSystem()
+   * @generated
+   */
+  EReference getSystem_Externals();
+
+  /**
    * Returns the meta object for the containment reference list '{@link org.xtext.example.mydsl.myDsl.System#getElements <em>Elements</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -348,6 +470,38 @@ public interface MyDslPackage extends EPackage
    * @generated
    */
   EReference getSystem_Elements();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.ExternalDefinitions <em>External Definitions</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>External Definitions</em>'.
+   * @see org.xtext.example.mydsl.myDsl.ExternalDefinitions
+   * @generated
+   */
+  EClass getExternalDefinitions();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.example.mydsl.myDsl.ExternalDefinitions#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.xtext.example.mydsl.myDsl.ExternalDefinitions#getName()
+   * @see #getExternalDefinitions()
+   * @generated
+   */
+  EAttribute getExternalDefinitions_Name();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.xtext.example.mydsl.myDsl.ExternalDefinitions#getTypes <em>Types</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Types</em>'.
+   * @see org.xtext.example.mydsl.myDsl.ExternalDefinitions#getTypes()
+   * @see #getExternalDefinitions()
+   * @generated
+   */
+  EAttribute getExternalDefinitions_Types();
 
   /**
    * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.Entity <em>Entity</em>}'.
@@ -424,26 +578,79 @@ public interface MyDslPackage extends EPackage
   EClass getRequire();
 
   /**
-   * Returns the meta object for the reference '{@link org.xtext.example.mydsl.myDsl.Require#getVarRef <em>Var Ref</em>}'.
+   * Returns the meta object for the containment reference '{@link org.xtext.example.mydsl.myDsl.Require#getRequire <em>Require</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Require</em>'.
+   * @see org.xtext.example.mydsl.myDsl.Require#getRequire()
+   * @see #getRequire()
+   * @generated
+   */
+  EReference getRequire_Require();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.VarExp <em>Var Exp</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Var Exp</em>'.
+   * @see org.xtext.example.mydsl.myDsl.VarExp
+   * @generated
+   */
+  EClass getVarExp();
+
+  /**
+   * Returns the meta object for the reference '{@link org.xtext.example.mydsl.myDsl.VarExp#getVarRef <em>Var Ref</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the reference '<em>Var Ref</em>'.
-   * @see org.xtext.example.mydsl.myDsl.Require#getVarRef()
-   * @see #getRequire()
+   * @see org.xtext.example.mydsl.myDsl.VarExp#getVarRef()
+   * @see #getVarExp()
    * @generated
    */
-  EReference getRequire_VarRef();
+  EReference getVarExp_VarRef();
 
   /**
-   * Returns the meta object for the attribute '{@link org.xtext.example.mydsl.myDsl.Require#getExp <em>Exp</em>}'.
+   * Returns the meta object for the attribute '{@link org.xtext.example.mydsl.myDsl.VarExp#getExp <em>Exp</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Exp</em>'.
-   * @see org.xtext.example.mydsl.myDsl.Require#getExp()
-   * @see #getRequire()
+   * @see org.xtext.example.mydsl.myDsl.VarExp#getExp()
+   * @see #getVarExp()
    * @generated
    */
-  EAttribute getRequire_Exp();
+  EAttribute getVarExp_Exp();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.FunCall <em>Fun Call</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Fun Call</em>'.
+   * @see org.xtext.example.mydsl.myDsl.FunCall
+   * @generated
+   */
+  EClass getFunCall();
+
+  /**
+   * Returns the meta object for the reference '{@link org.xtext.example.mydsl.myDsl.FunCall#getFunction <em>Function</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Function</em>'.
+   * @see org.xtext.example.mydsl.myDsl.FunCall#getFunction()
+   * @see #getFunCall()
+   * @generated
+   */
+  EReference getFunCall_Function();
+
+  /**
+   * Returns the meta object for the reference list '{@link org.xtext.example.mydsl.myDsl.FunCall#getVariables <em>Variables</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference list '<em>Variables</em>'.
+   * @see org.xtext.example.mydsl.myDsl.FunCall#getVariables()
+   * @see #getFunCall()
+   * @generated
+   */
+  EReference getFunCall_Variables();
 
   /**
    * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.Relation <em>Relation</em>}'.
@@ -583,12 +790,46 @@ public interface MyDslPackage extends EPackage
     EAttribute SYSTEM__NAME = eINSTANCE.getSystem_Name();
 
     /**
+     * The meta object literal for the '<em><b>Externals</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference SYSTEM__EXTERNALS = eINSTANCE.getSystem_Externals();
+
+    /**
      * The meta object literal for the '<em><b>Elements</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
     EReference SYSTEM__ELEMENTS = eINSTANCE.getSystem_Elements();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.ExternalDefinitionsImpl <em>External Definitions</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.example.mydsl.myDsl.impl.ExternalDefinitionsImpl
+     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getExternalDefinitions()
+     * @generated
+     */
+    EClass EXTERNAL_DEFINITIONS = eINSTANCE.getExternalDefinitions();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute EXTERNAL_DEFINITIONS__NAME = eINSTANCE.getExternalDefinitions_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Types</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute EXTERNAL_DEFINITIONS__TYPES = eINSTANCE.getExternalDefinitions_Types();
 
     /**
      * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.EntityImpl <em>Entity</em>}' class.
@@ -653,12 +894,30 @@ public interface MyDslPackage extends EPackage
     EClass REQUIRE = eINSTANCE.getRequire();
 
     /**
+     * The meta object literal for the '<em><b>Require</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference REQUIRE__REQUIRE = eINSTANCE.getRequire_Require();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.VarExpImpl <em>Var Exp</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.example.mydsl.myDsl.impl.VarExpImpl
+     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getVarExp()
+     * @generated
+     */
+    EClass VAR_EXP = eINSTANCE.getVarExp();
+
+    /**
      * The meta object literal for the '<em><b>Var Ref</b></em>' reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference REQUIRE__VAR_REF = eINSTANCE.getRequire_VarRef();
+    EReference VAR_EXP__VAR_REF = eINSTANCE.getVarExp_VarRef();
 
     /**
      * The meta object literal for the '<em><b>Exp</b></em>' attribute feature.
@@ -666,7 +925,33 @@ public interface MyDslPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute REQUIRE__EXP = eINSTANCE.getRequire_Exp();
+    EAttribute VAR_EXP__EXP = eINSTANCE.getVarExp_Exp();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.FunCallImpl <em>Fun Call</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.example.mydsl.myDsl.impl.FunCallImpl
+     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getFunCall()
+     * @generated
+     */
+    EClass FUN_CALL = eINSTANCE.getFunCall();
+
+    /**
+     * The meta object literal for the '<em><b>Function</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference FUN_CALL__FUNCTION = eINSTANCE.getFunCall_Function();
+
+    /**
+     * The meta object literal for the '<em><b>Variables</b></em>' reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference FUN_CALL__VARIABLES = eINSTANCE.getFunCall_Variables();
 
     /**
      * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.RelationImpl <em>Relation</em>}' class.

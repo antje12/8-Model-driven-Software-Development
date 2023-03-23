@@ -13,10 +13,13 @@ import org.eclipse.emf.ecore.EObject;
 import org.xtext.example.mydsl.myDsl.Association;
 import org.xtext.example.mydsl.myDsl.Attribute;
 import org.xtext.example.mydsl.myDsl.Entity;
+import org.xtext.example.mydsl.myDsl.ExternalDefinitions;
+import org.xtext.example.mydsl.myDsl.FunCall;
 import org.xtext.example.mydsl.myDsl.Inheritance;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
 import org.xtext.example.mydsl.myDsl.Relation;
 import org.xtext.example.mydsl.myDsl.Require;
+import org.xtext.example.mydsl.myDsl.VarExp;
 
 /**
  * <!-- begin-user-doc -->
@@ -87,6 +90,11 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
         return createSystemAdapter();
       }
       @Override
+      public Adapter caseExternalDefinitions(ExternalDefinitions object)
+      {
+        return createExternalDefinitionsAdapter();
+      }
+      @Override
       public Adapter caseEntity(Entity object)
       {
         return createEntityAdapter();
@@ -100,6 +108,16 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
       public Adapter caseRequire(Require object)
       {
         return createRequireAdapter();
+      }
+      @Override
+      public Adapter caseVarExp(VarExp object)
+      {
+        return createVarExpAdapter();
+      }
+      @Override
+      public Adapter caseFunCall(FunCall object)
+      {
+        return createFunCallAdapter();
       }
       @Override
       public Adapter caseRelation(Relation object)
@@ -154,6 +172,21 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl.myDsl.ExternalDefinitions <em>External Definitions</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.example.mydsl.myDsl.ExternalDefinitions
+   * @generated
+   */
+  public Adapter createExternalDefinitionsAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl.myDsl.Entity <em>Entity</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -194,6 +227,36 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createRequireAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl.myDsl.VarExp <em>Var Exp</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.example.mydsl.myDsl.VarExp
+   * @generated
+   */
+  public Adapter createVarExpAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl.myDsl.FunCall <em>Fun Call</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.example.mydsl.myDsl.FunCall
+   * @generated
+   */
+  public Adapter createFunCallAdapter()
   {
     return null;
   }

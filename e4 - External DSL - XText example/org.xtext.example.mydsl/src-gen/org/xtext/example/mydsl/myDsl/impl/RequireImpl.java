@@ -4,14 +4,15 @@
 package org.xtext.example.mydsl.myDsl.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.xtext.example.mydsl.myDsl.Attribute;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
 import org.xtext.example.mydsl.myDsl.Require;
 
@@ -23,8 +24,7 @@ import org.xtext.example.mydsl.myDsl.Require;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.xtext.example.mydsl.myDsl.impl.RequireImpl#getVarRef <em>Var Ref</em>}</li>
- *   <li>{@link org.xtext.example.mydsl.myDsl.impl.RequireImpl#getExp <em>Exp</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.impl.RequireImpl#getRequire <em>Require</em>}</li>
  * </ul>
  *
  * @generated
@@ -32,34 +32,14 @@ import org.xtext.example.mydsl.myDsl.Require;
 public class RequireImpl extends MinimalEObjectImpl.Container implements Require
 {
   /**
-   * The cached value of the '{@link #getVarRef() <em>Var Ref</em>}' reference.
+   * The cached value of the '{@link #getRequire() <em>Require</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getVarRef()
+   * @see #getRequire()
    * @generated
    * @ordered
    */
-  protected Attribute varRef;
-
-  /**
-   * The default value of the '{@link #getExp() <em>Exp</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getExp()
-   * @generated
-   * @ordered
-   */
-  protected static final int EXP_EDEFAULT = 0;
-
-  /**
-   * The cached value of the '{@link #getExp() <em>Exp</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getExp()
-   * @generated
-   * @ordered
-   */
-  protected int exp = EXP_EDEFAULT;
+  protected EObject require;
 
   /**
    * <!-- begin-user-doc -->
@@ -88,29 +68,26 @@ public class RequireImpl extends MinimalEObjectImpl.Container implements Require
    * @generated
    */
   @Override
-  public Attribute getVarRef()
+  public EObject getRequire()
   {
-    if (varRef != null && varRef.eIsProxy())
+    return require;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetRequire(EObject newRequire, NotificationChain msgs)
+  {
+    EObject oldRequire = require;
+    require = newRequire;
+    if (eNotificationRequired())
     {
-      InternalEObject oldVarRef = (InternalEObject)varRef;
-      varRef = (Attribute)eResolveProxy(oldVarRef);
-      if (varRef != oldVarRef)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, MyDslPackage.REQUIRE__VAR_REF, oldVarRef, varRef));
-      }
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MyDslPackage.REQUIRE__REQUIRE, oldRequire, newRequire);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
     }
-    return varRef;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Attribute basicGetVarRef()
-  {
-    return varRef;
+    return msgs;
   }
 
   /**
@@ -119,12 +96,20 @@ public class RequireImpl extends MinimalEObjectImpl.Container implements Require
    * @generated
    */
   @Override
-  public void setVarRef(Attribute newVarRef)
+  public void setRequire(EObject newRequire)
   {
-    Attribute oldVarRef = varRef;
-    varRef = newVarRef;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.REQUIRE__VAR_REF, oldVarRef, varRef));
+    if (newRequire != require)
+    {
+      NotificationChain msgs = null;
+      if (require != null)
+        msgs = ((InternalEObject)require).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.REQUIRE__REQUIRE, null, msgs);
+      if (newRequire != null)
+        msgs = ((InternalEObject)newRequire).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.REQUIRE__REQUIRE, null, msgs);
+      msgs = basicSetRequire(newRequire, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.REQUIRE__REQUIRE, newRequire, newRequire));
   }
 
   /**
@@ -133,23 +118,14 @@ public class RequireImpl extends MinimalEObjectImpl.Container implements Require
    * @generated
    */
   @Override
-  public int getExp()
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
-    return exp;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setExp(int newExp)
-  {
-    int oldExp = exp;
-    exp = newExp;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.REQUIRE__EXP, oldExp, exp));
+    switch (featureID)
+    {
+      case MyDslPackage.REQUIRE__REQUIRE:
+        return basicSetRequire(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -162,11 +138,8 @@ public class RequireImpl extends MinimalEObjectImpl.Container implements Require
   {
     switch (featureID)
     {
-      case MyDslPackage.REQUIRE__VAR_REF:
-        if (resolve) return getVarRef();
-        return basicGetVarRef();
-      case MyDslPackage.REQUIRE__EXP:
-        return getExp();
+      case MyDslPackage.REQUIRE__REQUIRE:
+        return getRequire();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -181,11 +154,8 @@ public class RequireImpl extends MinimalEObjectImpl.Container implements Require
   {
     switch (featureID)
     {
-      case MyDslPackage.REQUIRE__VAR_REF:
-        setVarRef((Attribute)newValue);
-        return;
-      case MyDslPackage.REQUIRE__EXP:
-        setExp((Integer)newValue);
+      case MyDslPackage.REQUIRE__REQUIRE:
+        setRequire((EObject)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -201,11 +171,8 @@ public class RequireImpl extends MinimalEObjectImpl.Container implements Require
   {
     switch (featureID)
     {
-      case MyDslPackage.REQUIRE__VAR_REF:
-        setVarRef((Attribute)null);
-        return;
-      case MyDslPackage.REQUIRE__EXP:
-        setExp(EXP_EDEFAULT);
+      case MyDslPackage.REQUIRE__REQUIRE:
+        setRequire((EObject)null);
         return;
     }
     super.eUnset(featureID);
@@ -221,29 +188,10 @@ public class RequireImpl extends MinimalEObjectImpl.Container implements Require
   {
     switch (featureID)
     {
-      case MyDslPackage.REQUIRE__VAR_REF:
-        return varRef != null;
-      case MyDslPackage.REQUIRE__EXP:
-        return exp != EXP_EDEFAULT;
+      case MyDslPackage.REQUIRE__REQUIRE:
+        return require != null;
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (exp: ");
-    result.append(exp);
-    result.append(')');
-    return result.toString();
   }
 
 } //RequireImpl

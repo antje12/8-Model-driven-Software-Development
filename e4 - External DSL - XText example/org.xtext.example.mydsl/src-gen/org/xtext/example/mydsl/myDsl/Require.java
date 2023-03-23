@@ -14,8 +14,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.xtext.example.mydsl.myDsl.Require#getVarRef <em>Var Ref</em>}</li>
- *   <li>{@link org.xtext.example.mydsl.myDsl.Require#getExp <em>Exp</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.Require#getRequire <em>Require</em>}</li>
  * </ul>
  *
  * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getRequire()
@@ -25,47 +24,25 @@ import org.eclipse.emf.ecore.EObject;
 public interface Require extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Var Ref</b></em>' reference.
+   * Returns the value of the '<em><b>Require</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Var Ref</em>' reference.
-   * @see #setVarRef(Attribute)
-   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getRequire_VarRef()
-   * @model
+   * @return the value of the '<em>Require</em>' containment reference.
+   * @see #setRequire(EObject)
+   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getRequire_Require()
+   * @model containment="true"
    * @generated
    */
-  Attribute getVarRef();
+  EObject getRequire();
 
   /**
-   * Sets the value of the '{@link org.xtext.example.mydsl.myDsl.Require#getVarRef <em>Var Ref</em>}' reference.
+   * Sets the value of the '{@link org.xtext.example.mydsl.myDsl.Require#getRequire <em>Require</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Var Ref</em>' reference.
-   * @see #getVarRef()
+   * @param value the new value of the '<em>Require</em>' containment reference.
+   * @see #getRequire()
    * @generated
    */
-  void setVarRef(Attribute value);
-
-  /**
-   * Returns the value of the '<em><b>Exp</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Exp</em>' attribute.
-   * @see #setExp(int)
-   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getRequire_Exp()
-   * @model
-   * @generated
-   */
-  int getExp();
-
-  /**
-   * Sets the value of the '{@link org.xtext.example.mydsl.myDsl.Require#getExp <em>Exp</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Exp</em>' attribute.
-   * @see #getExp()
-   * @generated
-   */
-  void setExp(int value);
+  void setRequire(EObject value);
 
 } // Require

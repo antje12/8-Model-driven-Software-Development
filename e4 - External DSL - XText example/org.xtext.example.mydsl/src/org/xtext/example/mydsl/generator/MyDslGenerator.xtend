@@ -23,12 +23,23 @@ class MyDslGenerator extends AbstractGenerator {
 
     override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
         val sys = resource.allContents.filter(System).next
+        fsa.generateFile(sys.name.toFirstLower+"/ExternalCode.java", sys.compileInterface)
         for (entity: resource.allContents.toIterable.filter(Entity)){
             var relation = resource.allContents.toIterable.filter(Inheritance).findFirst[baseEntity == entity]
             var associations = resource.allContents.toIterable.filter(Association).filter[from == entity || to == entity ]
-            fsa.generateFile(entity.name + ".java", entity.compile(sys, relation, associations.toList))
+            fsa.generateFile(sys.name.toFirstLower+"/"+entity.name + ".java", entity.compile(sys, relation, associations.toList))
         }
     }
+    
+    def compileInterface(System sys)'''
+    	package «sys.name.toFirstLower»;
+    	
+    	public interface ExternalCode {
+    		«FOR external: sys.externals»
+    			public boolean «external.name»(String cpr);
+			«ENDFOR»
+    	}
+    '''
     
     def compile(Entity entity, System system, Inheritance inheritance, List<Association> associations)'''
     package «system.name.toFirstLower»;
@@ -36,6 +47,9 @@ class MyDslGenerator extends AbstractGenerator {
     import java.util.*;
     
     public class «entity.name» «IF inheritance !== null»extends «inheritance.superEntity.name» «ENDIF»{
+    	
+    	private ExternalCode externalCode;
+    	
         «FOR attribute: entity.elements.filter(Attribute)»
         private «attribute.javaType» «attribute.name»;
         «ENDFOR»
@@ -43,10 +57,11 @@ class MyDslGenerator extends AbstractGenerator {
         «entity.compileInstanceVariables(association)»
         «ENDFOR»
     
-        public «entity.name»(«entity.compileConstructorAttributes(inheritance)») {
+        public «entity.name»(ExternalCode externalCode, «entity.compileConstructorAttributes(inheritance)») {
             «IF inheritance !== null»
-            super(«FOR attribute: inheritance.superEntity.elements.filter(Attribute) SEPARATOR ", "»«attribute.name»«ENDFOR»);
+            super(externalCode, «FOR attribute: inheritance.superEntity.elements.filter(Attribute) SEPARATOR ", "»«attribute.name»«ENDFOR»);
             «ENDIF»
+            this.externalCode = externalCode;
             «FOR attribute: entity.elements.filter(Attribute)»
             this.set«attribute.name.toFirstUpper»(«attribute.name»);
             «ENDFOR»
@@ -139,5 +154,9 @@ class MyDslGenerator extends AbstractGenerator {
         else{
             association.to
         }
+    }
+    
+    def List<Attribute> attributes(Entity entity){
+    	entity.elements.filter(Attribute).toList()
     }
 }

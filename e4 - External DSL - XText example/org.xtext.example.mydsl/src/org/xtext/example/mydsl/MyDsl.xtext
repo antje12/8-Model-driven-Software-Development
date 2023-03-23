@@ -3,7 +3,11 @@ grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals
 generate myDsl "http://www.xtext.org/example/mydsl/MyDsl"
 
 System:
-    'system' name=ID (elements+=(Relation|Entity))+ 
+    'system' name=ID externals+=ExternalDefinitions* (elements+=(Relation|Entity))+ 
+;
+
+ExternalDefinitions:
+	'external' name=ID '('(types+=Type (',' types+=Type)*)? ')'
 ;
 
 Entity:
@@ -15,7 +19,15 @@ Attribute:
 ;
 
 Require:
-    'require' varRef=[Attribute] '==' exp=INT
+    'require' require=(FunCall | VarExp) 
+;
+
+VarExp: 
+	varRef=[Attribute] '==' exp=INT
+;
+
+FunCall: 
+	function=[ExternalDefinitions] '('(variables+=[Attribute] (',' variables+=[Attribute])*)? ')'
 ;
 
 Type:

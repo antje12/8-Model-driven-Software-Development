@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link org.xtext.example.mydsl.myDsl.System#getName <em>Name</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.System#getExternals <em>Externals</em>}</li>
  *   <li>{@link org.xtext.example.mydsl.myDsl.System#getElements <em>Elements</em>}</li>
  * </ul>
  *
@@ -47,6 +48,18 @@ public interface System extends EObject
    * @generated
    */
   void setName(String value);
+
+  /**
+   * Returns the value of the '<em><b>Externals</b></em>' containment reference list.
+   * The list contents are of type {@link org.xtext.example.mydsl.myDsl.ExternalDefinitions}.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Externals</em>' containment reference list.
+   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getSystem_Externals()
+   * @model containment="true"
+   * @generated
+   */
+  EList<ExternalDefinitions> getExternals();
 
   /**
    * Returns the value of the '<em><b>Elements</b></em>' containment reference list.

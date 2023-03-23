@@ -14,11 +14,14 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.xtext.example.mydsl.myDsl.Association;
 import org.xtext.example.mydsl.myDsl.Attribute;
 import org.xtext.example.mydsl.myDsl.Entity;
+import org.xtext.example.mydsl.myDsl.ExternalDefinitions;
+import org.xtext.example.mydsl.myDsl.FunCall;
 import org.xtext.example.mydsl.myDsl.Inheritance;
 import org.xtext.example.mydsl.myDsl.MyDslFactory;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
 import org.xtext.example.mydsl.myDsl.Relation;
 import org.xtext.example.mydsl.myDsl.Require;
+import org.xtext.example.mydsl.myDsl.VarExp;
 
 /**
  * <!-- begin-user-doc -->
@@ -73,9 +76,12 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
     switch (eClass.getClassifierID())
     {
       case MyDslPackage.SYSTEM: return createSystem();
+      case MyDslPackage.EXTERNAL_DEFINITIONS: return createExternalDefinitions();
       case MyDslPackage.ENTITY: return createEntity();
       case MyDslPackage.ATTRIBUTE: return createAttribute();
       case MyDslPackage.REQUIRE: return createRequire();
+      case MyDslPackage.VAR_EXP: return createVarExp();
+      case MyDslPackage.FUN_CALL: return createFunCall();
       case MyDslPackage.RELATION: return createRelation();
       case MyDslPackage.INHERITANCE: return createInheritance();
       case MyDslPackage.ASSOCIATION: return createAssociation();
@@ -94,6 +100,18 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
   {
     SystemImpl system = new SystemImpl();
     return system;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public ExternalDefinitions createExternalDefinitions()
+  {
+    ExternalDefinitionsImpl externalDefinitions = new ExternalDefinitionsImpl();
+    return externalDefinitions;
   }
 
   /**
@@ -130,6 +148,30 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
   {
     RequireImpl require = new RequireImpl();
     return require;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public VarExp createVarExp()
+  {
+    VarExpImpl varExp = new VarExpImpl();
+    return varExp;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public FunCall createFunCall()
+  {
+    FunCallImpl funCall = new FunCallImpl();
+    return funCall;
   }
 
   /**

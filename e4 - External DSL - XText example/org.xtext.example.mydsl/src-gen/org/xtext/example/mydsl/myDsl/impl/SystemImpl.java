@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.xtext.example.mydsl.myDsl.ExternalDefinitions;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
 
 /**
@@ -31,6 +32,7 @@ import org.xtext.example.mydsl.myDsl.MyDslPackage;
  * </p>
  * <ul>
  *   <li>{@link org.xtext.example.mydsl.myDsl.impl.SystemImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.impl.SystemImpl#getExternals <em>Externals</em>}</li>
  *   <li>{@link org.xtext.example.mydsl.myDsl.impl.SystemImpl#getElements <em>Elements</em>}</li>
  * </ul>
  *
@@ -57,6 +59,16 @@ public class SystemImpl extends MinimalEObjectImpl.Container implements org.xtex
    * @ordered
    */
   protected String name = NAME_EDEFAULT;
+
+  /**
+   * The cached value of the '{@link #getExternals() <em>Externals</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getExternals()
+   * @generated
+   * @ordered
+   */
+  protected EList<ExternalDefinitions> externals;
 
   /**
    * The cached value of the '{@link #getElements() <em>Elements</em>}' containment reference list.
@@ -120,6 +132,21 @@ public class SystemImpl extends MinimalEObjectImpl.Container implements org.xtex
    * @generated
    */
   @Override
+  public EList<ExternalDefinitions> getExternals()
+  {
+    if (externals == null)
+    {
+      externals = new EObjectContainmentEList<ExternalDefinitions>(ExternalDefinitions.class, this, MyDslPackage.SYSTEM__EXTERNALS);
+    }
+    return externals;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EList<EObject> getElements()
   {
     if (elements == null)
@@ -139,6 +166,8 @@ public class SystemImpl extends MinimalEObjectImpl.Container implements org.xtex
   {
     switch (featureID)
     {
+      case MyDslPackage.SYSTEM__EXTERNALS:
+        return ((InternalEList<?>)getExternals()).basicRemove(otherEnd, msgs);
       case MyDslPackage.SYSTEM__ELEMENTS:
         return ((InternalEList<?>)getElements()).basicRemove(otherEnd, msgs);
     }
@@ -157,6 +186,8 @@ public class SystemImpl extends MinimalEObjectImpl.Container implements org.xtex
     {
       case MyDslPackage.SYSTEM__NAME:
         return getName();
+      case MyDslPackage.SYSTEM__EXTERNALS:
+        return getExternals();
       case MyDslPackage.SYSTEM__ELEMENTS:
         return getElements();
     }
@@ -176,6 +207,10 @@ public class SystemImpl extends MinimalEObjectImpl.Container implements org.xtex
     {
       case MyDslPackage.SYSTEM__NAME:
         setName((String)newValue);
+        return;
+      case MyDslPackage.SYSTEM__EXTERNALS:
+        getExternals().clear();
+        getExternals().addAll((Collection<? extends ExternalDefinitions>)newValue);
         return;
       case MyDslPackage.SYSTEM__ELEMENTS:
         getElements().clear();
@@ -198,6 +233,9 @@ public class SystemImpl extends MinimalEObjectImpl.Container implements org.xtex
       case MyDslPackage.SYSTEM__NAME:
         setName(NAME_EDEFAULT);
         return;
+      case MyDslPackage.SYSTEM__EXTERNALS:
+        getExternals().clear();
+        return;
       case MyDslPackage.SYSTEM__ELEMENTS:
         getElements().clear();
         return;
@@ -217,6 +255,8 @@ public class SystemImpl extends MinimalEObjectImpl.Container implements org.xtex
     {
       case MyDslPackage.SYSTEM__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+      case MyDslPackage.SYSTEM__EXTERNALS:
+        return externals != null && !externals.isEmpty();
       case MyDslPackage.SYSTEM__ELEMENTS:
         return elements != null && !elements.isEmpty();
     }

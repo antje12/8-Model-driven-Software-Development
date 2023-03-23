@@ -17,9 +17,12 @@ import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransi
 import org.xtext.example.mydsl.myDsl.Association;
 import org.xtext.example.mydsl.myDsl.Attribute;
 import org.xtext.example.mydsl.myDsl.Entity;
+import org.xtext.example.mydsl.myDsl.ExternalDefinitions;
+import org.xtext.example.mydsl.myDsl.FunCall;
 import org.xtext.example.mydsl.myDsl.Inheritance;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
 import org.xtext.example.mydsl.myDsl.Require;
+import org.xtext.example.mydsl.myDsl.VarExp;
 import org.xtext.example.mydsl.services.MyDslGrammarAccess;
 
 @SuppressWarnings("all")
@@ -45,6 +48,12 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 			case MyDslPackage.ENTITY:
 				sequence_Entity(context, (Entity) semanticObject); 
 				return; 
+			case MyDslPackage.EXTERNAL_DEFINITIONS:
+				sequence_ExternalDefinitions(context, (ExternalDefinitions) semanticObject); 
+				return; 
+			case MyDslPackage.FUN_CALL:
+				sequence_FunCall(context, (FunCall) semanticObject); 
+				return; 
 			case MyDslPackage.INHERITANCE:
 				sequence_Relation(context, (Inheritance) semanticObject); 
 				return; 
@@ -53,6 +62,9 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 				return; 
 			case MyDslPackage.SYSTEM:
 				sequence_System(context, (org.xtext.example.mydsl.myDsl.System) semanticObject); 
+				return; 
+			case MyDslPackage.VAR_EXP:
+				sequence_VarExp(context, (VarExp) semanticObject); 
 				return; 
 			}
 		if (errorAcceptor != null)
@@ -92,6 +104,34 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 * </pre>
 	 */
 	protected void sequence_Entity(ISerializationContext context, Entity semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     ExternalDefinitions returns ExternalDefinitions
+	 *
+	 * Constraint:
+	 *     (name=ID (types+=Type types+=Type*)?)
+	 * </pre>
+	 */
+	protected void sequence_ExternalDefinitions(ISerializationContext context, ExternalDefinitions semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     FunCall returns FunCall
+	 *
+	 * Constraint:
+	 *     (function=[ExternalDefinitions|ID] (variables+=[Attribute|ID] variables+=[Attribute|ID]*)?)
+	 * </pre>
+	 */
+	protected void sequence_FunCall(ISerializationContext context, FunCall semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -139,20 +179,11 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     Require returns Require
 	 *
 	 * Constraint:
-	 *     (varRef=[Attribute|ID] exp=INT)
+	 *     (require=FunCall | require=VarExp)
 	 * </pre>
 	 */
 	protected void sequence_Require(ISerializationContext context, Require semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.REQUIRE__VAR_REF) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.REQUIRE__VAR_REF));
-			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.REQUIRE__EXP) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.REQUIRE__EXP));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getRequireAccess().getVarRefAttributeIDTerminalRuleCall_1_0_1(), semanticObject.eGet(MyDslPackage.Literals.REQUIRE__VAR_REF, false));
-		feeder.accept(grammarAccess.getRequireAccess().getExpINTTerminalRuleCall_3_0(), semanticObject.getExp());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -162,11 +193,34 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     System returns System
 	 *
 	 * Constraint:
-	 *     (name=ID (elements+=Relation | elements+=Entity)+)
+	 *     (name=ID externals+=ExternalDefinitions* (elements+=Relation | elements+=Entity)+)
 	 * </pre>
 	 */
 	protected void sequence_System(ISerializationContext context, org.xtext.example.mydsl.myDsl.System semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     VarExp returns VarExp
+	 *
+	 * Constraint:
+	 *     (varRef=[Attribute|ID] exp=INT)
+	 * </pre>
+	 */
+	protected void sequence_VarExp(ISerializationContext context, VarExp semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.VAR_EXP__VAR_REF) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.VAR_EXP__VAR_REF));
+			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.VAR_EXP__EXP) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.VAR_EXP__EXP));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getVarExpAccess().getVarRefAttributeIDTerminalRuleCall_0_0_1(), semanticObject.eGet(MyDslPackage.Literals.VAR_EXP__VAR_REF, false));
+		feeder.accept(grammarAccess.getVarExpAccess().getExpINTTerminalRuleCall_2_0(), semanticObject.getExp());
+		feeder.finish();
 	}
 	
 	
