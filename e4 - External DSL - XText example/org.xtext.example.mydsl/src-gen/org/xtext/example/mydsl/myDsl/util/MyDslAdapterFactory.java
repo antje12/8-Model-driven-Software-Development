@@ -13,10 +13,16 @@ import org.eclipse.emf.ecore.EObject;
 import org.xtext.example.mydsl.myDsl.Association;
 import org.xtext.example.mydsl.myDsl.Attribute;
 import org.xtext.example.mydsl.myDsl.Entity;
-import org.xtext.example.mydsl.myDsl.ExternalDefinitions;
-import org.xtext.example.mydsl.myDsl.FunCall;
+import org.xtext.example.mydsl.myDsl.EntitySystem;
+import org.xtext.example.mydsl.myDsl.Expression;
+import org.xtext.example.mydsl.myDsl.ExternalDefinition;
+import org.xtext.example.mydsl.myDsl.FunctionCall;
 import org.xtext.example.mydsl.myDsl.Inheritance;
+import org.xtext.example.mydsl.myDsl.Minus;
+import org.xtext.example.mydsl.myDsl.Mult;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
+import org.xtext.example.mydsl.myDsl.Parenthesis;
+import org.xtext.example.mydsl.myDsl.Plus;
 import org.xtext.example.mydsl.myDsl.Relation;
 import org.xtext.example.mydsl.myDsl.Require;
 import org.xtext.example.mydsl.myDsl.VarExp;
@@ -85,14 +91,14 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
     new MyDslSwitch<Adapter>()
     {
       @Override
-      public Adapter caseSystem(org.xtext.example.mydsl.myDsl.System object)
+      public Adapter caseEntitySystem(EntitySystem object)
       {
-        return createSystemAdapter();
+        return createEntitySystemAdapter();
       }
       @Override
-      public Adapter caseExternalDefinitions(ExternalDefinitions object)
+      public Adapter caseExternalDefinition(ExternalDefinition object)
       {
-        return createExternalDefinitionsAdapter();
+        return createExternalDefinitionAdapter();
       }
       @Override
       public Adapter caseEntity(Entity object)
@@ -110,19 +116,49 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
         return createRequireAdapter();
       }
       @Override
+      public Adapter caseFunctionCall(FunctionCall object)
+      {
+        return createFunctionCallAdapter();
+      }
+      @Override
       public Adapter caseVarExp(VarExp object)
       {
         return createVarExpAdapter();
       }
       @Override
-      public Adapter caseFunCall(FunCall object)
+      public Adapter caseExpression(Expression object)
       {
-        return createFunCallAdapter();
+        return createExpressionAdapter();
       }
       @Override
       public Adapter caseRelation(Relation object)
       {
         return createRelationAdapter();
+      }
+      @Override
+      public Adapter casePlus(Plus object)
+      {
+        return createPlusAdapter();
+      }
+      @Override
+      public Adapter caseMinus(Minus object)
+      {
+        return createMinusAdapter();
+      }
+      @Override
+      public Adapter caseMult(Mult object)
+      {
+        return createMultAdapter();
+      }
+      @Override
+      public Adapter caseNumber(org.xtext.example.mydsl.myDsl.Number object)
+      {
+        return createNumberAdapter();
+      }
+      @Override
+      public Adapter caseParenthesis(Parenthesis object)
+      {
+        return createParenthesisAdapter();
       }
       @Override
       public Adapter caseInheritance(Inheritance object)
@@ -157,31 +193,31 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
 
 
   /**
-   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl.myDsl.System <em>System</em>}'.
+   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl.myDsl.EntitySystem <em>Entity System</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.xtext.example.mydsl.myDsl.System
+   * @see org.xtext.example.mydsl.myDsl.EntitySystem
    * @generated
    */
-  public Adapter createSystemAdapter()
+  public Adapter createEntitySystemAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl.myDsl.ExternalDefinitions <em>External Definitions</em>}'.
+   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl.myDsl.ExternalDefinition <em>External Definition</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.xtext.example.mydsl.myDsl.ExternalDefinitions
+   * @see org.xtext.example.mydsl.myDsl.ExternalDefinition
    * @generated
    */
-  public Adapter createExternalDefinitionsAdapter()
+  public Adapter createExternalDefinitionAdapter()
   {
     return null;
   }
@@ -232,6 +268,21 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl.myDsl.FunctionCall <em>Function Call</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.example.mydsl.myDsl.FunctionCall
+   * @generated
+   */
+  public Adapter createFunctionCallAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl.myDsl.VarExp <em>Var Exp</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -247,16 +298,16 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl.myDsl.FunCall <em>Fun Call</em>}'.
+   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl.myDsl.Expression <em>Expression</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.xtext.example.mydsl.myDsl.FunCall
+   * @see org.xtext.example.mydsl.myDsl.Expression
    * @generated
    */
-  public Adapter createFunCallAdapter()
+  public Adapter createExpressionAdapter()
   {
     return null;
   }
@@ -272,6 +323,81 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createRelationAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl.myDsl.Plus <em>Plus</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.example.mydsl.myDsl.Plus
+   * @generated
+   */
+  public Adapter createPlusAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl.myDsl.Minus <em>Minus</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.example.mydsl.myDsl.Minus
+   * @generated
+   */
+  public Adapter createMinusAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl.myDsl.Mult <em>Mult</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.example.mydsl.myDsl.Mult
+   * @generated
+   */
+  public Adapter createMultAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl.myDsl.Number <em>Number</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.example.mydsl.myDsl.Number
+   * @generated
+   */
+  public Adapter createNumberAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl.myDsl.Parenthesis <em>Parenthesis</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.example.mydsl.myDsl.Parenthesis
+   * @generated
+   */
+  public Adapter createParenthesisAdapter()
   {
     return null;
   }

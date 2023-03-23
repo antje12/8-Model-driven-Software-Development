@@ -10,13 +10,13 @@ import org.eclipse.xtext.testing.util.ParseHelper
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.^extension.ExtendWith
-import org.xtext.example.mydsl.myDsl.System
+import org.xtext.example.mydsl.myDsl.EntitySystem
 
 @ExtendWith(InjectionExtension)
 @InjectWith(MyDslInjectorProvider)
 class MyDslParsingTest {
 	@Inject
-	ParseHelper<System> parseHelper
+	ParseHelper<EntitySystem> parseHelper
 	
 	@Test
 	def void loadModel() {

@@ -14,6 +14,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.xtext.example.mydsl.myDsl.Attribute;
 import org.xtext.example.mydsl.myDsl.Entity;
+import org.xtext.example.mydsl.myDsl.EntitySystem;
 import org.xtext.example.mydsl.myDsl.Inheritance;
 import org.xtext.example.mydsl.myDsl.Require;
 
@@ -57,7 +58,7 @@ public class MyDslScopeProvider extends AbstractMyDslScopeProvider {
   }
 
   public Entity superEntity(final Entity entity) {
-    final org.xtext.example.mydsl.myDsl.System system = EcoreUtil2.<org.xtext.example.mydsl.myDsl.System>getContainerOfType(entity, org.xtext.example.mydsl.myDsl.System.class);
+    final EntitySystem system = EcoreUtil2.<EntitySystem>getContainerOfType(entity, EntitySystem.class);
     final Iterable<Inheritance> relations = Iterables.<Inheritance>filter(system.getElements(), Inheritance.class);
     final Function1<Inheritance, Boolean> _function = (Inheritance it) -> {
       Entity _baseEntity = it.getBaseEntity();

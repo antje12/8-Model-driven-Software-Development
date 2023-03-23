@@ -6,39 +6,34 @@ package org.xtext.example.mydsl.myDsl.impl;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.emf.ecore.util.EDataTypeEList;
 
-import org.xtext.example.mydsl.myDsl.ExternalDefinitions;
+import org.xtext.example.mydsl.myDsl.ExternalDefinition;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>System</b></em>'.
+ * An implementation of the model object '<em><b>External Definition</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.xtext.example.mydsl.myDsl.impl.SystemImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.xtext.example.mydsl.myDsl.impl.SystemImpl#getExternals <em>Externals</em>}</li>
- *   <li>{@link org.xtext.example.mydsl.myDsl.impl.SystemImpl#getElements <em>Elements</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.impl.ExternalDefinitionImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.impl.ExternalDefinitionImpl#getTypes <em>Types</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class SystemImpl extends MinimalEObjectImpl.Container implements org.xtext.example.mydsl.myDsl.System
+public class ExternalDefinitionImpl extends MinimalEObjectImpl.Container implements ExternalDefinition
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -61,31 +56,21 @@ public class SystemImpl extends MinimalEObjectImpl.Container implements org.xtex
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getExternals() <em>Externals</em>}' containment reference list.
+   * The cached value of the '{@link #getTypes() <em>Types</em>}' attribute list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getExternals()
+   * @see #getTypes()
    * @generated
    * @ordered
    */
-  protected EList<ExternalDefinitions> externals;
-
-  /**
-   * The cached value of the '{@link #getElements() <em>Elements</em>}' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getElements()
-   * @generated
-   * @ordered
-   */
-  protected EList<EObject> elements;
+  protected EList<String> types;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected SystemImpl()
+  protected ExternalDefinitionImpl()
   {
     super();
   }
@@ -98,7 +83,7 @@ public class SystemImpl extends MinimalEObjectImpl.Container implements org.xtex
   @Override
   protected EClass eStaticClass()
   {
-    return MyDslPackage.Literals.SYSTEM;
+    return MyDslPackage.Literals.EXTERNAL_DEFINITION;
   }
 
   /**
@@ -123,7 +108,7 @@ public class SystemImpl extends MinimalEObjectImpl.Container implements org.xtex
     String oldName = name;
     name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.SYSTEM__NAME, oldName, name));
+      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.EXTERNAL_DEFINITION__NAME, oldName, name));
   }
 
   /**
@@ -132,46 +117,13 @@ public class SystemImpl extends MinimalEObjectImpl.Container implements org.xtex
    * @generated
    */
   @Override
-  public EList<ExternalDefinitions> getExternals()
+  public EList<String> getTypes()
   {
-    if (externals == null)
+    if (types == null)
     {
-      externals = new EObjectContainmentEList<ExternalDefinitions>(ExternalDefinitions.class, this, MyDslPackage.SYSTEM__EXTERNALS);
+      types = new EDataTypeEList<String>(String.class, this, MyDslPackage.EXTERNAL_DEFINITION__TYPES);
     }
-    return externals;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EList<EObject> getElements()
-  {
-    if (elements == null)
-    {
-      elements = new EObjectContainmentEList<EObject>(EObject.class, this, MyDslPackage.SYSTEM__ELEMENTS);
-    }
-    return elements;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-  {
-    switch (featureID)
-    {
-      case MyDslPackage.SYSTEM__EXTERNALS:
-        return ((InternalEList<?>)getExternals()).basicRemove(otherEnd, msgs);
-      case MyDslPackage.SYSTEM__ELEMENTS:
-        return ((InternalEList<?>)getElements()).basicRemove(otherEnd, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
+    return types;
   }
 
   /**
@@ -184,12 +136,10 @@ public class SystemImpl extends MinimalEObjectImpl.Container implements org.xtex
   {
     switch (featureID)
     {
-      case MyDslPackage.SYSTEM__NAME:
+      case MyDslPackage.EXTERNAL_DEFINITION__NAME:
         return getName();
-      case MyDslPackage.SYSTEM__EXTERNALS:
-        return getExternals();
-      case MyDslPackage.SYSTEM__ELEMENTS:
-        return getElements();
+      case MyDslPackage.EXTERNAL_DEFINITION__TYPES:
+        return getTypes();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -205,16 +155,12 @@ public class SystemImpl extends MinimalEObjectImpl.Container implements org.xtex
   {
     switch (featureID)
     {
-      case MyDslPackage.SYSTEM__NAME:
+      case MyDslPackage.EXTERNAL_DEFINITION__NAME:
         setName((String)newValue);
         return;
-      case MyDslPackage.SYSTEM__EXTERNALS:
-        getExternals().clear();
-        getExternals().addAll((Collection<? extends ExternalDefinitions>)newValue);
-        return;
-      case MyDslPackage.SYSTEM__ELEMENTS:
-        getElements().clear();
-        getElements().addAll((Collection<? extends EObject>)newValue);
+      case MyDslPackage.EXTERNAL_DEFINITION__TYPES:
+        getTypes().clear();
+        getTypes().addAll((Collection<? extends String>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -230,14 +176,11 @@ public class SystemImpl extends MinimalEObjectImpl.Container implements org.xtex
   {
     switch (featureID)
     {
-      case MyDslPackage.SYSTEM__NAME:
+      case MyDslPackage.EXTERNAL_DEFINITION__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case MyDslPackage.SYSTEM__EXTERNALS:
-        getExternals().clear();
-        return;
-      case MyDslPackage.SYSTEM__ELEMENTS:
-        getElements().clear();
+      case MyDslPackage.EXTERNAL_DEFINITION__TYPES:
+        getTypes().clear();
         return;
     }
     super.eUnset(featureID);
@@ -253,12 +196,10 @@ public class SystemImpl extends MinimalEObjectImpl.Container implements org.xtex
   {
     switch (featureID)
     {
-      case MyDslPackage.SYSTEM__NAME:
+      case MyDslPackage.EXTERNAL_DEFINITION__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case MyDslPackage.SYSTEM__EXTERNALS:
-        return externals != null && !externals.isEmpty();
-      case MyDslPackage.SYSTEM__ELEMENTS:
-        return elements != null && !elements.isEmpty();
+      case MyDslPackage.EXTERNAL_DEFINITION__TYPES:
+        return types != null && !types.isEmpty();
     }
     return super.eIsSet(featureID);
   }
@@ -276,8 +217,10 @@ public class SystemImpl extends MinimalEObjectImpl.Container implements org.xtex
     StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
+    result.append(", types: ");
+    result.append(types);
     result.append(')');
     return result.toString();
   }
 
-} //SystemImpl
+} //ExternalDefinitionImpl

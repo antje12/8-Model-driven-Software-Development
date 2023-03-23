@@ -5,7 +5,6 @@ package org.xtext.example.mydsl.generator;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Iterators;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -18,11 +17,13 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.xtext.example.mydsl.myDsl.Association;
 import org.xtext.example.mydsl.myDsl.Attribute;
 import org.xtext.example.mydsl.myDsl.Entity;
-import org.xtext.example.mydsl.myDsl.ExternalDefinitions;
+import org.xtext.example.mydsl.myDsl.EntitySystem;
+import org.xtext.example.mydsl.myDsl.ExternalDefinition;
 import org.xtext.example.mydsl.myDsl.Inheritance;
 
 /**
@@ -34,7 +35,7 @@ import org.xtext.example.mydsl.myDsl.Inheritance;
 public class MyDslGenerator extends AbstractGenerator {
   @Override
   public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
-    final org.xtext.example.mydsl.myDsl.System sys = Iterators.<org.xtext.example.mydsl.myDsl.System>filter(resource.getAllContents(), org.xtext.example.mydsl.myDsl.System.class).next();
+    EntitySystem sys = ((EntitySystem[])Conversions.unwrapArray((Iterables.<EntitySystem>filter(IteratorExtensions.<EObject>toIterable(resource.getAllContents()), EntitySystem.class)), EntitySystem.class))[0];
     String _firstLower = StringExtensions.toFirstLower(sys.getName());
     String _plus = (_firstLower + "/ExternalCode.java");
     fsa.generateFile(_plus, this.compileInterface(sys));
@@ -60,24 +61,45 @@ public class MyDslGenerator extends AbstractGenerator {
     }
   }
 
-  public CharSequence compileInterface(final org.xtext.example.mydsl.myDsl.System sys) {
+  public CharSequence compileInterface(final EntitySystem sys) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package ");
     String _firstLower = StringExtensions.toFirstLower(sys.getName());
     _builder.append(_firstLower);
     _builder.append(";");
     _builder.newLineIfNotEmpty();
+    _builder.append("    ");
     _builder.newLine();
     _builder.append("public interface ExternalCode {");
     _builder.newLine();
     {
-      EList<ExternalDefinitions> _externals = sys.getExternals();
-      for(final ExternalDefinitions external : _externals) {
-        _builder.append("\t");
+      EList<ExternalDefinition> _externals = sys.getExternals();
+      for(final ExternalDefinition external : _externals) {
+        _builder.append("    ");
+        int i = 0;
+        _builder.newLineIfNotEmpty();
+        _builder.append("    ");
         _builder.append("public boolean ");
         String _name = external.getName();
-        _builder.append(_name, "\t");
-        _builder.append("(String cpr);");
+        _builder.append(_name, "    ");
+        _builder.append("(");
+        {
+          EList<String> _types = external.getTypes();
+          boolean _hasElements = false;
+          for(final String type : _types) {
+            if (!_hasElements) {
+              _hasElements = true;
+            } else {
+              _builder.appendImmediate(",", "    ");
+            }
+            String _javaType = this.javaType(type);
+            _builder.append(_javaType, "    ");
+            _builder.append(" name");
+            int _plusPlus = i++;
+            _builder.append(_plusPlus, "    ");
+          }
+        }
+        _builder.append(");");
         _builder.newLineIfNotEmpty();
       }
     }
@@ -86,7 +108,7 @@ public class MyDslGenerator extends AbstractGenerator {
     return _builder;
   }
 
-  public CharSequence compile(final Entity entity, final org.xtext.example.mydsl.myDsl.System system, final Inheritance inheritance, final List<Association> associations) {
+  public CharSequence compile(final Entity entity, final EntitySystem system, final Inheritance inheritance, final List<Association> associations) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package ");
     String _firstLower = StringExtensions.toFirstLower(system.getName());
@@ -111,16 +133,15 @@ public class MyDslGenerator extends AbstractGenerator {
     }
     _builder.append("{");
     _builder.newLineIfNotEmpty();
-    _builder.append("\t");
+    _builder.append("    ");
     _builder.newLine();
-    _builder.append("\t");
+    _builder.append("    ");
     _builder.append("private ExternalCode externalCode;");
     _builder.newLine();
-    _builder.append("\t");
     _builder.newLine();
     {
-      Iterable<Attribute> _filter = Iterables.<Attribute>filter(entity.getElements(), Attribute.class);
-      for(final Attribute attribute : _filter) {
+      List<Attribute> _attributes = this.attributes(entity);
+      for(final Attribute attribute : _attributes) {
         _builder.append("    ");
         _builder.append("private ");
         String _javaType = this.javaType(attribute);
@@ -153,11 +174,11 @@ public class MyDslGenerator extends AbstractGenerator {
     {
       if ((inheritance != null)) {
         _builder.append("        ");
-        _builder.append("super(externalCode, ");
+        _builder.append("super(");
         {
-          Iterable<Attribute> _filter_1 = Iterables.<Attribute>filter(inheritance.getSuperEntity().getElements(), Attribute.class);
+          List<Attribute> _attributes_1 = this.attributes(inheritance.getSuperEntity());
           boolean _hasElements = false;
-          for(final Attribute attribute_1 : _filter_1) {
+          for(final Attribute attribute_1 : _attributes_1) {
             if (!_hasElements) {
               _hasElements = true;
             } else {
@@ -175,8 +196,8 @@ public class MyDslGenerator extends AbstractGenerator {
     _builder.append("this.externalCode = externalCode;");
     _builder.newLine();
     {
-      Iterable<Attribute> _filter_2 = Iterables.<Attribute>filter(entity.getElements(), Attribute.class);
-      for(final Attribute attribute_2 : _filter_2) {
+      List<Attribute> _attributes_2 = this.attributes(entity);
+      for(final Attribute attribute_2 : _attributes_2) {
         _builder.append("        ");
         _builder.append("this.set");
         String _firstUpper = StringExtensions.toFirstUpper(attribute_2.getName());
@@ -192,8 +213,8 @@ public class MyDslGenerator extends AbstractGenerator {
     _builder.append("}");
     _builder.newLine();
     {
-      Iterable<Attribute> _filter_3 = Iterables.<Attribute>filter(entity.getElements(), Attribute.class);
-      for(final Attribute attribute_3 : _filter_3) {
+      List<Attribute> _attributes_3 = this.attributes(entity);
+      for(final Attribute attribute_3 : _attributes_3) {
         _builder.append("    ");
         _builder.append("public ");
         String _javaType_1 = this.javaType(attribute_3);
@@ -256,10 +277,13 @@ public class MyDslGenerator extends AbstractGenerator {
   }
 
   public String javaType(final Attribute attribute) {
+    return this.javaType(attribute.getType());
+  }
+
+  public String javaType(final String type) {
     String _switchResult = null;
-    String _type = attribute.getType();
-    if (_type != null) {
-      switch (_type) {
+    if (type != null) {
+      switch (type) {
         case "string":
           _switchResult = "String";
           break;
@@ -280,7 +304,7 @@ public class MyDslGenerator extends AbstractGenerator {
         String _name = it.getName();
         return (_plus + _name);
       };
-      String[] attributes = ((String[])Conversions.unwrapArray(IterableExtensions.<Attribute, String>map(Iterables.<Attribute>filter(base.getElements(), Attribute.class), _function), String.class));
+      String[] attributes = ((String[])Conversions.unwrapArray(ListExtensions.<Attribute, String>map(this.attributes(base), _function), String.class));
       if ((inheritance != null)) {
         final String[] _converted_attributes = (String[])attributes;
         final Function1<Attribute, String> _function_1 = (Attribute it) -> {
@@ -289,7 +313,7 @@ public class MyDslGenerator extends AbstractGenerator {
           String _name = it.getName();
           return (_plus + _name);
         };
-        Iterable<String> _map = IterableExtensions.<Attribute, String>map(Iterables.<Attribute>filter(inheritance.getSuperEntity().getElements(), Attribute.class), _function_1);
+        List<String> _map = ListExtensions.<Attribute, String>map(this.attributes(inheritance.getSuperEntity()), _function_1);
         Iterable<String> _plus = Iterables.<String>concat(((Iterable<? extends String>)Conversions.doWrapArray(_converted_attributes)), _map);
         attributes = ((String[])Conversions.unwrapArray(_plus, String.class));
       }

@@ -11,7 +11,7 @@ import org.eclipse.xtext.EcoreUtil2
 import org.xtext.example.mydsl.myDsl.Entity
 import org.xtext.example.mydsl.myDsl.Attribute
 import org.xtext.example.mydsl.myDsl.Inheritance
-import org.xtext.example.mydsl.myDsl.System
+import org.xtext.example.mydsl.myDsl.EntitySystem
 import org.eclipse.xtext.scoping.Scopes
 
 /**
@@ -42,7 +42,7 @@ class MyDslScopeProvider extends AbstractMyDslScopeProvider {
     }
         
     def Entity superEntity(Entity entity) {
-        val system = EcoreUtil2.getContainerOfType(entity, System)
+        val system = EcoreUtil2.getContainerOfType(entity, EntitySystem)
         val relations = system.elements.filter(Inheritance)
         val inheritanceRelation = relations.findFirst[baseEntity == entity]
         if(inheritanceRelation === null)

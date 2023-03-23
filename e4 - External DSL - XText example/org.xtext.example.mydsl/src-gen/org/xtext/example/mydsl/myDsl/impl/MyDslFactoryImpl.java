@@ -14,11 +14,17 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.xtext.example.mydsl.myDsl.Association;
 import org.xtext.example.mydsl.myDsl.Attribute;
 import org.xtext.example.mydsl.myDsl.Entity;
-import org.xtext.example.mydsl.myDsl.ExternalDefinitions;
-import org.xtext.example.mydsl.myDsl.FunCall;
+import org.xtext.example.mydsl.myDsl.EntitySystem;
+import org.xtext.example.mydsl.myDsl.Expression;
+import org.xtext.example.mydsl.myDsl.ExternalDefinition;
+import org.xtext.example.mydsl.myDsl.FunctionCall;
 import org.xtext.example.mydsl.myDsl.Inheritance;
+import org.xtext.example.mydsl.myDsl.Minus;
+import org.xtext.example.mydsl.myDsl.Mult;
 import org.xtext.example.mydsl.myDsl.MyDslFactory;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
+import org.xtext.example.mydsl.myDsl.Parenthesis;
+import org.xtext.example.mydsl.myDsl.Plus;
 import org.xtext.example.mydsl.myDsl.Relation;
 import org.xtext.example.mydsl.myDsl.Require;
 import org.xtext.example.mydsl.myDsl.VarExp;
@@ -75,14 +81,20 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
   {
     switch (eClass.getClassifierID())
     {
-      case MyDslPackage.SYSTEM: return createSystem();
-      case MyDslPackage.EXTERNAL_DEFINITIONS: return createExternalDefinitions();
+      case MyDslPackage.ENTITY_SYSTEM: return createEntitySystem();
+      case MyDslPackage.EXTERNAL_DEFINITION: return createExternalDefinition();
       case MyDslPackage.ENTITY: return createEntity();
       case MyDslPackage.ATTRIBUTE: return createAttribute();
       case MyDslPackage.REQUIRE: return createRequire();
+      case MyDslPackage.FUNCTION_CALL: return createFunctionCall();
       case MyDslPackage.VAR_EXP: return createVarExp();
-      case MyDslPackage.FUN_CALL: return createFunCall();
+      case MyDslPackage.EXPRESSION: return createExpression();
       case MyDslPackage.RELATION: return createRelation();
+      case MyDslPackage.PLUS: return createPlus();
+      case MyDslPackage.MINUS: return createMinus();
+      case MyDslPackage.MULT: return createMult();
+      case MyDslPackage.NUMBER: return createNumber();
+      case MyDslPackage.PARENTHESIS: return createParenthesis();
       case MyDslPackage.INHERITANCE: return createInheritance();
       case MyDslPackage.ASSOCIATION: return createAssociation();
       default:
@@ -96,10 +108,10 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
    * @generated
    */
   @Override
-  public org.xtext.example.mydsl.myDsl.System createSystem()
+  public EntitySystem createEntitySystem()
   {
-    SystemImpl system = new SystemImpl();
-    return system;
+    EntitySystemImpl entitySystem = new EntitySystemImpl();
+    return entitySystem;
   }
 
   /**
@@ -108,10 +120,10 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
    * @generated
    */
   @Override
-  public ExternalDefinitions createExternalDefinitions()
+  public ExternalDefinition createExternalDefinition()
   {
-    ExternalDefinitionsImpl externalDefinitions = new ExternalDefinitionsImpl();
-    return externalDefinitions;
+    ExternalDefinitionImpl externalDefinition = new ExternalDefinitionImpl();
+    return externalDefinition;
   }
 
   /**
@@ -156,6 +168,18 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
    * @generated
    */
   @Override
+  public FunctionCall createFunctionCall()
+  {
+    FunctionCallImpl functionCall = new FunctionCallImpl();
+    return functionCall;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public VarExp createVarExp()
   {
     VarExpImpl varExp = new VarExpImpl();
@@ -168,10 +192,10 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
    * @generated
    */
   @Override
-  public FunCall createFunCall()
+  public Expression createExpression()
   {
-    FunCallImpl funCall = new FunCallImpl();
-    return funCall;
+    ExpressionImpl expression = new ExpressionImpl();
+    return expression;
   }
 
   /**
@@ -184,6 +208,66 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
   {
     RelationImpl relation = new RelationImpl();
     return relation;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Plus createPlus()
+  {
+    PlusImpl plus = new PlusImpl();
+    return plus;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Minus createMinus()
+  {
+    MinusImpl minus = new MinusImpl();
+    return minus;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Mult createMult()
+  {
+    MultImpl mult = new MultImpl();
+    return mult;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public org.xtext.example.mydsl.myDsl.Number createNumber()
+  {
+    NumberImpl number = new NumberImpl();
+    return number;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Parenthesis createParenthesis()
+  {
+    ParenthesisImpl parenthesis = new ParenthesisImpl();
+    return parenthesis;
   }
 
   /**

@@ -4,14 +4,17 @@
 package org.xtext.example.mydsl.generator
 
 import org.eclipse.emf.ecore.resource.Resource
+
 import org.eclipse.xtext.generator.AbstractGenerator
 import org.eclipse.xtext.generator.IFileSystemAccess2
 import org.eclipse.xtext.generator.IGeneratorContext
-import org.xtext.example.mydsl.myDsl.System
+
+import org.xtext.example.mydsl.myDsl.EntitySystem
 import org.xtext.example.mydsl.myDsl.Entity
 import org.xtext.example.mydsl.myDsl.Attribute
 import org.xtext.example.mydsl.myDsl.Association
 import org.xtext.example.mydsl.myDsl.Inheritance
+
 import java.util.List
 
 /**
@@ -22,7 +25,7 @@ import java.util.List
 class MyDslGenerator extends AbstractGenerator {
 
     override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
-        val sys = resource.allContents.filter(System).next
+        var sys = resource.allContents.toIterable.filter(EntitySystem).get(0)
         fsa.generateFile(sys.name.toFirstLower+"/ExternalCode.java", sys.compileInterface)
         for (entity: resource.allContents.toIterable.filter(Entity)){
             var relation = resource.allContents.toIterable.filter(Inheritance).findFirst[baseEntity == entity]
@@ -31,26 +34,27 @@ class MyDslGenerator extends AbstractGenerator {
         }
     }
     
-    def compileInterface(System sys)'''
-    	package «sys.name.toFirstLower»;
-    	
-    	public interface ExternalCode {
-    		«FOR external: sys.externals»
-    			public boolean «external.name»(String cpr);
-			«ENDFOR»
-    	}
+    def compileInterface(EntitySystem sys)'''
+    package «sys.name.toFirstLower»;
+        
+    public interface ExternalCode {
+        «FOR external: sys.externals»
+        «var i = 0»
+        public boolean «external.name»(«FOR type : external.types SEPARATOR ','»«type.javaType» name«i++»«ENDFOR»);
+        «ENDFOR»
+    }
     '''
     
-    def compile(Entity entity, System system, Inheritance inheritance, List<Association> associations)'''
+    def compile(Entity entity, EntitySystem system, Inheritance inheritance, List<Association> associations)'''
     package «system.name.toFirstLower»;
     
     import java.util.*;
     
     public class «entity.name» «IF inheritance !== null»extends «inheritance.superEntity.name» «ENDIF»{
-    	
-    	private ExternalCode externalCode;
-    	
-        «FOR attribute: entity.elements.filter(Attribute)»
+        
+        private ExternalCode externalCode;
+
+        «FOR attribute: entity.attributes»
         private «attribute.javaType» «attribute.name»;
         «ENDFOR»
         «FOR association: associations»
@@ -59,14 +63,14 @@ class MyDslGenerator extends AbstractGenerator {
     
         public «entity.name»(ExternalCode externalCode, «entity.compileConstructorAttributes(inheritance)») {
             «IF inheritance !== null»
-            super(externalCode, «FOR attribute: inheritance.superEntity.elements.filter(Attribute) SEPARATOR ", "»«attribute.name»«ENDFOR»);
+            super(«FOR attribute: inheritance.superEntity.attributes SEPARATOR ", "»«attribute.name»«ENDFOR»);
             «ENDIF»
             this.externalCode = externalCode;
-            «FOR attribute: entity.elements.filter(Attribute)»
+            «FOR attribute: entity.attributes»
             this.set«attribute.name.toFirstUpper»(«attribute.name»);
             «ENDFOR»
         }
-        «FOR attribute: entity.elements.filter(Attribute)»
+        «FOR attribute: entity.attributes»
         public «attribute.javaType» get«attribute.name.toFirstUpper»() {
             return «attribute.name»;
         }
@@ -82,16 +86,20 @@ class MyDslGenerator extends AbstractGenerator {
     '''
     
     def javaType(Attribute attribute){
-        switch attribute.type {
+        attribute.type.javaType
+    }
+    
+    def javaType(String type){
+        switch type {
             case "string": "String"
             case "number": "int"
         }
     }
     
     def compileConstructorAttributes(Entity base, Inheritance inheritance) {
-        var String[] attributes = base.elements.filter(Attribute).map[javaType +" "+ name]
+        var String[] attributes = base.attributes.map[javaType +" "+ name]
         if(inheritance !== null){
-            attributes = attributes + inheritance.superEntity.elements.filter(Attribute).map[javaType +" "+ name]
+            attributes = attributes + inheritance.superEntity.attributes.map[javaType +" "+ name]
         }
         attributes.join(", ")
     }
@@ -157,6 +165,6 @@ class MyDslGenerator extends AbstractGenerator {
     }
     
     def List<Attribute> attributes(Entity entity){
-    	entity.elements.filter(Attribute).toList()
+        entity.elements.filter(Attribute).toList
     }
 }

@@ -4,6 +4,7 @@
 package org.xtext.example.mydsl.myDsl.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -12,6 +13,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.xtext.example.mydsl.myDsl.Attribute;
+import org.xtext.example.mydsl.myDsl.Expression;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
 import org.xtext.example.mydsl.myDsl.VarExp;
 
@@ -24,6 +26,7 @@ import org.xtext.example.mydsl.myDsl.VarExp;
  * </p>
  * <ul>
  *   <li>{@link org.xtext.example.mydsl.myDsl.impl.VarExpImpl#getVarRef <em>Var Ref</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.impl.VarExpImpl#getOp <em>Op</em>}</li>
  *   <li>{@link org.xtext.example.mydsl.myDsl.impl.VarExpImpl#getExp <em>Exp</em>}</li>
  * </ul>
  *
@@ -42,24 +45,34 @@ public class VarExpImpl extends MinimalEObjectImpl.Container implements VarExp
   protected Attribute varRef;
 
   /**
-   * The default value of the '{@link #getExp() <em>Exp</em>}' attribute.
+   * The default value of the '{@link #getOp() <em>Op</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getExp()
+   * @see #getOp()
    * @generated
    * @ordered
    */
-  protected static final int EXP_EDEFAULT = 0;
+  protected static final String OP_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getExp() <em>Exp</em>}' attribute.
+   * The cached value of the '{@link #getOp() <em>Op</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getOp()
+   * @generated
+   * @ordered
+   */
+  protected String op = OP_EDEFAULT;
+
+  /**
+   * The cached value of the '{@link #getExp() <em>Exp</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getExp()
    * @generated
    * @ordered
    */
-  protected int exp = EXP_EDEFAULT;
+  protected Expression exp;
 
   /**
    * <!-- begin-user-doc -->
@@ -133,7 +146,32 @@ public class VarExpImpl extends MinimalEObjectImpl.Container implements VarExp
    * @generated
    */
   @Override
-  public int getExp()
+  public String getOp()
+  {
+    return op;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setOp(String newOp)
+  {
+    String oldOp = op;
+    op = newOp;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.VAR_EXP__OP, oldOp, op));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Expression getExp()
   {
     return exp;
   }
@@ -143,13 +181,54 @@ public class VarExpImpl extends MinimalEObjectImpl.Container implements VarExp
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setExp(int newExp)
+  public NotificationChain basicSetExp(Expression newExp, NotificationChain msgs)
   {
-    int oldExp = exp;
+    Expression oldExp = exp;
     exp = newExp;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.VAR_EXP__EXP, oldExp, exp));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MyDslPackage.VAR_EXP__EXP, oldExp, newExp);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setExp(Expression newExp)
+  {
+    if (newExp != exp)
+    {
+      NotificationChain msgs = null;
+      if (exp != null)
+        msgs = ((InternalEObject)exp).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.VAR_EXP__EXP, null, msgs);
+      if (newExp != null)
+        msgs = ((InternalEObject)newExp).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.VAR_EXP__EXP, null, msgs);
+      msgs = basicSetExp(newExp, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.VAR_EXP__EXP, newExp, newExp));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case MyDslPackage.VAR_EXP__EXP:
+        return basicSetExp(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -165,6 +244,8 @@ public class VarExpImpl extends MinimalEObjectImpl.Container implements VarExp
       case MyDslPackage.VAR_EXP__VAR_REF:
         if (resolve) return getVarRef();
         return basicGetVarRef();
+      case MyDslPackage.VAR_EXP__OP:
+        return getOp();
       case MyDslPackage.VAR_EXP__EXP:
         return getExp();
     }
@@ -184,8 +265,11 @@ public class VarExpImpl extends MinimalEObjectImpl.Container implements VarExp
       case MyDslPackage.VAR_EXP__VAR_REF:
         setVarRef((Attribute)newValue);
         return;
+      case MyDslPackage.VAR_EXP__OP:
+        setOp((String)newValue);
+        return;
       case MyDslPackage.VAR_EXP__EXP:
-        setExp((Integer)newValue);
+        setExp((Expression)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -204,8 +288,11 @@ public class VarExpImpl extends MinimalEObjectImpl.Container implements VarExp
       case MyDslPackage.VAR_EXP__VAR_REF:
         setVarRef((Attribute)null);
         return;
+      case MyDslPackage.VAR_EXP__OP:
+        setOp(OP_EDEFAULT);
+        return;
       case MyDslPackage.VAR_EXP__EXP:
-        setExp(EXP_EDEFAULT);
+        setExp((Expression)null);
         return;
     }
     super.eUnset(featureID);
@@ -223,8 +310,10 @@ public class VarExpImpl extends MinimalEObjectImpl.Container implements VarExp
     {
       case MyDslPackage.VAR_EXP__VAR_REF:
         return varRef != null;
+      case MyDslPackage.VAR_EXP__OP:
+        return OP_EDEFAULT == null ? op != null : !OP_EDEFAULT.equals(op);
       case MyDslPackage.VAR_EXP__EXP:
-        return exp != EXP_EDEFAULT;
+        return exp != null;
     }
     return super.eIsSet(featureID);
   }
@@ -240,8 +329,8 @@ public class VarExpImpl extends MinimalEObjectImpl.Container implements VarExp
     if (eIsProxy()) return super.toString();
 
     StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (exp: ");
-    result.append(exp);
+    result.append(" (op: ");
+    result.append(op);
     result.append(')');
     return result.toString();
   }

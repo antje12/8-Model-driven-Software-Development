@@ -11,10 +11,16 @@ import org.eclipse.emf.ecore.util.Switch;
 import org.xtext.example.mydsl.myDsl.Association;
 import org.xtext.example.mydsl.myDsl.Attribute;
 import org.xtext.example.mydsl.myDsl.Entity;
-import org.xtext.example.mydsl.myDsl.ExternalDefinitions;
-import org.xtext.example.mydsl.myDsl.FunCall;
+import org.xtext.example.mydsl.myDsl.EntitySystem;
+import org.xtext.example.mydsl.myDsl.Expression;
+import org.xtext.example.mydsl.myDsl.ExternalDefinition;
+import org.xtext.example.mydsl.myDsl.FunctionCall;
 import org.xtext.example.mydsl.myDsl.Inheritance;
+import org.xtext.example.mydsl.myDsl.Minus;
+import org.xtext.example.mydsl.myDsl.Mult;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
+import org.xtext.example.mydsl.myDsl.Parenthesis;
+import org.xtext.example.mydsl.myDsl.Plus;
 import org.xtext.example.mydsl.myDsl.Relation;
 import org.xtext.example.mydsl.myDsl.Require;
 import org.xtext.example.mydsl.myDsl.VarExp;
@@ -82,17 +88,17 @@ public class MyDslSwitch<T> extends Switch<T>
   {
     switch (classifierID)
     {
-      case MyDslPackage.SYSTEM:
+      case MyDslPackage.ENTITY_SYSTEM:
       {
-        org.xtext.example.mydsl.myDsl.System system = (org.xtext.example.mydsl.myDsl.System)theEObject;
-        T result = caseSystem(system);
+        EntitySystem entitySystem = (EntitySystem)theEObject;
+        T result = caseEntitySystem(entitySystem);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case MyDslPackage.EXTERNAL_DEFINITIONS:
+      case MyDslPackage.EXTERNAL_DEFINITION:
       {
-        ExternalDefinitions externalDefinitions = (ExternalDefinitions)theEObject;
-        T result = caseExternalDefinitions(externalDefinitions);
+        ExternalDefinition externalDefinition = (ExternalDefinition)theEObject;
+        T result = caseExternalDefinition(externalDefinition);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -117,6 +123,13 @@ public class MyDslSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case MyDslPackage.FUNCTION_CALL:
+      {
+        FunctionCall functionCall = (FunctionCall)theEObject;
+        T result = caseFunctionCall(functionCall);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case MyDslPackage.VAR_EXP:
       {
         VarExp varExp = (VarExp)theEObject;
@@ -124,10 +137,10 @@ public class MyDslSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case MyDslPackage.FUN_CALL:
+      case MyDslPackage.EXPRESSION:
       {
-        FunCall funCall = (FunCall)theEObject;
-        T result = caseFunCall(funCall);
+        Expression expression = (Expression)theEObject;
+        T result = caseExpression(expression);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -135,6 +148,46 @@ public class MyDslSwitch<T> extends Switch<T>
       {
         Relation relation = (Relation)theEObject;
         T result = caseRelation(relation);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case MyDslPackage.PLUS:
+      {
+        Plus plus = (Plus)theEObject;
+        T result = casePlus(plus);
+        if (result == null) result = caseExpression(plus);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case MyDslPackage.MINUS:
+      {
+        Minus minus = (Minus)theEObject;
+        T result = caseMinus(minus);
+        if (result == null) result = caseExpression(minus);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case MyDslPackage.MULT:
+      {
+        Mult mult = (Mult)theEObject;
+        T result = caseMult(mult);
+        if (result == null) result = caseExpression(mult);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case MyDslPackage.NUMBER:
+      {
+        org.xtext.example.mydsl.myDsl.Number number = (org.xtext.example.mydsl.myDsl.Number)theEObject;
+        T result = caseNumber(number);
+        if (result == null) result = caseExpression(number);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case MyDslPackage.PARENTHESIS:
+      {
+        Parenthesis parenthesis = (Parenthesis)theEObject;
+        T result = caseParenthesis(parenthesis);
+        if (result == null) result = caseExpression(parenthesis);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -159,33 +212,33 @@ public class MyDslSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>System</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Entity System</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>System</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Entity System</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseSystem(org.xtext.example.mydsl.myDsl.System object)
+  public T caseEntitySystem(EntitySystem object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>External Definitions</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>External Definition</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>External Definitions</em>'.
+   * @return the result of interpreting the object as an instance of '<em>External Definition</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseExternalDefinitions(ExternalDefinitions object)
+  public T caseExternalDefinition(ExternalDefinition object)
   {
     return null;
   }
@@ -239,6 +292,22 @@ public class MyDslSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>Function Call</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Function Call</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseFunctionCall(FunctionCall object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>Var Exp</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -255,17 +324,17 @@ public class MyDslSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Fun Call</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Expression</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Fun Call</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Expression</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseFunCall(FunCall object)
+  public T caseExpression(Expression object)
   {
     return null;
   }
@@ -282,6 +351,86 @@ public class MyDslSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseRelation(Relation object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Plus</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Plus</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T casePlus(Plus object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Minus</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Minus</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseMinus(Minus object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Mult</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Mult</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseMult(Mult object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Number</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Number</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseNumber(org.xtext.example.mydsl.myDsl.Number object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Parenthesis</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Parenthesis</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseParenthesis(Parenthesis object)
   {
     return null;
   }

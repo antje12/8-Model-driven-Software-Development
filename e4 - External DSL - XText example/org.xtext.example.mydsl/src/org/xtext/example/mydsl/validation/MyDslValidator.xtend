@@ -7,7 +7,7 @@ import org.eclipse.xtext.validation.Check
 import org.xtext.example.mydsl.myDsl.Inheritance
 import org.xtext.example.mydsl.myDsl.MyDslPackage.Literals
 import org.xtext.example.mydsl.myDsl.Entity
-import org.xtext.example.mydsl.myDsl.System
+import org.xtext.example.mydsl.myDsl.EntitySystem
 import java.util.HashSet
 import org.eclipse.xtext.EcoreUtil2
 
@@ -22,7 +22,7 @@ class MyDslValidator extends AbstractMyDslValidator {
     
     @Check
     def noCycleInheritance(Inheritance relation){
-        val system = EcoreUtil2.getContainerOfType(relation, System)
+        val system = EcoreUtil2.getContainerOfType(relation, EntitySystem)
         val inheritances = system.elements.filter(Inheritance)
         val seen = new HashSet<Entity>
         seen.add(relation.baseEntity)

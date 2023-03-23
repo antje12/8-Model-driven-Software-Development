@@ -18,25 +18,25 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
 import org.xtext.example.mydsl.myDsl.Attribute;
-import org.xtext.example.mydsl.myDsl.ExternalDefinitions;
-import org.xtext.example.mydsl.myDsl.FunCall;
+import org.xtext.example.mydsl.myDsl.ExternalDefinition;
+import org.xtext.example.mydsl.myDsl.FunctionCall;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Fun Call</b></em>'.
+ * An implementation of the model object '<em><b>Function Call</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.xtext.example.mydsl.myDsl.impl.FunCallImpl#getFunction <em>Function</em>}</li>
- *   <li>{@link org.xtext.example.mydsl.myDsl.impl.FunCallImpl#getVariables <em>Variables</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.impl.FunctionCallImpl#getFunction <em>Function</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.impl.FunctionCallImpl#getVariables <em>Variables</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class FunCallImpl extends MinimalEObjectImpl.Container implements FunCall
+public class FunctionCallImpl extends MinimalEObjectImpl.Container implements FunctionCall
 {
   /**
    * The cached value of the '{@link #getFunction() <em>Function</em>}' reference.
@@ -46,7 +46,7 @@ public class FunCallImpl extends MinimalEObjectImpl.Container implements FunCall
    * @generated
    * @ordered
    */
-  protected ExternalDefinitions function;
+  protected ExternalDefinition function;
 
   /**
    * The cached value of the '{@link #getVariables() <em>Variables</em>}' reference list.
@@ -63,7 +63,7 @@ public class FunCallImpl extends MinimalEObjectImpl.Container implements FunCall
    * <!-- end-user-doc -->
    * @generated
    */
-  protected FunCallImpl()
+  protected FunctionCallImpl()
   {
     super();
   }
@@ -76,7 +76,7 @@ public class FunCallImpl extends MinimalEObjectImpl.Container implements FunCall
   @Override
   protected EClass eStaticClass()
   {
-    return MyDslPackage.Literals.FUN_CALL;
+    return MyDslPackage.Literals.FUNCTION_CALL;
   }
 
   /**
@@ -85,16 +85,16 @@ public class FunCallImpl extends MinimalEObjectImpl.Container implements FunCall
    * @generated
    */
   @Override
-  public ExternalDefinitions getFunction()
+  public ExternalDefinition getFunction()
   {
     if (function != null && function.eIsProxy())
     {
       InternalEObject oldFunction = (InternalEObject)function;
-      function = (ExternalDefinitions)eResolveProxy(oldFunction);
+      function = (ExternalDefinition)eResolveProxy(oldFunction);
       if (function != oldFunction)
       {
         if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, MyDslPackage.FUN_CALL__FUNCTION, oldFunction, function));
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, MyDslPackage.FUNCTION_CALL__FUNCTION, oldFunction, function));
       }
     }
     return function;
@@ -105,7 +105,7 @@ public class FunCallImpl extends MinimalEObjectImpl.Container implements FunCall
    * <!-- end-user-doc -->
    * @generated
    */
-  public ExternalDefinitions basicGetFunction()
+  public ExternalDefinition basicGetFunction()
   {
     return function;
   }
@@ -116,12 +116,12 @@ public class FunCallImpl extends MinimalEObjectImpl.Container implements FunCall
    * @generated
    */
   @Override
-  public void setFunction(ExternalDefinitions newFunction)
+  public void setFunction(ExternalDefinition newFunction)
   {
-    ExternalDefinitions oldFunction = function;
+    ExternalDefinition oldFunction = function;
     function = newFunction;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.FUN_CALL__FUNCTION, oldFunction, function));
+      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.FUNCTION_CALL__FUNCTION, oldFunction, function));
   }
 
   /**
@@ -134,7 +134,7 @@ public class FunCallImpl extends MinimalEObjectImpl.Container implements FunCall
   {
     if (variables == null)
     {
-      variables = new EObjectResolvingEList<Attribute>(Attribute.class, this, MyDslPackage.FUN_CALL__VARIABLES);
+      variables = new EObjectResolvingEList<Attribute>(Attribute.class, this, MyDslPackage.FUNCTION_CALL__VARIABLES);
     }
     return variables;
   }
@@ -149,10 +149,10 @@ public class FunCallImpl extends MinimalEObjectImpl.Container implements FunCall
   {
     switch (featureID)
     {
-      case MyDslPackage.FUN_CALL__FUNCTION:
+      case MyDslPackage.FUNCTION_CALL__FUNCTION:
         if (resolve) return getFunction();
         return basicGetFunction();
-      case MyDslPackage.FUN_CALL__VARIABLES:
+      case MyDslPackage.FUNCTION_CALL__VARIABLES:
         return getVariables();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -169,10 +169,10 @@ public class FunCallImpl extends MinimalEObjectImpl.Container implements FunCall
   {
     switch (featureID)
     {
-      case MyDslPackage.FUN_CALL__FUNCTION:
-        setFunction((ExternalDefinitions)newValue);
+      case MyDslPackage.FUNCTION_CALL__FUNCTION:
+        setFunction((ExternalDefinition)newValue);
         return;
-      case MyDslPackage.FUN_CALL__VARIABLES:
+      case MyDslPackage.FUNCTION_CALL__VARIABLES:
         getVariables().clear();
         getVariables().addAll((Collection<? extends Attribute>)newValue);
         return;
@@ -190,10 +190,10 @@ public class FunCallImpl extends MinimalEObjectImpl.Container implements FunCall
   {
     switch (featureID)
     {
-      case MyDslPackage.FUN_CALL__FUNCTION:
-        setFunction((ExternalDefinitions)null);
+      case MyDslPackage.FUNCTION_CALL__FUNCTION:
+        setFunction((ExternalDefinition)null);
         return;
-      case MyDslPackage.FUN_CALL__VARIABLES:
+      case MyDslPackage.FUNCTION_CALL__VARIABLES:
         getVariables().clear();
         return;
     }
@@ -210,12 +210,12 @@ public class FunCallImpl extends MinimalEObjectImpl.Container implements FunCall
   {
     switch (featureID)
     {
-      case MyDslPackage.FUN_CALL__FUNCTION:
+      case MyDslPackage.FUNCTION_CALL__FUNCTION:
         return function != null;
-      case MyDslPackage.FUN_CALL__VARIABLES:
+      case MyDslPackage.FUNCTION_CALL__VARIABLES:
         return variables != null && !variables.isEmpty();
     }
     return super.eIsSet(featureID);
   }
 
-} //FunCallImpl
+} //FunctionCallImpl

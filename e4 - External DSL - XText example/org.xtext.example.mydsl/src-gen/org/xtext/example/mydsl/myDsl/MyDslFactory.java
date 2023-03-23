@@ -24,22 +24,22 @@ public interface MyDslFactory extends EFactory
   MyDslFactory eINSTANCE = org.xtext.example.mydsl.myDsl.impl.MyDslFactoryImpl.init();
 
   /**
-   * Returns a new object of class '<em>System</em>'.
+   * Returns a new object of class '<em>Entity System</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>System</em>'.
+   * @return a new object of class '<em>Entity System</em>'.
    * @generated
    */
-  System createSystem();
+  EntitySystem createEntitySystem();
 
   /**
-   * Returns a new object of class '<em>External Definitions</em>'.
+   * Returns a new object of class '<em>External Definition</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>External Definitions</em>'.
+   * @return a new object of class '<em>External Definition</em>'.
    * @generated
    */
-  ExternalDefinitions createExternalDefinitions();
+  ExternalDefinition createExternalDefinition();
 
   /**
    * Returns a new object of class '<em>Entity</em>'.
@@ -69,6 +69,15 @@ public interface MyDslFactory extends EFactory
   Require createRequire();
 
   /**
+   * Returns a new object of class '<em>Function Call</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Function Call</em>'.
+   * @generated
+   */
+  FunctionCall createFunctionCall();
+
+  /**
    * Returns a new object of class '<em>Var Exp</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -78,13 +87,13 @@ public interface MyDslFactory extends EFactory
   VarExp createVarExp();
 
   /**
-   * Returns a new object of class '<em>Fun Call</em>'.
+   * Returns a new object of class '<em>Expression</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Fun Call</em>'.
+   * @return a new object of class '<em>Expression</em>'.
    * @generated
    */
-  FunCall createFunCall();
+  Expression createExpression();
 
   /**
    * Returns a new object of class '<em>Relation</em>'.
@@ -94,6 +103,51 @@ public interface MyDslFactory extends EFactory
    * @generated
    */
   Relation createRelation();
+
+  /**
+   * Returns a new object of class '<em>Plus</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Plus</em>'.
+   * @generated
+   */
+  Plus createPlus();
+
+  /**
+   * Returns a new object of class '<em>Minus</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Minus</em>'.
+   * @generated
+   */
+  Minus createMinus();
+
+  /**
+   * Returns a new object of class '<em>Mult</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Mult</em>'.
+   * @generated
+   */
+  Mult createMult();
+
+  /**
+   * Returns a new object of class '<em>Number</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Number</em>'.
+   * @generated
+   */
+  Number createNumber();
+
+  /**
+   * Returns a new object of class '<em>Parenthesis</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Parenthesis</em>'.
+   * @generated
+   */
+  Parenthesis createParenthesis();
 
   /**
    * Returns a new object of class '<em>Inheritance</em>'.

@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link org.xtext.example.mydsl.myDsl.VarExp#getVarRef <em>Var Ref</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.VarExp#getOp <em>Op</em>}</li>
  *   <li>{@link org.xtext.example.mydsl.myDsl.VarExp#getExp <em>Exp</em>}</li>
  * </ul>
  *
@@ -47,25 +48,47 @@ public interface VarExp extends EObject
   void setVarRef(Attribute value);
 
   /**
-   * Returns the value of the '<em><b>Exp</b></em>' attribute.
+   * Returns the value of the '<em><b>Op</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Exp</em>' attribute.
-   * @see #setExp(int)
-   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getVarExp_Exp()
+   * @return the value of the '<em>Op</em>' attribute.
+   * @see #setOp(String)
+   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getVarExp_Op()
    * @model
    * @generated
    */
-  int getExp();
+  String getOp();
 
   /**
-   * Sets the value of the '{@link org.xtext.example.mydsl.myDsl.VarExp#getExp <em>Exp</em>}' attribute.
+   * Sets the value of the '{@link org.xtext.example.mydsl.myDsl.VarExp#getOp <em>Op</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Exp</em>' attribute.
+   * @param value the new value of the '<em>Op</em>' attribute.
+   * @see #getOp()
+   * @generated
+   */
+  void setOp(String value);
+
+  /**
+   * Returns the value of the '<em><b>Exp</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Exp</em>' containment reference.
+   * @see #setExp(Expression)
+   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getVarExp_Exp()
+   * @model containment="true"
+   * @generated
+   */
+  Expression getExp();
+
+  /**
+   * Sets the value of the '{@link org.xtext.example.mydsl.myDsl.VarExp#getExp <em>Exp</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Exp</em>' containment reference.
    * @see #getExp()
    * @generated
    */
-  void setExp(int value);
+  void setExp(Expression value);
 
 } // VarExp

@@ -2,38 +2,45 @@ grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals
 
 generate myDsl "http://www.xtext.org/example/mydsl/MyDsl"
 
-System:
-    'system' name=ID externals+=ExternalDefinitions* (elements+=(Relation|Entity))+ 
-;
+EntitySystem:
+    'system' name=ID externals+=ExternalDefinition* (elements+=(Relation|Entity))+ ;
 
-ExternalDefinitions:
-	'external' name=ID '('(types+=Type (',' types+=Type)*)? ')'
+ExternalDefinition:
+    'external' name=ID '('(types+=Type (',' types+=Type)*)? ')'
 ;
 
 Entity:
     'entity' name=ID (elements+=(Attribute|Require))*
 ;
-
 Attribute:
     'attribute' name=ID 'as' type=Type
 ;
 
 Require:
-    'require' require=(FunCall | VarExp) 
+    'require' require=(FunctionCall | VarExp)
 ;
 
-VarExp: 
-	varRef=[Attribute] '==' exp=INT
+FunctionCall:
+    function=[ExternalDefinition] '('(variables+=[Attribute] (',' variables+=[Attribute])*)? ')' 
 ;
 
-FunCall: 
-	function=[ExternalDefinitions] '('(variables+=[Attribute] (',' variables+=[Attribute])*)? ')'
+VarExp:
+    varRef=[Attribute] op=('==' | '>' | '>=') exp=Exp
+;
+
+Exp returns Expression: PlusOrMinus;
+PlusOrMinus returns Expression: Term (({Plus.left=current} '+' | {Minus.left=current} '-')right=Term)*;
+Term returns Expression: Factor ({Mult.left=current} '*' right=Factor)*;
+Factor returns Expression: Atomic;
+
+Atomic returns Expression:
+    {Number} value=INT |
+    {Parenthesis} '(' exp=Exp ')' 
 ;
 
 Type:
     'string' | 'number'
 ;
-
 Relation:
     {Inheritance} 'relation' baseEntity=[Entity] 'is' superEntity=[Entity] |
     {Association} 'relation' ('a'|manyFrom?='many')? from=[Entity] ('has'|'have') ('a'|manyTo?='many')? to=[Entity]

@@ -9,22 +9,22 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>External Definitions</b></em>'.
+ * A representation of the model object '<em><b>External Definition</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.xtext.example.mydsl.myDsl.ExternalDefinitions#getName <em>Name</em>}</li>
- *   <li>{@link org.xtext.example.mydsl.myDsl.ExternalDefinitions#getTypes <em>Types</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.ExternalDefinition#getName <em>Name</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.ExternalDefinition#getTypes <em>Types</em>}</li>
  * </ul>
  *
- * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getExternalDefinitions()
+ * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getExternalDefinition()
  * @model
  * @generated
  */
-public interface ExternalDefinitions extends EObject
+public interface ExternalDefinition extends EObject
 {
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
@@ -32,14 +32,14 @@ public interface ExternalDefinitions extends EObject
    * <!-- end-user-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
-   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getExternalDefinitions_Name()
+   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getExternalDefinition_Name()
    * @model
    * @generated
    */
   String getName();
 
   /**
-   * Sets the value of the '{@link org.xtext.example.mydsl.myDsl.ExternalDefinitions#getName <em>Name</em>}' attribute.
+   * Sets the value of the '{@link org.xtext.example.mydsl.myDsl.ExternalDefinition#getName <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Name</em>' attribute.
@@ -54,10 +54,10 @@ public interface ExternalDefinitions extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Types</em>' attribute list.
-   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getExternalDefinitions_Types()
+   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getExternalDefinition_Types()
    * @model unique="false"
    * @generated
    */
   EList<String> getTypes();
 
-} // ExternalDefinitions
+} // ExternalDefinition

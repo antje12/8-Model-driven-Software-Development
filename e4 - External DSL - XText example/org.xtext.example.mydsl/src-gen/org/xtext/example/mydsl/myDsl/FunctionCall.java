@@ -9,44 +9,44 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Fun Call</b></em>'.
+ * A representation of the model object '<em><b>Function Call</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.xtext.example.mydsl.myDsl.FunCall#getFunction <em>Function</em>}</li>
- *   <li>{@link org.xtext.example.mydsl.myDsl.FunCall#getVariables <em>Variables</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.FunctionCall#getFunction <em>Function</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.FunctionCall#getVariables <em>Variables</em>}</li>
  * </ul>
  *
- * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getFunCall()
+ * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getFunctionCall()
  * @model
  * @generated
  */
-public interface FunCall extends EObject
+public interface FunctionCall extends EObject
 {
   /**
    * Returns the value of the '<em><b>Function</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Function</em>' reference.
-   * @see #setFunction(ExternalDefinitions)
-   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getFunCall_Function()
+   * @see #setFunction(ExternalDefinition)
+   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getFunctionCall_Function()
    * @model
    * @generated
    */
-  ExternalDefinitions getFunction();
+  ExternalDefinition getFunction();
 
   /**
-   * Sets the value of the '{@link org.xtext.example.mydsl.myDsl.FunCall#getFunction <em>Function</em>}' reference.
+   * Sets the value of the '{@link org.xtext.example.mydsl.myDsl.FunctionCall#getFunction <em>Function</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Function</em>' reference.
    * @see #getFunction()
    * @generated
    */
-  void setFunction(ExternalDefinitions value);
+  void setFunction(ExternalDefinition value);
 
   /**
    * Returns the value of the '<em><b>Variables</b></em>' reference list.
@@ -54,10 +54,10 @@ public interface FunCall extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Variables</em>' reference list.
-   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getFunCall_Variables()
+   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getFunctionCall_Variables()
    * @model
    * @generated
    */
   EList<Attribute> getVariables();
 
-} // FunCall
+} // FunctionCall

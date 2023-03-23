@@ -11,6 +11,7 @@ import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.xtext.example.mydsl.myDsl.Entity;
+import org.xtext.example.mydsl.myDsl.EntitySystem;
 import org.xtext.example.mydsl.myDsl.Inheritance;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
 
@@ -25,7 +26,7 @@ public class MyDslValidator extends AbstractMyDslValidator {
 
   @Check
   public void noCycleInheritance(final Inheritance relation) {
-    final org.xtext.example.mydsl.myDsl.System system = EcoreUtil2.<org.xtext.example.mydsl.myDsl.System>getContainerOfType(relation, org.xtext.example.mydsl.myDsl.System.class);
+    final EntitySystem system = EcoreUtil2.<EntitySystem>getContainerOfType(relation, EntitySystem.class);
     final Iterable<Inheritance> inheritances = Iterables.<Inheritance>filter(system.getElements(), Inheritance.class);
     final HashSet<Entity> seen = new HashSet<Entity>();
     seen.add(relation.getBaseEntity());
