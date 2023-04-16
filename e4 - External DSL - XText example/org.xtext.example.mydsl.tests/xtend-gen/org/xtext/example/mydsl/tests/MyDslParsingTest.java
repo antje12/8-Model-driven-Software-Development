@@ -5,16 +5,20 @@ package org.xtext.example.mydsl.tests;
 
 import com.google.inject.Inject;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.extensions.InjectionExtension;
 import org.eclipse.xtext.testing.util.ParseHelper;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.xtext.example.mydsl.myDsl.Attribute;
+import org.xtext.example.mydsl.myDsl.Entity;
 import org.xtext.example.mydsl.myDsl.EntitySystem;
 
 @ExtendWith(InjectionExtension.class)
@@ -22,15 +26,18 @@ import org.xtext.example.mydsl.myDsl.EntitySystem;
 @SuppressWarnings("all")
 public class MyDslParsingTest {
   @Inject
-  private ParseHelper<EntitySystem> parseHelper;
+  @Extension
+  private ParseHelper<EntitySystem> _parseHelper;
 
   @Test
   public void loadModel() {
     try {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("Hello Xtext!");
+      _builder.append("system University");
       _builder.newLine();
-      final EntitySystem result = this.parseHelper.parse(_builder);
+      _builder.append("entity Person");
+      _builder.newLine();
+      final EntitySystem result = this._parseHelper.parse(_builder);
       Assertions.assertNotNull(result);
       final EList<Resource.Diagnostic> errors = result.eResource().getErrors();
       boolean _isEmpty = errors.isEmpty();
@@ -39,6 +46,67 @@ public class MyDslParsingTest {
       String _join = IterableExtensions.join(errors, ", ");
       _builder_1.append(_join);
       Assertions.assertTrue(_isEmpty, _builder_1.toString());
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+
+  @Test
+  public void simpleEntity() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("system University");
+      _builder.newLine();
+      _builder.append("entity Person");
+      _builder.newLine();
+      final EntitySystem result = this._parseHelper.parse(_builder);
+      Assertions.assertEquals("University", result.getName());
+      Assertions.assertEquals(1, result.getElements().size());
+      EObject _get = result.getElements().get(0);
+      final Entity entity = ((Entity) _get);
+      Assertions.assertEquals("Person", entity.getName());
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+
+  @Test
+  public void multipleEntities() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("system University");
+      _builder.newLine();
+      _builder.append("entity Person");
+      _builder.newLine();
+      _builder.append("entity Teacher");
+      _builder.newLine();
+      final EntitySystem result = this._parseHelper.parse(_builder);
+      Assertions.assertEquals("University", result.getName());
+      Assertions.assertEquals(2, result.getElements().size());
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+
+  @Test
+  public void attributes() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("system University");
+      _builder.newLine();
+      _builder.append("entity Person");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("attribute name as string");
+      _builder.newLine();
+      final EntitySystem result = this._parseHelper.parse(_builder);
+      EObject _get = result.getElements().get(0);
+      final Entity entity = ((Entity) _get);
+      Assertions.assertEquals(1, entity.getElements().size());
+      EObject _get_1 = entity.getElements().get(0);
+      final Attribute attribute = ((Attribute) _get_1);
+      Assertions.assertEquals("name", attribute.getName());
+      Assertions.assertEquals("string", attribute.getType());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
