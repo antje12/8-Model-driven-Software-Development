@@ -8,6 +8,7 @@ import org.xtext.example.mydsl.myDsl.Inheritance
 import org.xtext.example.mydsl.myDsl.MyDslPackage.Literals
 import org.xtext.example.mydsl.myDsl.Entity
 import org.xtext.example.mydsl.myDsl.EntitySystem
+import org.xtext.example.mydsl.myDsl.FunctionCall
 import java.util.HashSet
 import org.eclipse.xtext.EcoreUtil2
 
@@ -39,4 +40,17 @@ class MyDslValidator extends AbstractMyDslValidator {
             currentInheritance = inheritances.findFirst[baseEntity == superEntity]
         }
      }
+     
+     @Check
+   	 def externalCallArgumentType(FunctionCall functionCall){
+   	 	for(var i=0; i < functionCall.variables.size; i++){
+   	 		if (functionCall.variables.get(i).type != functionCall.function.types.get(i)){
+   	 			error("Wrong number of arguments", Literals.FUNCTION_CALL__VARIABLES, 
+   	 				i // error shown at argument at index i
+   	 				  // so if the error was because of the second argument, this is shown
+   	 			)
+                return
+   	 		}
+   	 	}
+   	 }
 }

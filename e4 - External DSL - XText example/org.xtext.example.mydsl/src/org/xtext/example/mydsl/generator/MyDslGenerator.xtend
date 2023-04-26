@@ -63,7 +63,7 @@ class MyDslGenerator extends AbstractGenerator {
     
         public «entity.name»(ExternalCode externalCode, «entity.compileConstructorAttributes(inheritance)») {
             «IF inheritance !== null»
-            super(«FOR attribute: inheritance.superEntity.attributes SEPARATOR ", "»«attribute.name»«ENDFOR»);
+            super(externalCode, «FOR attribute: inheritance.superEntity.attributes SEPARATOR ", "»«attribute.name»«ENDFOR»);
             «ENDIF»
             this.externalCode = externalCode;
             «FOR attribute: entity.attributes»

@@ -12,6 +12,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.xtext.example.mydsl.myDsl.Entity;
 import org.xtext.example.mydsl.myDsl.EntitySystem;
+import org.xtext.example.mydsl.myDsl.FunctionCall;
 import org.xtext.example.mydsl.myDsl.Inheritance;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
 
@@ -45,6 +46,19 @@ public class MyDslValidator extends AbstractMyDslValidator {
           return Boolean.valueOf(Objects.equal(_baseEntity, superEntity));
         };
         currentInheritance = IterableExtensions.<Inheritance>findFirst(inheritances, _function);
+      }
+    }
+  }
+
+  @Check
+  public void externalCallArgumentType(final FunctionCall functionCall) {
+    for (int i = 0; (i < functionCall.getVariables().size()); i++) {
+      String _type = functionCall.getVariables().get(i).getType();
+      String _get = functionCall.getFunction().getTypes().get(i);
+      boolean _notEquals = (!Objects.equal(_type, _get));
+      if (_notEquals) {
+        this.error("Wrong number of arguments", MyDslPackage.Literals.FUNCTION_CALL__VARIABLES, i);
+        return;
       }
     }
   }

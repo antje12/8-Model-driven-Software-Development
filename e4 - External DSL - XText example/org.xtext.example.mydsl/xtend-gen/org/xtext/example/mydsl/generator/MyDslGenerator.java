@@ -174,7 +174,7 @@ public class MyDslGenerator extends AbstractGenerator {
     {
       if ((inheritance != null)) {
         _builder.append("        ");
-        _builder.append("super(");
+        _builder.append("super(externalCode, ");
         {
           List<Attribute> _attributes_1 = this.attributes(inheritance.getSuperEntity());
           boolean _hasElements = false;
