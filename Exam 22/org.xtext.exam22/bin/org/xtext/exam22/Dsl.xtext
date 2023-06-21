@@ -1,0 +1,75 @@
+grammar org.xtext.exam22.Dsl with org.eclipse.xtext.common.Terminals
+
+generate dsl "http://www.xtext.org/exam22/Dsl"
+
+Model: 
+	'story' name=ID functions+=Function* scenarios+=Scenario*;
+
+Function: 
+	'function' name=ID '(' (types+=Type (',' types+=Type)*)? ')' ':' returnType=Type;
+
+Scenario: 
+	'scenario' name=ID ('('(parameters+=Parameter (',' parameters+=Parameter)*)?')')?
+	'{' (variables+=VariableDef | statements+=Statement)* '}';
+
+Statement: 
+	Announce | Question | End;
+	
+VariableDef: 
+	'var' name=ID ':' type=Type;
+
+Announce: 
+	'announce' name=ID expression=Exp targets+=Target+;
+
+Question: 
+	'question' name=ID expression=Exp 'as' output=Exp ('in' variable=[VariableDef])? targets+=Target+;
+
+End: 
+	'end' name=ID expression=Exp?;
+
+Target: 
+	'to' to=[CrossRef] ('('(expressions+=Exp (',' expressions+=Exp)*)?')')? ('if' condition=Exp)? ('{' endingTargets+=EndingTarget+ '}')?;
+
+EndingTarget: 
+	'on' end=[End] target=Target;
+
+Parameter: 
+	name=ID ':' type=Type;
+
+Type: 
+	'boolean' | 'text' | 'number';
+
+Exp:
+	Boolean;
+
+Boolean returns Exp:
+	Equal ({Boolean.left=current} op=('&&'|'||') right=Equal)*;
+
+Equal returns Exp:
+	Compare ({Equal.left=current} op=('=='|'!=') right=Compare)*;
+
+Compare returns Exp:
+	Concat ({Compare.left=current} op=('<'|'>'|'<='|'>=') right=Concat)*;
+
+Concat returns Exp:
+	PlusMinus ({Concat.left=current} '&' right=PlusMinus)*;
+
+PlusMinus returns Exp:
+	MultDiv ({PlusMinus.left=current} op=('+'|'-') right=MultDiv)*;
+
+MultDiv returns Exp:
+	Primitive ({MultDiv.left=current} op=('*'|'/') right=Primitive)*;
+
+Primitive returns Exp:
+    {IntConstant} value=INT |
+    {StringConstant} value=STRING |
+    {BoolConstant} value=('true' | 'false') |
+    {Not} '!' exp=Primitive |
+    {TypeConstant} type=Type |
+    {This} 'this' |
+    {VarRef} ref=[CrossRef] |
+    {FuncCall} ref=[Function] '('(expressions+=Exp (',' expressions+=Exp)*)?')' |
+    {Parenthesis} '(' exp=Exp ')';
+
+CrossRef:
+	Statement|Scenario|Function|Parameter|VariableDef;

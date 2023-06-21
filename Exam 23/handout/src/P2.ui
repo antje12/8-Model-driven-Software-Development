@@ -1,0 +1,7 @@
+title Layout
+form Basic{
+    row {
+        label : "Left"
+        label : "Right"
+    }
+}

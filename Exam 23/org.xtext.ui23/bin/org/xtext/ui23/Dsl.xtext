@@ -1,0 +1,74 @@
+grammar org.xtext.ui23.Dsl with org.eclipse.xtext.common.Terminals
+
+generate dsl "http://www.xtext.org/ui23/Dsl"
+
+UI23:
+	'title' name=ID functions+=Function* forms+=Form*;
+
+Function:
+	'function' name=ID '(' (types+=Type (',' types+=Type)*)? ')' ':' returnType=Type;
+
+Form:
+	'form' name=ID ('(' (parameters+=Parameter (',' parameters+=Parameter)*)?')')?
+	'{' layout=Layout '}';
+
+Layout:
+	{Layout} axis=('row' | 'column') '{' components+=Component* '}';
+
+Component:
+	Layout | Element | FormUse;
+
+Element:
+	Label | InputText | Button;
+
+Label:
+	'label' ':' exp=Exp;
+
+InputText:
+	'input' name=ID ':' exp=Exp;
+
+Button:
+	'button' validate='*'? name=ID ':' exp=Exp;
+
+FormUse:
+	form=[Form] '(' (exps+=Exp (',' exps+=Exp)*)?')';
+
+Parameter:
+	name=ID ':' type=Type;
+
+Type:
+	'boolean' | 'string' | 'number';
+
+Exp:
+	Boolean;
+
+Boolean returns Exp:
+	Equal ({Boolean.left=current} op=('&&' | '||') right=Equal)*;
+
+Equal returns Exp:
+	Compare ({Equal.left=current} op=('==' | '!=') right=Compare)*;
+
+Compare returns Exp:
+	Concat ({Compare.left=current} op=('<' | '>' | '<=' | '>=') right=Concat)*;
+
+Concat returns Exp:
+	PlusMinus ({Concat.left=current} '&' right=PlusMinus)*;
+
+PlusMinus returns Exp:
+	MultDiv ({PlusMinus.left=current} op=('+' | '-') right=MultDiv)*;
+
+MultDiv returns Exp:
+	Primitive ({MultDiv.left=current} op=('*' | '/') right=Primitive)*;
+
+Primitive returns Exp:
+	{IntConstant} value=INT |
+	{StringConstant} value=STRING |
+	{Not} '!' exp=Primitive |
+	{Length} '#' exp=Primitive |
+	{TypeConstant} type=Type |
+	{VarRef} ref=[CrossRef] |
+	{FuncCall} ref=[Function] '(' (exps+=Exp (',' exps+=Exp)*)?')' |
+	{Parenthesis} '(' exp=Exp ')';
+
+CrossRef:
+	InputText | Parameter;

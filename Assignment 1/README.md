@@ -1,0 +1,5 @@
+Complete the state machine source code by clonning the repository and implementing the missing logic. You can use the Ulrik's MDSD github repository for inspiration (mini_state_machine, year3). The Unit tests in `CDPlayerTest` and `MachineInterpreterTest` are available, if you succeed in making all unit tests pass while following the standard internal DSL implementation patterns, you have solved the exercise perfectly. Nevertheless, you are not required to pass all unit tests, on the contrary you are just required to have made an attempt. So handing in a repository without changes is not acceptable, but e.g. having spent a few hours trying and only passing the first group of unit tests is acceptable.
+
+The `MachineStructureTest` can be used as a guidance if you feel lost about designing your metamodel. Because of this, `MachineStructureTest` file will not be tested as part of your submission. 
+
+Finally, notice that the last commit pushed to the repository will function as your hand-in. After the deadline you'll have a couple of days to fill in the survey, please write a one-paragraph summary of how you solved the exercise"

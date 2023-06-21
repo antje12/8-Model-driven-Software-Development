@@ -1,0 +1,8 @@
+title Elements
+form Basic{
+    column {
+        label : "I am a label"
+        input name : string
+        button save : "Valid"
+    }
+}

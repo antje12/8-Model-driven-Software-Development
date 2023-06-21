@@ -1,0 +1,25 @@
+title Validation
+form Save{
+    column {
+    	row{
+    		label : "Name"
+    		input name : string	
+    	}
+    	row{
+    		label : "Age"
+    		input age : number > 18 && number <= 75	
+    	}
+    	row{
+    		label : "Password"
+    		input password: #string > 8	
+    	}
+    	row{
+    		label : "Repeat Password"
+    		input repeatPassword: password == string	
+    	}
+        row {
+        	button* save : "Save"
+        	button cancel : "Cancel"
+        }
+    }
+}

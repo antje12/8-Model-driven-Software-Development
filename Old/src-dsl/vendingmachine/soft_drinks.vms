@@ -1,0 +1,5 @@
+machine soft_drinks(payment "20 kr coin", capacity Max = 10)
+product coke(name "Coke")
+product sprite(name "Sprite")
+warning "Low on Coke" when coke at 50%
+warning "Low on Sprite" when sprite at 50%

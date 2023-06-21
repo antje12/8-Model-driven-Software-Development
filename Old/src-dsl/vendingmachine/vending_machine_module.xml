@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_1.dtd'>
+<nta>
+  <declaration>
+    const int Max = 5;
+    int coke := Max;
+    int sprite := Max;
+    chan refill, insert_coin, return_coin, get_coke, get_sprite;
+  </declaration>
+  <template>
+    <name>User</name>
+    <declaration>
+      bool getcoke:=0;
+      bool getsprite:=0;
+    </declaration>
+    <location id="id0">
+      <name >select_sprite</name>
+      <committed/>
+    </location>
+    <location id="id1">
+      <name >select_coke</name>
+      <committed/>
+    </location>
+    <location id="id2">
+      <name>select</name>
+    </location>
+    <location id="id3">
+      <name >Thirsty</name>
+    </location>
+    <init ref="id3"/>
+    <transition>
+      <source ref="id1"/>
+      <target ref="id3"/>
+      <label kind="synchronisation" >get_coke?</label>
+      <label kind="assignment">coke := coke -1,
+      getcoke:=0</label>
+    </transition>
+    <transition>
+      <source ref="id0"/>
+      <target ref="id3"/>
+      <label kind="synchronisation">get_sprite?</label>
+      <label kind="assignment">sprite := sprite -1,
+      getsprite:=0</label>
+    </transition>
+    <transition>
+      <source ref="id2"/>
+      <target ref="id3"/>
+      <label kind="synchronisation">return_coin?</label>
+    </transition>
+    <transition>
+      <source ref="id2"/>
+      <target ref="id2"/>
+      <label kind="synchronisation">refill!</label>
+    </transition>
+    <transition>
+      <source ref="id3"/>
+      <target ref="id3"/>
+      <label kind="synchronisation">refill!</label>
+    </transition>
+    <transition>
+      <source ref="id2"/>
+      <target ref="id0"/>
+      <label kind="guard">sprite &gt; 0</label>
+      <label kind="assignment">getsprite := true</label>
+    </transition>
+    <transition>
+      <source ref="id2"/>
+      <target ref="id1"/>
+      <label kind="guard">coke &gt;0</label>
+      <label kind="assignment">getcoke:=true</label>
+    </transition>
+    <transition>
+      <source ref="id3"/>
+      <target ref="id2"/>
+      <label kind="synchronisation">insert_coin!</label>
+    </transition>
+  </template>
+  <template>
+    <name>soft_drinks</name>
+    <declaration>const int Max = 5;
+    int coke := Max;
+    int sprite := Max;
+    </declaration>
+    <location id="id4">
+      <name>Select</name>
+    </location>
+    <location id="id5">
+      <name>Start</name>
+    </location>
+    <init ref="id5"/>
+    <transition>
+      <source ref="id4"/>
+      <target ref="id5"/>
+      <label kind="guard">sprite &gt; 0</label>
+      <label kind="synchronisation">get_sprite!</label>
+      <label kind="assignment">sprite := sprite -1</label>
+    </transition>
+    <transition>
+      <source ref="id4"/>
+      <target ref="id5"/>
+      <label kind="guard">coke &gt; 0</label>
+      <label kind="synchronisation">get_coke!</label>
+      <label kind="assignment">coke := coke -1</label>
+    </transition>
+    <transition>
+      <source ref="id4"/>
+      <target ref="id5"/>
+      <label kind="guard">(sprite == 0 || coke ==0)</label>
+      <label kind="synchronisation">return_coin!</label>
+    </transition>
+    <transition>
+      <source ref="id4"/>
+      <target ref="id4"/>
+      <label kind="guard">! (coke == Max || sprite == Max)</label>
+      <label kind="synchronisation">refill?</label>
+      <label kind="assignment">coke++,
+      sprite++</label>
+    </transition>
+    <transition>
+      <source ref="id5"/>
+      <target ref="id4"/>
+      <label kind="synchronisation">insert_coin?</label>
+    </transition>
+    <transition>
+      <source ref="id5"/>
+      <target ref="id5"/>
+      <label kind="guard">not(coke == Max or sprite == Max)</label>
+      <label kind="synchronisation">refill?</label>
+      <label kind="assignment">coke:=coke+1,
+      sprite:=sprite+1</label>
+    </transition>
+  </template>
+  <system>system soft_drinks, User;
+
+  </system>
+</nta>

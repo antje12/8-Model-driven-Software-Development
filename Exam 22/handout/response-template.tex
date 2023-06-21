@@ -1,0 +1,34 @@
+\documentclass[12pt]{article}
+
+\begin{document}
+\begin{enumerate}
+\item Name, email
+\item Xtext Grammar:
+  \begin{enumerate}
+  \item Does your grammar support all of the example programs? If not
+    what are the limitations?
+  \item How did you implement operator precedence and associativity?
+  \item How did you implement the syntax of variables ({\tt ID} in rule {\tt Exp} of the IF22 BNF) such that they can refer both to parameters of scenarios and local variables?
+  \item How did you implement the syntax of \texttt{to} statements, such that they refer to announcement/question/end/scenario? (first {\tt ID} in rule {\tt Target} of the IF22 BNF)
+  \end{enumerate}
+\item Scoping Rules
+  \begin{enumerate}
+    \item Did you implement scoping rules that allow variables to refer to variable definition and scenario parameters? If not, what are the limitations?
+    \item Did you implement scoping rules that allow announcement and question statements to call scenarios and reference the called scenario end statements? If not, what are the limitations?
+    \item Describe your implementation of any scoping rules included with your system.
+  \end{enumerate}
+\item Validation
+  \begin{enumerate}
+  \item What validation rule did you implement, if any?
+  \item Did you implement validation for the correct use of keywords such as \texttt{this} and Type keywords (\texttt{number}, \texttt{text})? If not, what are the limitations? If yes, briefly describe your approach
+  \item Did you implement validation with type inferencing? If yes, does it correctly check the types for all expressions (including input validation and conditions) in the provided IF22 examples? If not, what are the problems?
+  \item If you implemented validation with type inferencing, briefly describe your approach.
+  \end{enumerate}
+\item Generator
+  \begin{enumerate}
+  \item Does your code generator correctly generate code for all of the examples provided, and are you confident that it will also work for ``similar'' programs? If not, then what limitations are there?
+  \item Briefly describe how your code generator works.
+  \end{enumerate}
+\item Implementation: include your Xtext grammar file and all implemented Xtend files (scoping, type validation, generator, and any additional file).
+\end{enumerate}
+\end{document}

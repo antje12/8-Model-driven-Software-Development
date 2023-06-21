@@ -1,0 +1,7 @@
+title Basic
+
+form Basic {
+	column {
+		label : "My first form"
+	}
+}

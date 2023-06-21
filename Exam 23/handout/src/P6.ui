@@ -1,0 +1,52 @@
+title MultipleForms
+
+form RegisterStudent{
+    column {
+        label : "Registration"
+        PersonalInformation("Student")
+        UniversityInformation(3, 10)
+        button* save : "Save"
+    }
+}
+
+form PersonalInformation(name: string){
+    column{
+        label : "Fill with " & name & " Information"
+        row {
+        	label : "Name"
+            input firstName : string
+        }
+        row { 
+        	label : "Last Name"
+            input lastName : firstName != string
+        }
+        row {
+        	label : "Age"
+            input age : number > 18
+        }
+        InterestForm()
+    }
+}
+
+form UniversityInformation(acrLength: number, nameLength: number){
+	column{
+		label: "University Information"
+		row {
+			label: "University Name"
+			input name: #string <= nameLength
+		}
+		row {
+			label: "Acronym"
+			input acr: acrLength >= #string
+		}
+	}
+}
+
+form InterestForm{
+	column{
+		row{
+			label: "What do you want to learn?"
+			input learn : #string >= 5
+		}
+	}
+}

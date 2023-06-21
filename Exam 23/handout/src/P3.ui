@@ -1,0 +1,18 @@
+title NestedLayout
+form Basic{
+    column {
+    	row {
+    		label : "Up Left"
+        	label : " Up Right"	
+    	}
+    	row {
+    		label : "Middle Left"
+    		label : "Middle Right"
+    		column {
+    			label : "One more"
+    			label : "Another more"
+    		}
+    	}
+    	label: "Very Down"
+    }
+}

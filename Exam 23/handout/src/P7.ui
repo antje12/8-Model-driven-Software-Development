@@ -1,0 +1,17 @@
+title External
+
+function validMail(string) : boolean
+
+form Information {
+    column {
+        row {
+        	label : "Name"
+        	input name : string
+        }
+        row{
+        	label : "Mail"
+        	input mail : validMail(string)
+        }
+        button* valid : 'Save'
+    }
+}

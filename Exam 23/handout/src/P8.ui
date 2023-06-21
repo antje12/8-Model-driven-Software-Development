@@ -1,0 +1,64 @@
+title FullExample
+
+function validMail(string) : boolean
+function validLike(number, string) : boolean
+
+form RegisterStudent{
+    column {
+        label : "Registration"
+        PersonalInformation("Student")
+        UniversityInformation(3, 10)
+        button* save : "Save"
+    }
+}
+
+form PersonalInformation(name: string){
+    column{
+        label : "Fill with " & name & " Information"
+        row {
+        	label : "Name"
+            input firstName : string
+        }
+        row { 
+        	label : "Last Name"
+            input lastName : firstName != string
+        }
+        row {
+        	label : "Age"
+            input age : number > 18
+        }
+        row {
+        	label : "Mail"
+            input mail : validMail(string)
+        }
+    }
+}
+
+form UniversityInformation(acrLength: number, nameLength: number){
+	column{
+		label: "University Information"
+		row {
+			label: "University Name"
+			input name: #string <= nameLength
+		}
+		row {
+			label: "Acronym"
+			input acr: acrLength >= #string
+		}
+		LikeForm()
+	}
+}
+
+form LikeForm{
+	column{
+		label : "Next questions will ask about your interests"
+		row{
+			label : "How many interests will you share?"
+			input num : number
+		}
+		row {
+        	label : "What are your interests (space divided)?"
+        	input likes : #string >=0 && validLike(num, string)
+        }
+	}
+}
